@@ -1,0 +1,152 @@
+
+@media all and (min-width : 481px)  {
+
+a.header_text {
+	display : none;
+}
+
+img#menu_button, img#user_button {
+	display: none;
+}
+
+/************************************ IMAGE ************************************/
+
+img#subscribe_background_image {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 60vw;
+	left : 50%;
+	margin-left : -30%;
+	opacity : 0.1;
+}
+
+
+/************************************ TITLE ************************************/
+
+a#subscribe_title {
+	display : block;
+	margin-top : 12vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 4vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 2vw;
+}
+
+
+/************************************ INTPUT ************************************/
+
+section#subscribe_information {
+	position : absolute;
+	z-index : 2;
+	display : block;
+	width : 30vw;
+	left : 50%;
+	margin-left : -15%;
+}
+
+div.subscribe_item {
+	margin-bottom : 0.8vw;
+	width : 40vw;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+a.subscribe_item_title {
+	display : block;
+	float : left;
+	width : 15vw;
+	font-size : 1.2vw;
+	color : rgb(200,200,200);
+}
+
+div#subscribe_mod_date_input, div#subscribe_login_input {
+	margin-bottom : 4vw;
+}
+
+div#subscribe_id_input{
+	margin-top : 4vw;
+} 
+
+div#subscribe_first_name_input {
+	margin-top : 2vw;
+}
+
+div#subscribe_pwd_input {
+	margin-top : 7vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom-color : grey; 	
+	height : 1.2vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a.subscribe_item_value {
+	height : 1.2vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a#subscribe_update_title {
+	display : block;
+	float : left;
+	width : 36vw;
+}
+
+a#subscribe_update_button {
+	display : block;
+	text-align : center;
+	margin-top : 4vw;
+	margin-bottom : 4vw;
+	font-size : 1.2vw;
+}
+
+a#subscription_message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 6vw;
+	height : 2vw;
+	width   : 18vw;
+	color : red;
+	text-align : center;
+	font-size : 1.2vw;
+}
+
+a {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+a#enter {
+	display : block;
+	margin-top : 6vw;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width   : 18vw;
+	color : grey;
+	text-align : center;
+	font-size : 1.2vw;
+}
+
+#footer {
+	margin-top : 40vw;
+}
+
+/************************************************* FIN ************************************************/
+
+}

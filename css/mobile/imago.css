@@ -1,0 +1,389 @@
+
+@media all and (max-width : 480px)  {
+
+/************************************************ GLOBAL ***********************************************/
+
+@font-face {
+	font-family : "Avenir";
+	src : url("../../font/AvenirLTStd-Light.otf");
+}
+
+body {
+	--main-bg-color : rgb(35, 35, 35);
+
+	background-color : var(--main-bg-color);
+	margin : 0;
+	padding : 0;
+	overflow-x : hidden;
+
+	font-family : Avenir;
+	font-size : 3.5vw;
+	color : grey;
+}
+
+/************************************************ HEADER ***********************************************/
+
+#header {
+	display : none;
+	background-color : var(--main-bg-color);
+	z-index : 30;
+	position : fixed;
+	top : 0vw;
+	padding-top : 1vw;
+	padding-bottom : 1vw;
+	text-align : center;
+	width : 100%;
+	height : 12.5vw;
+	box-shadow: 0vw 1vw 1vw #000;
+}
+
+#header_left {
+	position : fixed;
+	top : 3vw;
+	left : 0vw;
+	text-align : left;
+	width: 15%;
+}
+
+		img#menu_button {
+			padding-top : 1vw;
+			padding-left : 2vw;
+			width : 8vw;
+		}
+
+#header_center {
+	position : relative;
+}
+
+		img#imago_logo {
+			margin-top : 2vw;
+			width : 30vw;
+		}
+
+
+#header_right {
+	position : fixed;
+	top : 3vw;
+	right : 0vw;
+	text-align : right;
+	width : 15%;
+}
+
+		img#user_button {
+			padding-top : 1vw;
+			margin-right : 2vw;
+			width : 8vw;
+		}
+
+a.header_text {
+	display : none;
+}
+
+ol#sub_list {
+	display : none;
+}
+
+
+/*********************************************** COOKIES ***********************************************/
+
+div#cookie_popup {
+	display : none;
+	background-color : rgb(20, 20, 20);
+	position : fixed;
+	z-index : 100;
+	bottom : 0px;
+	padding-top : 4vw;
+	padding-left : 4vw;
+	padding-right : 4vw;
+	padding-bottom : 8vw;
+}
+
+img#close_cookies {
+	position : fixed;
+	opacity : 0.7;
+	width : 10vw;
+	height : 10vw;
+	bottom : 40vw;
+	right : 2vw;	
+}
+
+
+/************************************************* MENU ************************************************/
+
+#menu {
+	background-color : var(--main-bg-color);
+	z-index : 10;
+	position : fixed;
+	top : 0vw;
+	margin-left : -80vw;
+	width : 80vw;
+	height : 100%;
+	overflow-y : auto;
+	display : none;
+	box-shadow : 1vw 0vw 1vw #000;
+}
+
+span.item_menu {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_menu {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_menu {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;
+			margin-left : 2vw;	
+		}
+
+		img.icon_item_down {
+			width : 10vw; 
+			float : right; 
+			margin-right : 4vw;
+		}
+
+
+span.tvshow_list_item {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}
+
+div#sub_list_3 {
+	margin-bottom : 5vw;
+}
+
+		img.icon_tvshow_list_item {
+			visibility : hidden;
+			width : 8vw; 
+			margin-left : 10vw;
+			margin-bottom : 1.8vw;
+			vertical-align : middle;
+		}
+
+		a.text_tvshow_list_item {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle; 
+			margin-left : 2vw;
+		}
+
+span#item_menu_0 {margin-top : 30vw} 
+span#item_menu_1 {margin-top : 10vw} 
+span#item_menu_3 {margin-top : 10vw}
+span#item_menu_5 {margin-top : 10vw}
+
+span#item_menu_9 {margin-bottom : 50vw}
+
+
+/************************************************* USER ************************************************/
+
+#user {
+	background-color : var(--main-bg-color);
+	z-index : 10;
+	position : fixed;
+	top : 0vw;
+	margin-left : 100vw;
+	width : 80vw;
+	height : 100%;
+	overflow-y : auto;
+	display : none;
+	box-shadow : -1vw 0vw 1vw #000;
+}
+
+span.item_user {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_user {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_user {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;	
+		}
+
+span#item_user_1 {margin-top : 30vw} 
+span#item_user_3 {margin-top : 10vw}
+
+
+/************************************************ PLAYER ***********************************************/
+
+img#background_shadow {
+	position : fixed;
+	z-index : 40;
+	opacity : 0.8;
+	top : 0vw;
+	left: : 0vw;
+	width : 100%;
+	height : 100%;
+	display : none;	
+}
+
+img#close_player {
+	position : fixed;
+	z-index : 60;
+	opacity : 0.7;
+	top : 2vw;
+	right : 2vw;
+	width : 10vw;
+	height : 10vw;
+	display : none;	
+}
+
+iframe#video_popup {
+	position : fixed;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 56.25vw;
+	border : black;
+	display : none;
+}
+
+iframe#audio_popup_soundcloud {
+	position : fixed;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}
+
+iframe#audio_popup_pippa {
+	position : fixed;
+	z-index : 50;
+	top : 30vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}
+
+audio#audio_popup_wix {
+	position : fixed;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}
+
+img#audio_popup_wix_image{
+	position : fixed;
+	z-index : 40;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}
+
+
+/********************************************* RIGTH / LEFT *********************************************/
+
+img#page_left {
+	position: fixed;
+	cursor : default;
+	/*content:url("img/icons/footer/page_left_grey.png")*/
+	z-index : 8;
+	left : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#page_left:hover {
+	cursor : pointer;
+	/*content:url("img/icons/footer/page_left_white.png")*/
+}
+
+img#page_right {
+	position: fixed;
+	cursor : default;
+	/*content:url("img/icons/footer/page_right_grey.png")*/
+	z-index : 8;
+	right : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#page_right:hover {
+	cursor : pointer;
+	/*content:url("img/icons/footer/page_right_white.png")*/
+}
+
+
+/************************************************ SCROLL ***********************************************/
+
+img#page_up {
+	position: fixed;
+	z-index : 100;
+	bottom : 0vw;
+	left : 50%;
+	width : 20vw;
+ 	margin-left: -10vw;
+}
+
+
+/************************************************ FOOTER ***********************************************/
+
+#footer {
+	background-color : rgb(10, 10, 10);
+	position : relative;
+	padding-top : 6vw;
+	height : 30vw;
+	text-align : center;
+	display : none;
+}
+
+a#info_footer {
+	color : rgb(60, 60, 60);
+}
+
+ol#footer_list {
+	list-style-type : none;
+	padding-left : 0vw; 
+	margin-left : 0vw;
+}
+
+		ol#footer_list li { 
+			display : inline;
+			padding-left : 4vw; 
+			padding-right : 4vw; 
+		}
+
+		.item_footer {
+			color : grey; 
+			text-decoration : none;
+		}
+
+
+/************************************************* FIN ************************************************/
+
+}

@@ -1,0 +1,81 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+	display : none;
+	margin-top : 20vw;
+	/*margin-bottom : 16vw;*/
+}
+
+div.item_list {
+	position : relative;
+	height : 5vw;
+	/*text-align : center;*/
+	/*no-wrap*/
+}
+
+ol.item_list {
+	list-style-type : none;
+	padding-left : 0px; 
+	margin-left : 0px;
+
+}
+
+		ol.item_list li { 
+			display : inline;
+			padding-left : 1vw; 
+			padding-right : 1vw; 
+		}
+
+		.item {
+			color : grey; 
+			text-decoration : none;
+		}
+
+/************************************ IMAGE ************************************/
+
+img#member_background_image {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 60vw;
+	left : 50%;
+	margin-left : -30%;
+	opacity : 0.05;
+}
+
+section#text {
+	position : relative;
+	z-index : 2;
+	width : 95%;
+	margin-left : auto;
+	margin-right : auto;
+	text-align : justify;
+}
+
+a.title {
+	font-size : 4.5vw;
+	color : white;
+}
+
+div.text {
+	margin-bottom : 8vw;
+	font-size : 3.5vw;
+}
+
+
+img.logo {
+	float : left;
+	margin-right : 1vw;
+	width : 40%;	
+}
+
+img.image {
+	float : center;
+/*	width : 20%;
+	margin-left : auto;
+	margin-right : auto;*/	
+}
+
+}

@@ -1,0 +1,263 @@
+
+@media all and (min-width : 481px)  {
+
+#screen {
+ 	display : none;
+	margin-top : 8vw;
+	margin-bottom : 6vw;
+	min-height : 40vw;
+}
+
+
+/********************************************* BACKGROUND *********************************************/
+
+/*img#background {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 60vw;
+	left : 50%;
+	margin-left : -30%;
+	opacity : 0.1;
+}*/
+
+
+/************************************************ TITLE ************************************************/
+
+/*a#page_title {
+	display : block;
+	margin-top : 6vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 4vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 2vw;
+}*/
+
+
+/************************************************ QUERY ************************************************/
+
+section#query {
+	position : relative;
+	z-index : 2;
+	display : block;
+	width : 20vw;
+	left : 50vw;
+	margin-left : -10vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom-color : grey; 	
+	height : 1.5vw;
+	margin-left : auto;
+	margin-right : auto;
+	width : 20vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a#validate_button {
+	display : block;
+	text-align : center;
+	margin-top : 3vw;
+	margin-bottom : 2vw;
+	font-size : 1.2vw;
+}
+
+a#message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width : 20vw;
+	color : red;
+	text-align : center;
+	font-size : 1.2vw;
+}
+
+
+/************************************************ RESULT ************************************************/
+
+section#result {
+	position : relative;
+	z-index : 5;
+	/*margin-top : 2vw;*/
+}
+
+a.title {
+	margin-left : 2vw;
+	font-size : 2.4vw;
+}
+
+div.pager_container {
+	position : relative;
+	margin-top : -2vw;
+	justify-content: center;
+	display : flex;
+	flex-basis : 100%;
+	/*flex-wrap : wrap;*/
+	width : 100%;
+}
+
+div.pager{
+	background : rgb(60, 60, 60);
+	border-radius : 50%;
+	width : 0.8vw;
+	height : 0.8vw;
+	margin-left : 0.25vw;
+	margin-right : 0.25vw;
+}
+
+div.scrolling_container {
+	position : relative;
+}
+
+div.list_container {
+	display : flex;
+	/*flex-wrap : wrap;*/
+	padding-top : 1vw;
+	padding-left : 4.8vw;
+	padding-bottom : 4vw;
+}
+
+		div.panorama {
+			margin-top : 0.8vw;
+			margin-left : 0.8vw;
+			margin-right : 0.8vw;
+			margin-bottom : 0.8vw;
+			flex : 0 0 21vw;
+		}
+
+		div.portrait {
+			margin-top : 1.6vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1.6vw;
+			flex : 0 0 16vw;
+		}
+
+		div.squared {
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			flex : 0 0 16vw;
+		}
+
+		div.thumbnail_info {
+			box-shadow : 5px 5px 5px #000;
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+		}
+
+		div.thumbnail_info:hover {	
+			box-shadow : 10px 10px 5px #000;
+
+			-webkit-transform : scale(1.05); 
+			-moz-transform : scale(1.05); 
+			-ms-transform : scale(1.05); 
+			-o-transform : scale(1.05); 
+			transform : scale(1.05);
+		}
+
+		img.panorama {
+			height : 100%;
+			width : 100%;
+		}
+
+		img.portrait {
+			height : 100%;
+			width : 100%;
+		}
+
+		img.squared {
+			height : 100%;
+			width : 100%;
+		}
+
+		div.info_panorama {
+			/*border : 1px solid orange;*/
+			position : absolute;
+			display : inline;
+			top : 12.5vw;
+			left : -2.1vw;
+			width : 120%;
+			font-size : 1.2vw;
+			color : white;
+			text-align : center;			
+		}
+
+		div.info_portrait {
+			/*border : 1px solid orange;*/
+			position : absolute;
+			display : inline;
+			top : 22vw;
+			left : -1.7vw;
+			width : 120%;
+			font-size : 1.2vw;
+			color : white;
+			text-align : center;			
+		}
+
+		div.info_squared {
+			/*border : 1px solid orange;*/
+			position : absolute;
+			display : inline;
+			top : 17vw;
+			left : -1.7vw;
+			width : 120%;
+			font-size : 1.2vw;
+			color : white;
+			text-align : center;			
+		}
+
+		a.info_free {
+			color : green;
+		}
+
+		a.info {
+			color : orange;
+		}
+
+		a.line_2 {
+			color : grey;
+		}
+
+		div.left_arrow_container_panorama {
+			position : absolute;
+			margin-top : -14vw;
+		}
+
+		div.right_arrow_container_panorama {
+			position : absolute;
+			margin-top : -14vw;
+			right : 0vw;
+		}
+
+		div.left_arrow_container_portrait {
+			position : absolute;
+			margin-top : -20vw;
+		}
+
+		div.right_arrow_container_portrait {
+			position : absolute;
+			margin-top : -20vw;
+			right : 0vw;
+		}
+
+		img.right_arrow_container, img.left_arrow_container {
+			height : 7vw;
+		}
+
+}
+

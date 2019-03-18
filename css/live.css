@@ -1,0 +1,120 @@
+
+@media all and (min-width : 481px)  {
+
+
+div#screen {
+	background-color: transparent;
+	display : none;
+}
+
+a.title {
+	display : block;
+	margin-left : 2vw;
+	margin-top : 1vw;
+	margin-bottom : 1vw;
+	font-size : 2.4vw;
+	color : white;
+}
+
+
+/************************************************ PLAYER ***********************************************/
+
+section#channel {
+	padding-top : 5vw;
+}
+
+iframe#channel_player {
+	/*display : none;*/
+	position : absolute;
+	margin-left : 6vw;
+	border : none;
+	width : 43.2vw;
+	height : 24.3vw;
+}
+
+#layer {
+	/*opacity: 0.8;*/
+	position : absolute;
+	margin-left : 6vw;
+	border : none;
+	width : 43.2vw;
+	height : 24.3vw;	
+}
+
+img#channel_selector {
+	position : absolute;
+	margin-left : 51vw;
+	height : 24vw;
+}
+
+div#channel_list {
+	position : absolute;
+	margin-left : 53vw;
+	margin-top : -0.7vw;
+}
+
+		img.channel_logo {
+			display : block;
+			height : 1.8vw;
+			padding-left : 1vw;
+			padding-top : 0.7vw;
+			padding-bottom :  0.7vw;
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+		}
+			
+		img.channel_logo:hover {
+
+			-webkit-transform : scale(1.05); 
+			-moz-transform : scale(1.05); 
+			-ms-transform : scale(1.05); 
+			-o-transform : scale(1.05); 
+			transform : scale(1.05);
+		}
+
+img#video_selector {
+	position : absolute;
+	margin-left : 72vw;
+	height : 24vw;
+}
+
+div#live_video_list {
+	position : absolute;
+	margin-left : 75vw;
+	padding-right : 2.5vw;
+}
+	
+		img.video {
+			margin-bottom : 1vw;
+			width : 20vw;	
+
+			-webkit-filter : grayscale(100%);
+    		filter : grayscale(100%);
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+		}
+
+		img.video:hover {
+
+			-webkit-filter : grayscale(0%);
+    		filter : grayscale(0%);
+
+			-webkit-transform : scale(1.05); 
+			-moz-transform : scale(1.05); 
+			-ms-transform : scale(1.05); 
+			-o-transform : scale(1.05); 
+			transform : scale(1.05);
+		}
+
+
+/************************************************* FIN ************************************************/
+
+}

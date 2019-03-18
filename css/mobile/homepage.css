@@ -1,0 +1,130 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+	display : none;
+	margin-top : 16vw;
+	margin-bottom : 16vw;
+}
+
+div.slideshow {
+	display : none;
+}
+
+a.title {
+	margin-left : 2vw;
+	font-size : 6vw;
+	color : white;
+}
+
+div.scrolling_container {
+	position : relative;
+}
+
+div.list_container {
+	/*display : line;*/
+	display : flex;
+	/*flex-wrap : wrap;*/
+	padding-top : 2vw;
+	padding-left : 2vw;
+	padding-bottom : 6vw;
+
+	overflow-x : scroll;
+	overflow-y : hidden;
+	white-space : nowrap;
+}
+
+		img.panorama, img.portrait {
+			box-shadow : 1vw 1vw 1vw #000;
+
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			width : 45vw;
+		}
+
+		div.info_panorama {
+			display : none;
+			position : absolute;
+			margin-top : -28vw;
+			margin-left : 50vw;
+			width : 45vw;
+			font-size : 3.5vw;
+		}
+
+		div.info_portrait {
+			display : none;
+			position : absolute;
+			margin-top : -63vw;
+			margin-left : 50vw;
+			width : 45vw;
+			font-size : 3.5vw;
+		}
+
+		img.left_arrow_container {
+			display : none;
+		}
+
+		img.right_arrow_container {
+			display : none;
+		}
+
+
+div.link {
+	margin-top : 2vw;
+	margin-left : 2vw;
+	margin-bottom : 6vw;
+}
+
+		img.type, img.category {
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			width : 45vw;
+
+			box-shadow : 1vw 1vw 1vw #000;
+		}
+
+		img.promo {
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			width : 93vw;
+
+			box-shadow : 1vw 1vw 1vw #000;
+		}
+
+/************************************************* PLAY ************************************************/
+
+section#live {
+	height : 67vw;
+}
+
+a#live_title {
+	/*background-color: orange;*/
+}
+
+div.live_player {
+	/*margin-left : 30vw;*/
+	background-color : orange;
+	position : absolute;
+	width : 100vw;
+/*	left : auto;
+	right : auto;*/
+}
+
+iframe.live_player {
+	/*display : none;*/
+	/*background-color: red;*/
+	position : absolute;
+	margin-top : 1vw;
+	margin-left : 2.5vw;
+	border : none; 
+	width : 95vw;
+	height : 53.4vw;
+}
+
+}
