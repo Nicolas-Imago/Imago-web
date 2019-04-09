@@ -1,130 +1,129 @@
-
 @media all and (max-width : 480px)  {
 
 
-div#screen {
-	background-color: transparent;
-	display : none;
-}
+	div#screen {
+		background-color: transparent;
+		display : none;
+	}
 
-a.title {
-	display : block;
-	margin-left : 2vw;
-	margin-top : 6vw;
-	margin-bottom : 3vw;
-	font-size : 6vw;
-	color : white;
-}
-
-
-/************************************************ PLAYER ***********************************************/
-
-section#channel {
-	padding-top : 12vw;
-}
-
-iframe#channel_player {
-	/*display : none;*/
-	position : absolute;
-	margin-left : 5vw;
-	border : none;
-	width : 90vw;
-	height : 50.6vw;
-}
-
-#layer {
-	display : none;
-	position : absolute;
-	margin-left : 6vw;
-	border : none;
-	width : 90vw;
-	height : 50.6vw;	
-}
-
-div#layer {
-	position : absolute;
-	margin-left : 5vw;
-	border : none;
-	width : 90vw;
-	height : 50.6vw;	
-}
-
-img#channel_selector {
-	display : none;
-}
-
-div#channel_list {
-	position : absolute;
-	margin-top : 55vw;
-	width : 40vw;
-}
-
-		img.channel_logo {
-			display : block;
-			height : 4vw;
-			padding-left : 6vw;
-			padding-top : 1.5vw;
-			padding-bottom : 1.5vw;
-
-			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;
-		}
-			
-		img.channel_logo:hover {
-
-			-webkit-transform : scale(1.05); 
-			-moz-transform : scale(1.05); 
-			-ms-transform : scale(1.05); 
-			-o-transform : scale(1.05); 
-			transform : scale(1.05);
-		}
-
-img#video_selector {
-	position : absolute;
-	margin-top : 57vw;
-	/*margin-top : 2vw;*/
-	margin-left : 45vw;
-	height : 53vw;
-}
-
-div#live_video_list {
-	position : absolute;
-	margin-top : 57vw;
-	/*margin-top : 2vw;*/
-	margin-left : 50vw;
-}
-
-		img.video {
-			margin-bottom : 1vw;
-			width : 45vw;	
-
-			-webkit-filter : grayscale(100%);
-    		filter : grayscale(100%);
-
-			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;
-		}
-
-		img.video:hover {
-
-			-webkit-filter : grayscale(0%);
-    		filter : grayscale(0%);
-
-			-webkit-transform : scale(1.02); 
-			-moz-transform : scale(1.02); 
-			-ms-transform : scale(1.02); 
-			-o-transform : scale(1.02); 
-			transform : scale(1.02);
-		}
+	a.title {
+		display : block;
+		margin-left : 2vw;
+		margin-top : 6vw;
+		margin-bottom : 3vw;
+		font-size : 6vw;
+		color : white;
+	}
 
 
-/************************************************* FIN ************************************************/
+	/************************************************ PLAYER ***********************************************/
+
+	section#channel {
+		padding-top : 12vw;
+	}
+
+	iframe#channel_player {
+		/*display : none;*/
+		position : absolute;
+		margin-left : 5vw;
+		border : none;
+		width : 90vw;
+		height : 50.6vw;
+	}
+
+	#layer {
+		display : none;
+		position : absolute;
+		margin-left : 6vw;
+		border : none;
+		width : 90vw;
+		height : 50.6vw;
+	}
+
+	div#layer {
+		position : absolute;
+		margin-left : 5vw;
+		border : none;
+		width : 90vw;
+		height : 50.6vw;
+	}
+
+	img#channel_selector {
+		display : none;
+	}
+
+	div#channel_list {
+		position : absolute;
+		margin-top : 55vw;
+		width : 40vw;
+	}
+
+	img.channel_logo {
+		display : block;
+		height : 4vw;
+		padding-left : 6vw;
+		padding-top : 1.5vw;
+		padding-bottom : 1.5vw;
+
+		-webkit-transition : all 0.2s ease;
+		-moz-transition : 0.2s ease;
+		-o-transition : all 0.2s ease;
+		-ms-transition : all 0.2s ease;
+		transition : all 0.2s ease;
+	}
+
+	img.channel_logo:hover {
+
+		-webkit-transform : scale(1.05);
+		-moz-transform : scale(1.05);
+		-ms-transform : scale(1.05);
+		-o-transform : scale(1.05);
+		transform : scale(1.05);
+	}
+
+	img#video_selector {
+		position : absolute;
+		margin-top : 57vw;
+		/*margin-top : 2vw;*/
+		margin-left : 45vw;
+		height : 53vw;
+	}
+
+	div#live_video_list {
+		position : absolute;
+		margin-top : 57vw;
+		/*margin-top : 2vw;*/
+		margin-left : 50vw;
+	}
+
+	img.video {
+		margin-bottom : 1vw;
+		width : 45vw;
+
+		-webkit-filter : grayscale(100%);
+		filter : grayscale(100%);
+
+		-webkit-transition : all 0.2s ease;
+		-moz-transition : 0.2s ease;
+		-o-transition : all 0.2s ease;
+		-ms-transition : all 0.2s ease;
+		transition : all 0.2s ease;
+	}
+
+	img.video:hover {
+
+		-webkit-filter : grayscale(0%);
+		filter : grayscale(0%);
+
+		-webkit-transform : scale(1.02);
+		-moz-transform : scale(1.02);
+		-ms-transform : scale(1.02);
+		-o-transform : scale(1.02);
+		transform : scale(1.02);
+	}
+
+
+	/************************************************* FIN ************************************************/
 
 }
 

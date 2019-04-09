@@ -1,69 +1,66 @@
 
 @media all and (max-width : 480px)  {
 
-/************************************************* PAGE ************************************************/
+	/************************************************* PAGE ************************************************/
 
-body {
- 	/*overflow-y : hidden;*/
- 	/*min-width : 640px;*/
-}
+	body {
+		/*overflow-y : hidden;*/
+		/*min-width : 640px;*/
+	}
 
-div#splashscreen {
-/* 	margin-top : 50vh;
- 	transform : translateY(-50vh);*/
- 	display : none;
-}
-
-
-/************************************ TITLE ************************************/
-
-a#splashscreen_title {
-	display : block;
-	margin-top : 5vh;	
-	margin-left : 10vw;
-	margin-right : 10vw;
-	margin-bottom : 15vw;
-	text-align : center;
-	font-size : 6vw;
-	color : rgb(200,200,200);
-}
+	div#splashscreen {
+		/* 	margin-top : 50vh;
+             transform : translateY(-50vh);*/
+		display : none;
+	}
 
 
-/************************************ INTPUT ************************************/
+	/************************************ TITLE ************************************/
 
-a.splashscreen_text {
-	display : block;
-	font-size : 4vw;
-	text-align : center;
-}
-
-a {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-}
+	a#splashscreen_title {
+		display : block;
+		margin: 5vh 10vw 15vw;
+		text-align : center;
+		font-size : 6vw;
+		color : rgb(200,200,200);
+	}
 
 
-/************************************ IMAGE ************************************/
+	/************************************ INTPUT ************************************/
 
-img#splashscreen_image {
-	display : block;
-	width : 80vw;
-	margin-top : 15vw;
-	margin-left : auto;
-	margin-right : auto;
-}
+	a.splashscreen_text {
+		display : block;
+		font-size : 4vw;
+		text-align : center;
+	}
 
-a#imago_version {
-	display : block;
-	margin-top : 20vh;
-	margin-left : auto;
-	margin-right : auto;
-	text-align : center;
-	font-size : 3.6vw;
-}
+	a {
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		user-select: none;
+	}
 
-/************************************************* FIN ************************************************/
+
+	/************************************ IMAGE ************************************/
+
+	img#splashscreen_image {
+		display : block;
+		width : 80vw;
+		margin-top : 15vw;
+		margin-left : auto;
+		margin-right : auto;
+	}
+
+	a#imago_version {
+		display : block;
+		margin-top : 20vh;
+		margin-left : auto;
+		margin-right : auto;
+		text-align : center;
+		font-size : 3.6vw;
+	}
+
+	/************************************************* FIN ************************************************/
 
 }

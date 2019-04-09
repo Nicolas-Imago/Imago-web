@@ -1,14 +1,10 @@
-
-<?php require_once("../php/mutual/init.php") ?>
-
-<?php
+<?php require_once("../php/mutual/init.php");
 
     header("HTTP/1.0 404 Not Found");
-
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr_FR">
 
 <head>
     <meta charset = "utf-8"/>
@@ -44,7 +40,7 @@
 	<div id = "splashscreen" class = "screen">
 
 		<a id = "splashscreen_title"> ERREUR 404 </a>
-		<img id = "splashscreen_image" src = "../img/login/imago.png"></img>
+		<img id = "splashscreen_image" src = "../img/login/imago.png" alt="Imago splashscreen" />
 
 	</div>
 

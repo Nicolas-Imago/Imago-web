@@ -1,267 +1,260 @@
-
 @media all and (max-width : 480px)  {
 
-#screen {
-	display : none;
-}
+	#screen {
+		display : none;
+	}
 
-#button_header {
-	position : fixed;
-	z-index : 4;
-	top : 17vw;
-	padding-left : 88vw;
-	width : 25vw;
-}
+	#button_header {
+		position : fixed;
+		z-index : 4;
+		top : 17vw;
+		padding-left : 88vw;
+		width : 25vw;
+	}
 
-		img.button {
-			display : none;
-			margin-bottom : 10px;
-			margin-left : 2.5vw;
-			width : 30%;
+	img.button {
+		display : none;
+		margin-bottom : 10px;
+		margin-left : 2.5vw;
+		width : 30%;
 
-    		-webkit-filter: grayscale(20%);
-    		filter: grayscale(20%);
-    		box-shadow: 4px 4px 8px #000;
+		-webkit-filter: grayscale(20%);
+		filter: grayscale(20%);
+		box-shadow: 4px 4px 8px #000;
 
-			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;
-    	}
+		-webkit-transition : all 0.2s ease;
+		-moz-transition : 0.2s ease;
+		-o-transition : all 0.2s ease;
+		-ms-transition : all 0.2s ease;
+		transition : all 0.2s ease;
+	}
 
-    	img.button:hover {
-			-webkit-transform : scale(1.05);
-			-moz-transform : scale(1.05);
-			-ms-transform : scale(1.05);
-			-o-transform : scale(1.05);
-			transform : scale(1.05);
-		}
+	img.button:hover {
+		-webkit-transform : scale(1.05);
+		-moz-transform : scale(1.05);
+		-ms-transform : scale(1.05);
+		-o-transform : scale(1.05);
+		transform : scale(1.05);
+	}
 
-		img.sharing {
-			display : block;
-		}
-
-
-/********************************************* BACKGROUND *********************************************/
-
-img.background_image {
-	position : absolute;
-	right : 0px;
-	width : 100%;
-}
-
-div.background_shadow {
-	position : absolute;
-	display : none;
-	top : 0px;
-	left : 0px;
-	width : 100%;
-	height : 100%;
-}
-
-/************************************************ INFO ************************************************/
-
-section#information {
-	background-color : var(--main-bg-color);
-	position : relative;
-	z-index : 3;
-	margin-top : 58vw;
-	padding-top : 2vw;
-	padding-bottom : 5vw;
-	padding-left : 2vw;
-	padding-right : 2vw;
-}
-
-#information_header {
-	margin-top : 1vw;
-}
-
-		img.logo_image {
-			float : left;
-			width : 10vw;
-		}
-
-		#title {
-			float : left;
-			padding-left : 10px;
-		}
-
-		a.name {
-			display : block;
-			font-size : 4.5vw;
-			color : white;
-			text-decoration : none;
-		}
-
-		a.author {
-			display : block;
-			font-size : 4vw;	
-			color : grey;
-		}
-
-		img.author_image {
-			display : none;
-		}
+	img.sharing {
+		display : block;
+	}
 
 
-div.description {
-	padding-top : 17vw;
-	width : 96vw;
-	text-align: justify;
-	font-size : 3.5vw;
-	color : rgb(200,200,200);
-}
+	/********************************************* BACKGROUND *********************************************/
 
-a.more_info {
-	text-decoration : underline;
-	font-size : 3.5vw;
-	color : grey;
-}
+	img.background_image {
+		position : absolute;
+		right : 0px;
+		width : 100%;
+	}
 
-div.date {
-	display : none;
-}
+	div.background_shadow {
+		position : absolute;
+		display : none;
+		top : 0px;
+		left : 0px;
+		width : 100%;
+		height : 100%;
+	}
 
-div.duration {
-	padding-top : 5%;
-}
+	/************************************************ INFO ************************************************/
 
-div#note_1 {
-	padding-top : 5%;
-}
+	section#information {
+		background-color : var(--main-bg-color);
+		position : relative;
+		z-index : 3;
+		margin-top : 58vw;
+		padding: 2vw 2vw 5vw;
+	}
 
-a.title {
-	font-size : 3.5vw;
-	color : rgb(200, 200, 200);
-}
+	#information_header {
+		margin-top : 1vw;
+	}
 
-div.note_title {
-	float : left;
-	width : 60vw;
-}
+	img.logo_image {
+		float : left;
+		width : 10vw;
+	}
 
-img.note_image {
-	position : relative;
-	width : 3vw;
-}
+	#title {
+		float : left;
+		padding-left : 10px;
+	}
 
-/*a.more_note {
-	position : absolute;
-	left : 26%;
-	text-decoration : underline;
-	font-size : 3.5vw;
-	color : grey;
-}*/
+	a.name {
+		display : block;
+		font-size : 4.5vw;
+		color : white;
+		text-decoration : none;
+	}
 
+	a.author {
+		display : block;
+		font-size : 4vw;
+		color : grey;
+	}
 
-/*********************************************** SAISONS **********************************************/
-
-div#season_list {
-	position : relative;
-	z-index : 3;
-	margin-top : 1vw;
-	list-style-type : none;
-	padding-left : 0vw;
-
-	overflow-x : scroll;
-	overflow-y : hidden;
-	white-space : nowrap;
-}
-
-div#season_list.fixed_header {
-	margin-top : 145vw;
-}
-
-div#season_list.fixed_season {
-	position : fixed;
-	margin-top : 0vw;
-	top : 30vw;
-}
-
-		a.season {
-			display : inline;
-			margin-right: 2vw;
-			margin-left : 2vw;
-
-			color : grey; 
-			text-decoration : none;
-		}
-
-img#season_selector {
-	position : absolute;
-	top : 100%;
-}
-
-div#shadow_info {
-	position : fixed;
-	z-index : 2;
-	display : none;
-	top : 0px;
-	width : 100%;
-	height : 40vw;
-}
+	img.author_image {
+		display : none;
+	}
 
 
-/*********************************************** VIDEOS ***********************************************/
+	div.description {
+		padding-top : 17vw;
+		width : 96vw;
+		text-align: justify;
+		font-size : 3.5vw;
+		color : rgb(200,200,200);
+	}
 
-section#video_thumbnail {
-	position : relative;
-	z-index : 1;
-	margin-top : 2vw;
-	margin-left : 1vw;
-	color : grey;
-	/*min-height : 600px;*/
-}
+	a.more_info {
+		text-decoration : underline;
+		font-size : 3.5vw;
+		color : grey;
+	}
 
-div.thumbnail {
-	display : inline;
-}
+	div.date {
+		display : none;
+	}
 
-div.video_thumbnail_season {
-	display : none;
-}
+	div.duration {
+		padding-top : 5%;
+	}
 
-		img.thumbnail {
-			margin-top : 1vw;
-			margin-left : 1vw;
-			margin-right : 1vw;
-			margin-bottom : 1vw;
-			width : 45vw;
+	div#note_1 {
+		padding-top : 5%;
+	}
 
-			box-shadow: 4px 4px 4px #000;
+	a.title {
+		font-size : 3.5vw;
+		color : rgb(200, 200, 200);
+	}
 
-/*			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;*/
-		}
-			
-		img.thumbnail:hover {
-			/*box-shadow: 16px 16px 16px #000;*/
+	div.note_title {
+		float : left;
+		width : 60vw;
+	}
 
-/*			-webkit-transform : scale(1.05);
-			-moz-transform : scale(1.05);
-			-ms-transform : scale(1.05);
-			-o-transform : scale(1.05);
-			transform : scale(1.05);*/
-		}
+	img.note_image {
+		position : relative;
+		width : 3vw;
+	}
 
-		img.play_logo_panorama {
-			/*display : none;*/
-			position : absolute;
-			width : 15vw;
-			margin-top : 7vw;
-			margin-left : -32vw;
-		}
+	/*a.more_note {
+        position : absolute;
+        left : 26%;
+        text-decoration : underline;
+        font-size : 3.5vw;
+        color : grey;
+    }*/
 
-		img.play_logo_squared {
-			position : absolute;
-			width : 15vw;
-			margin-top : 15vw;
-			margin-left : -32vw;
-		}
+
+	/*********************************************** SAISONS **********************************************/
+
+	div#season_list {
+		position : relative;
+		z-index : 3;
+		margin-top : 1vw;
+		list-style-type : none;
+		padding-left : 0vw;
+
+		overflow-x : scroll;
+		overflow-y : hidden;
+		white-space : nowrap;
+	}
+
+	div#season_list.fixed_header {
+		margin-top : 145vw;
+	}
+
+	div#season_list.fixed_season {
+		position : fixed;
+		margin-top : 0vw;
+		top : 30vw;
+	}
+
+	a.season {
+		display : inline;
+		margin-right: 2vw;
+		margin-left : 2vw;
+
+		color : grey;
+		text-decoration : none;
+	}
+
+	img#season_selector {
+		position : absolute;
+		top : 100%;
+	}
+
+	div#shadow_info {
+		position : fixed;
+		z-index : 2;
+		display : none;
+		top : 0px;
+		width : 100%;
+		height : 40vw;
+	}
+
+
+	/*********************************************** VIDEOS ***********************************************/
+
+	section#video_thumbnail {
+		position : relative;
+		z-index : 1;
+		margin-top : 2vw;
+		margin-left : 1vw;
+		color : grey;
+		/*min-height : 600px;*/
+	}
+
+	div.thumbnail {
+		display : inline;
+	}
+
+	div.video_thumbnail_season {
+		display : none;
+	}
+
+	img.thumbnail {
+		margin: 1vw;
+		width : 45vw;
+
+		box-shadow: 4px 4px 4px #000;
+
+		/*			-webkit-transition : all 0.2s ease;
+                    -moz-transition : 0.2s ease;
+                    -o-transition : all 0.2s ease;
+                    -ms-transition : all 0.2s ease;
+                    transition : all 0.2s ease;*/
+	}
+
+	img.thumbnail:hover {
+		/*box-shadow: 16px 16px 16px #000;*/
+
+		/*			-webkit-transform : scale(1.05);
+                    -moz-transform : scale(1.05);
+                    -ms-transform : scale(1.05);
+                    -o-transform : scale(1.05);
+                    transform : scale(1.05);*/
+	}
+
+	img.play_logo_panorama {
+		/*display : none;*/
+		position : absolute;
+		width : 15vw;
+		margin-top : 7vw;
+		margin-left : -32vw;
+	}
+
+	img.play_logo_squared {
+		position : absolute;
+		width : 15vw;
+		margin-top : 15vw;
+		margin-left : -32vw;
+	}
 
 
 }
