@@ -1,4 +1,3 @@
-
 @media all and (min-width : 481px)  {
 
 div#screen {
@@ -271,10 +270,7 @@ div.video_thumbnail_type {
 
 		div.movie_message {
 			text-align : justify;
-			padding-top : 1vw;
-			padding-left : 1vw;
-			padding-right : 8vw;
-			padding-bottom : 3vw;
+			padding: 1vw 8vw 3vw 1vw;
 			color : rgb(200,200,200);
 		}
 

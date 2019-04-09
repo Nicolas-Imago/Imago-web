@@ -1,93 +1,86 @@
-
 @media all and (max-width : 480px)  {
 
-#screen {
-	display : none;
-}
+	#screen {
+		display : none;
+	}
 
-img#background {
-	position : absolute;
-	width : 100%;
-}
+	img#background {
+		position : absolute;
+		width : 100%;
+	}
 
-section#information {
-	position : relative;
-	z-index : 5;
-	padding-top : 85vw;
-	padding-left : 2vw;
-	width : 94vw;
-}
+	section#information {
+		position : relative;
+		z-index : 5;
+		padding-top : 85vw;
+		padding-left : 2vw;
+		width : 94vw;
+	}
 
-		a.name {
-			display : block;
-			font-size : 6vw;
-			color : white;
-		}
+	a.name {
+		display : block;
+		font-size : 6vw;
+		color : white;
+	}
 
-		a.position {
-			display : block;
-			font-size : 4.5vw;	
-		}
+	a.position {
+		display : block;
+		font-size : 4.5vw;
+	}
 
-		div#description {
-			padding-top : 4vw;
-			padding-left : 1vw;
-			padding-bottom : 6vw;
-			font-size : 3.5vw;
-			text-align: justify;
-		}
+	div#description {
+		padding-top : 4vw;
+		padding-left : 1vw;
+		padding-bottom : 6vw;
+		font-size : 3.5vw;
+		text-align: justify;
+	}
 
-a.title {
-	margin-left : 2vw;
-	font-size : 4.5vw;
-	color : white;
-}
+	a.title {
+		margin-left : 2vw;
+		font-size : 4.5vw;
+		color : white;
+	}
 
-div.thumbnail {
-	margin-top : 2vw;
-	margin-left : 2vw;
-	margin-bottom : 6vw;
+	div.thumbnail {
+		margin-top : 2vw;
+		margin-left : 2vw;
+		margin-bottom : 6vw;
 
-/*	overflow-x : scroll;
-	overflow-y : hidden;
-	white-space : nowrap;*/
-}
+		/*	overflow-x : scroll;
+            overflow-y : hidden;
+            white-space : nowrap;*/
+	}
 
-		img.rounded {
-			margin-top : 1vw;
-			margin-left : 1vw;
-			margin-right : 1vw;
-			margin-bottom : 1vw;
-			width : 22vw;
-		}
+	img.rounded {
+		margin: 1vw;
+		width : 22vw;
+	}
 
-		img.panorama, img.portrait, img.panorama {
-			margin-top : 1vw;
-			margin-left : 1vw;
-			margin-right : 1vw;
-			margin-bottom : 1vw;
-			width : 45vw;
-		}
+	img.panorama, img.portrait, img.panorama {
+		margin: 1vw;
+		width : 45vw;
+	}
 
-		img.thumbnail {
-			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;
-		}
+	img.thumbnail {
+		-webkit-transition : all 0.2s ease;
+		-moz-transition : 0.2s ease;
+		-o-transition : all 0.2s ease;
+		-ms-transition : all 0.2s ease;
+		transition : all 0.2s ease;
+	}
 
-		img.thumbnail:hover {
-			cursor : pointer;
+	img.thumbnail:hover {
+		cursor : pointer;
 
-			-webkit-transform : scale(1.05);
-			-moz-transform : scale(1.05);
-			-ms-transform : scale(1.05);
-			-o-transform : scale(1.05);
-			transform : scale(1.05);
-		}
+		-webkit-transform : scale(1.05);
+		-moz-transform : scale(1.05);
+		-ms-transform : scale(1.05);
+		-o-transform : scale(1.05);
+		transform : scale(1.05);
+	}
 
 
-/************************************************* FIN ************************************************/
+	/************************************************* FIN ************************************************/
 
 }

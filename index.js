@@ -1,6 +1,4 @@
-
 /********************************************** INIT ***********************************************/
-
 init_screen();
 
 function init_screen() {
@@ -8,7 +6,7 @@ function init_screen() {
     // Display screen
 
     $("div#splashscreen").fadeIn(2000);
-    $("a#imago_version").text("ImagoTV - v" + version)
+    $("a#imago_version").text("ImagoTV - v" + version);
 
     // listen mouse over, scroll and resize
 
@@ -22,7 +20,7 @@ function listen_splashscreen_image() {
 
     $("img#splashscreen_image").hover(function() {
         $(this).css("color","white");
-        $(this).css("cursor","pointer"); 
+        $(this).css("cursor","pointer");
     },function() {
         $(this).css("color","grey");
         $(this).css("cursor","auto");
@@ -32,11 +30,6 @@ function listen_splashscreen_image() {
 
     $("img#splashscreen_image").click(function() {
         go_to("/php/homepage.php");
-    });      
+    });
 
 }
-
-
-
-
-

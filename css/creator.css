@@ -1,107 +1,106 @@
-
 @media all and (min-width : 481px)  {
 
-#screen {
-	display : none;
-	/*margin-top : 6vw;*/
-	margin-bottom : 6vw;
-}
+	#screen {
+		display : none;
+		/*margin-top : 6vw;*/
+		margin-bottom : 6vw;
+	}
 
-img#background {
-	position : absolute;
-	width : 60%;
-}
+	img#background {
+		position : absolute;
+		width : 60%;
+	}
 
-section#information {
-	position : relative;
-	z-index : 5;
-	padding-top : 6vw;
-	padding-left : 1.5vw;
-	width : 40vw;
-}
+	section#information {
+		position : relative;
+		z-index : 5;
+		padding-top : 6vw;
+		padding-left : 1.5vw;
+		width : 40vw;
+	}
 
-		a.name {
-			display : block;
-			font-size : 2.4vw; 
-			color : white;
-		}
+	a.name {
+		display : block;
+		font-size : 2.4vw;
+		color : white;
+	}
 
-		a.position {
-			display : block;
-			font-size : 1.8vw; 	
-		}
+	a.position {
+		display : block;
+		font-size : 1.8vw;
+	}
 
-		div#description {
-			padding-top : 1vw;
-			padding-left : 2vw;
-			padding-bottom : 2vw;
-			font-size : 1.2vw;
-			text-align: justify;
-		}
+	div#description {
+		padding-top : 1vw;
+		padding-left : 2vw;
+		padding-bottom : 2vw;
+		font-size : 1.2vw;
+		text-align: justify;
+	}
 
 
-a.title {
-	margin-left : 3.5vw;
-	font-size : 1.8vw;
-	color : white;
-}
+	a.title {
+		margin-left : 3.5vw;
+		font-size : 1.8vw;
+		color : white;
+	}
 
-div.thumbnail {
-	margin-left : 4.5vw;
-	margin-bottom : 2vw;
+	div.thumbnail {
+		margin-left : 4.5vw;
+		margin-bottom : 2vw;
 
-/*	overflow-x : scroll;
-	overflow-y : hidden;
-	white-space : nowrap;*/
-}
+		/*	overflow-x : scroll;
+            overflow-y : hidden;
+            white-space : nowrap;*/
+	}
 
-		img.rounded {
-			margin-top : 0.8vw;
-			margin-left : 0.8vw;
-			margin-right : 0.8vw;
-			margin-bottom : 0.8vw;
-			width : 8vw;
-		}
+	img.rounded {
+		margin-top : 0.8vw;
+		margin-left : 0.8vw;
+		margin-right : 0.8vw;
+		margin-bottom : 0.8vw;
+		width : 8vw;
+	}
 
-		img.panorama {
-			margin-top : 0.8vw;
-			margin-left : 0.8vw;
-			margin-right : 0.8vw;
-			margin-bottom : 0.8vw;
-			width : 21vw;
-		}
+	img.panorama {
+		margin-top : 0.8vw;
+		margin-left : 0.8vw;
+		margin-right : 0.8vw;
+		margin-bottom : 0.8vw;
+		width : 21vw;
+	}
 
-		img.portrait {
-			margin-top : 1vw;
-			margin-left : 1vw;
-			margin-right : 1vw;
-			margin-bottom : 1vw;
-			width : 16vw;
-		}
+	img.portrait {
+		margin-top : 1vw;
+		margin-left : 1vw;
+		margin-right : 1vw;
+		margin-bottom : 1vw;
+		width : 16vw;
+	}
 
-		img.squared {
-			margin-top : 1vw;
-			margin-left : 1vw;
-			margin-right : 1vw;
-			margin-bottom : 1vw;
-			width : 13vw;
-		}
+	img.squared {
+		margin-top : 1vw;
+		margin-left : 1vw;
+		margin-right : 1vw;
+		margin-bottom : 1vw;
+		width : 13vw;
+	}
 
-		img.thumbnail {
-			-webkit-transition : all 0.2s ease;
-			-moz-transition : 0.2s ease;
-			-o-transition : all 0.2s ease;
-			-ms-transition : all 0.2s ease;
-			transition : all 0.2s ease;
-		}
+	img.thumbnail {
+		-webkit-transition : all 0.2s ease;
+		-moz-transition : 0.2s ease;
+		-o-transition : all 0.2s ease;
+		-ms-transition : all 0.2s ease;
+		transition : all 0.2s ease;
+	}
 
-		img.thumbnail:hover {
-			cursor : pointer;
+	img.thumbnail:hover {
+		cursor : pointer;
 
-			-webkit-transform : scale(1.05); 
-			-moz-transform : scale(1.05); 
-			-ms-transform : scale(1.05); 
-			-o-transform : scale(1.05); 
-			transform : scale(1.05);
-		}
+		-webkit-transform : scale(1.05);
+		-moz-transform : scale(1.05);
+		-ms-transform : scale(1.05);
+		-o-transform : scale(1.05);
+		transform : scale(1.05);
+	}
 }
