@@ -10,7 +10,7 @@ console.log(base_url)
 // Variables
 
 var trigger_width = 480;
-var version = "1.1.0"
+var version = "1.0.9"
 
 
 /*********************************************** COOKIES ***********************************************/
