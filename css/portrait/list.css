@@ -1,0 +1,94 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+ 	display : none;
+ 	margin-top : 16vw;
+	/*margin-bottom : 6vw;*/
+}
+
+div#screen_title {
+	margin-top : 20vw;
+	margin-bottom : 6vw;
+	text-align : center;
+	font-size : 6vw;
+	}
+
+div#button_header {
+	display : none;
+}
+
+img.big_image {
+	display : none;
+}
+
+img.small_image {
+	position : absolute;
+	width : 100vw;
+}
+
+
+/************************************************ QUERY ************************************************/
+
+section#query {
+	position : relative;
+	z-index : 2;
+	display : block;
+	width : 60vw;
+	left : 50vw;
+	margin-left : -30vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-radius: 0px;
+	border-bottom-color : grey; 	
+	height : 3.6vw;
+	margin-left : auto;
+	margin-right : auto;
+	width : 60vw;
+	color : grey;
+	font-size : 3.6vw;
+}
+
+a#validate_button {
+	display : block;
+	text-align : center;
+	margin-top : 8vw;
+	margin-bottom : 8vw;
+	font-size : 3.6vw;
+}
+
+a#message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width : 50vw;
+	color : red;
+	text-align : center;
+	font-size : 3.6vw;
+}
+
+
+/************************************************ RESULT ************************************************/
+
+section#list {
+	position : relative;
+	background-color : rgb(35, 35, 35);
+}
+
+section.folder {
+	padding-top : 4vw;
+	margin-top : 58vw;
+}
+
+section#result {
+	position : relative;
+	z-index : 5;
+}
+		
+}

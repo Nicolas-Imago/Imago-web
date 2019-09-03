@@ -17,11 +17,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "css/imago.css"/>
-    <link rel = "stylesheet" href = "css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "css/panorama/imago.css"/>
+    <link rel = "stylesheet" href = "css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "index.css"/>
-    <link rel = "stylesheet" href = "index_mobile.css"/>
+    <link rel = "stylesheet" href = "css/panorama/index.css"/>
+    <link rel = "stylesheet" href = "css/portrait/index.css"/>
 
     <link rel = "icon" type = "image/png" href = "img/icons/imago_con.png"/>
 
@@ -74,7 +74,7 @@
 <!-- JS FILES -->
 
 	<script src = "js/mutual/lib.js"></script>
-	<script src = "index.js"></script>
+	<script src = "js/index.js"></script>
 
 </body>
 </html>

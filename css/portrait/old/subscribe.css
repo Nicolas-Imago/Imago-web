@@ -1,0 +1,145 @@
+
+@media all and (max-width : 480px)  {
+
+
+/************************************ IMAGE ************************************/
+
+img#subscribe_background_image {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 90vw;
+	left : 50%;
+	margin-left : -45%;
+	opacity : 0.1;
+}
+
+
+/************************************ TITLE ************************************/
+
+a#subscribe_title {
+	display : block;
+	margin-top : 30vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 8vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 5vw;
+}
+
+
+/************************************ INTPUT ************************************/
+
+section#subscribe_information {
+	position : absolute;
+	z-index : 2;
+	display : block;
+	width : 95vw;
+	left : 50%;
+	margin-left : -48%;
+}
+
+div.subscribe_item {
+	margin-bottom : 0.8vw;
+	width : 90vw;
+	margin-left : auto;
+	margin-right : auto;
+}
+
+a.subscribe_item_title {
+	display : block;
+	float : left;
+	width : 40vw;
+	font-size : 3.6vw;
+	color : rgb(200,200,200);
+}
+
+div#subscribe_mod_date_input, div#subscribe_login_input {
+	margin-bottom : 8vw;
+}
+
+div#subscribe_id_input{
+	margin-top : 8vw;
+} 
+
+div#subscribe_first_name_input {
+	margin-top : 4vw;
+}
+
+div#subscribe_pwd_input {
+	margin-top : 16vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom-color : grey; 	
+	height : 3.6vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 3.6vw;
+}
+
+a.subscribe_item_value {
+	height : 3.6vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 3.6vw;
+}
+
+a#subscribe_update_title {
+	display : block;
+	float : left;
+	width : 90vw;
+	font-size : 3.2vw;
+}
+
+a#subscribe_update_button {
+	display : block;
+	text-align : center;
+	margin-top : 8vw;
+	margin-bottom : 8vw;
+	font-size : 3.6vw;
+}
+
+a#subscription_message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width   : 40vw;
+	color : red;
+	text-align : center;
+	font-size : 3.6vw;
+}
+
+a#enter {
+	display : block;
+	margin-top : 24vw;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width   : 40vw;
+	color : grey;
+	text-align : center;
+	font-size : 3.6vw;
+}
+
+a {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#footer {
+	margin-top : 120vw;
+}
+
+/************************************************* FIN ************************************************/
+
+}

@@ -1,0 +1,99 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+	display : none;
+	margin-top : 16vw;
+	margin-bottom : 16vw;
+}
+
+div#screen_title {
+	margin-top : 20vw;
+	margin-bottom : 6vw;
+	text-align : center;
+	font-size : 6vw;
+}
+
+div#button_header {
+	display : none;
+}
+
+/********************************************** THUMBNAIL **********************************************/
+
+div.list_container {
+	flex-wrap : wrap;
+
+/*	overflow-x : scroll;
+	overflow-y : hidden;
+	white-space : nowrap;*/
+}
+
+		div.panorama, div.portrait, div.squared {
+			margin-right : 1.8vw;
+		}
+
+
+/************************************************ LINK *************************************************/
+
+a.corner{
+	text-decoration : none;
+	cursor : auto;
+}
+
+a.link {
+	text-decoration : none;
+}
+
+a.folder:hover {
+	color : white;
+}
+
+div.link {
+	margin-top : 2vw;
+	margin-left : 2vw;
+	margin-bottom : 6vw;
+}
+
+		img.one_tile, img.two_tiles, img.three_tiles {
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			width : 93vw;
+
+			box-shadow : 1vw 1vw 1vw #000;
+		}
+
+		img.four_tiles {
+			margin-top : 1vw;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			margin-bottom : 1vw;
+			width : 45vw;
+
+			box-shadow : 1vw 1vw 1vw #000;
+		}
+
+
+/************************************************* PLAY ************************************************/
+
+section#live {
+	height : 67vw;
+}
+
+div.live_player {
+	background-color : orange;
+	position : absolute;
+	width : 100vw;
+}
+
+iframe.live_player {
+	position : absolute;
+	margin-top : 1vw;
+	margin-left : 2.5vw;
+	border : none; 
+	width : 95vw;
+	height : 53.4vw;
+}
+
+}

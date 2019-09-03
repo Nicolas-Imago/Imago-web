@@ -1,0 +1,22 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+ 	display : none;
+ 	margin-top : 16vw;
+	margin-bottom : 6vw;
+}
+
+	img#banner_image {
+		position : absolute;  
+		width : 60vw;
+		margin-left : 20vw;
+	}
+
+	section#list {
+		position : relative;
+		background-color : rgb(35, 35, 35);
+		margin-top : 50vw;
+	}
+		
+}

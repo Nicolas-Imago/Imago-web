@@ -1,0 +1,15 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+	display : none;
+	/*min-height : 80vw;*/
+}
+
+
+	img.background_image {
+		width : 100%;
+	}
+	
+
+}

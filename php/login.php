@@ -1,218 +1,214 @@
 
-<?php require_once("mutual/init.php") ?>
+<?php require_once("lib/init.php") ?>
 
-<?php require_once("mutual/lib_model.php") ?>
-<?php require_once("mutual/lib_view.php") ?>
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
+
+<?php require_once("lib/session.php") ?>
 
 <?php 
 
     // Display functions 
 
-    function hide() {
+    // function hide() {
 
-    	if (isset($_SESSION["login"])) {
-            ECHO ' style = "visibility:hidden;" ';
-        }
-    }
+    // 	if (isset($_SESSION["login"])) {
+    //         ECHO ' style = "visibility:hidden;" ';
+    //     }
+    // }
 
-    function display_validate() {
+    // function display_validate() {
 
-    	if (!isset($_SESSION["login"])) {
-            ECHO ' style = "display:block;" ';
-        }
-    }
+    // 	if (!isset($_SESSION["login"])) {
+    //         ECHO ' style = "display:block;" ';
+    //     }
+    // }
 
-    function display_subscribe() {
+    // function display_subscribe() {
 
-        if (isset($_SESSION["login"])) {
-            ECHO ' style = "visibility:hidden;" ';
-        }
-    }
+    //     if (isset($_SESSION["login"])) {
+    //         ECHO ' style = "visibility:hidden;" ';
+    //     }
+    // }
 
-    function display_enter() {
+    // function display_enter() {
 
-    	if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
-            ECHO ' style = "display:block;" ';
-        }
-    }
+    // 	if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
+    //         ECHO ' style = "display:block;" ';
+    //     }
+    // }
     
-    function display_logout() {
+    // function display_logout() {
 
-    	if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
-            ECHO ' style = "display:block;" ';
-        }
+    // 	if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
+    //         ECHO ' style = "display:block;" ';
+    //     }
+    // }
+
+  //   function dislay_message() {
+
+  //   	if (isset($_SESSION["login"])) {
+		// 	ECHO ' style = "visibility:visible; color:green" ';
+		// }
+		// else if (isset($_POST["login"])) { 
+		// 	ECHO ' style = "visibility:visible; color:red" ';
+		// }
+  //   }
+
+    // Check login and Display
+
+    // $login_status = "";
+
+    if (!empty($_SESSION["login"])) {
+        header('Location: member.php');
+        exit();
     }
 
-    function dislay_message() {
+    // $login = "";
+    // $password_default = "";
 
-    	if (isset($_SESSION["login"])) {
-			ECHO ' style = "visibility:visible; color:green" ';
-		}
-		else if (isset($_POST["login"])) { 
-			ECHO ' style = "visibility:visible; color:red" ';
-		}
-    }
+    // $validate_message = "Valider";
+    // $enter_message = "Retournez sur ImagoTV";
+
+    // $message = "defaut_message";
 
 
-    // Check login and Display 
+    // if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
+	   //  $message = "Bonjour " . $_SESSION["login"] . " !";
+    // }
 
-    $login = "";
-    $password_default = "";
+    // else if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
+    // 	$message = "Vous avez été correctement déconnecté !";
+    // }
 
-    $validate_message = "Valider";
-    $enter_message = "Retournez sur ImagoTV";
+ //    if (isset($_POST["login"]) AND isset($_POST["password"])) {
 
-    $message = "defaut_message";
+ //    	$login = $_POST["login"];
+ //    	$password = $_POST["password"];
 
+ //    	$member = read_member($login);
+ //    	$test_password = password_verify($password, $member["password"]);
 
-    if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
-	    $message = "Bonjour " . $_SESSION["login"] . " !";
-    }
-
-    else if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
-    	$message = "Vous avez été correctement déconnecté !";
-    }
-
-    else if (isset($_POST["login"]) AND isset($_POST["password"])) {
-
-    	$login = $_POST["login"];
-    	$password = $_POST["password"];
-
-    	$member = read_member($login);
-    	$test_password = password_verify($password, $member["password"]);
-
-	    if ($test_password) {
-	        $_SESSION["login"] = $login;
-	    	$message = "Bonjour " . $_SESSION["login"] . " !";
-	    } 
-	    else {
-	    	$message = "Login ou mot de passe erroné";
-	    }
-	}
+	//     if ($test_password) {
+	//         $_SESSION["login"] = $login;
+ //            header('Location: homepage.php');
+ //            exit();
+	//     } 
+	//     else {
+ //            $login_status = "error";
+	//     }
+	// }
 
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/imago.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "../css/login.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/login.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/login.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/login.css"/>
 
     <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
 
-    <title>ImagoTV</title>
+    <title> Imago TV - La plateforme vidéo de la transition </title>
 
-    <meta property = "og:title" content = "ImagoTV" />
-    <meta property = "og:description" content = "La plateforme vidéo des vidéastes engagés dans la transition" />
+    <meta property = "og:title" content = "Imago TV" />
+    <meta property = "og:description" content = "La plateforme vidéo gratuite de la transition" />
     <meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-	<script src = "../lib/jquery.js"></script>
+    <script src = "../js/lib/jquery.js"></script>
 
     <!-- TRACKING -->
 
-    <?php include("mutual/tracking.php") ?>
+    <?php include("lib/tracking.php") ?>
 
 </head>
 
 
-<body>	
+<body>  
 
-<!-- HEADER -->
-    
-    <?php include("mutual/header.php") ?>
-    
+<!-- HEADER, MENU & USER -->
 
-<!-- MENU & USER -->    
+    <?php include("block/header.php") ?>    
 
-    <?php include("mutual/menu.php") ?>
-    <?php include("mutual/user.php") ?>
+    <?php include("block/menu.php") ?>
+    <?php include("block/user.php") ?>
 
 
-<!-- HOME SCREEN -->	
+<!-- LOGIN SCREEN -->	
 
     <div id = "screen">
 
-        <!-- <img id = "login_background_image" src = "../img/login/imago.jpg"></img> -->
-		<a id = "login_title"> ImagoTV, la plateforme vidéo de la transition ! </a>
+		<a id = "login_title"> Connectez-vous pour profiter des fonctions coopératives ! </a>
 
 		<section id = "login_connection">
 
-    		<form id = "form" action = "login.php" method = "post">
+			<div class = "login_item" >
+				<a class = "login_item_title"> Pseudo : </a>
+			   	<input id = "login" type = "text" class = "login_item" >
+			</div>
 
-				<div class = "login_item" <?php hide() ?> >
-					<a class = "login_item_title"> Pseudo : </a>
-				   	<input type = "text" class = "login_item" name = "login" value = "<?php ECHO $login ?>">
-				</div>
+			<div class = "login_item" >
+		     	<a class = "login_item_title"> Mot de passe : </a>
+			   	<input id = "password" type = "password" class = "login_item" >
+			</div>
 
-				<div class = "login_item" <?php hide() ?> >
-				   	<a class = "login_item_title"> Mot de passe : </a>
-				   	<input type = "password" class = "login_item" name = "password" value = "<?php ECHO $password_default ?>">
-				</div>
+			<a id = "message" > Login ou mot de passe erroné </a>
 
-				<a id = "message" <?php dislay_message() ?> > <?php ECHO $message ?> </a>
-
-			</form> 
-
-		<a id = "validate" class = "action" <?php display_validate() ?> > <?php ECHO $validate_message ?> </a>
-		<a id = "enter" class = "action" <?php display_enter() ?> > <?php ECHO $enter_message ?> </a>
-		<a id = "logout" class = "action" <?php display_logout() ?> > <?php ECHO $enter_message ?> </a>
-
-        <a id = "subscribe" class = "action" <?php display_subscribe() ?> > (je ne suis pas encore inscrit) </a>
+    		<a id = "validate" class = "action" > VALIDER </a>
+            <a href = "subscribe.php" id = "subscribe" class = "action" > (je ne suis pas encore inscrit) </a>
+            <a id = "forget" class = "action" > Mot de passe oublié </a>
 
 		</section>
-
-		<!-- <img id = "login_background_image" src = "img/login/imago.jpg"></img> -->
-		<!-- <a id = "imago_version"> ImagoTV - v1.0.2</a> -->
 
 	</div>
 
 
 <?php
-	    if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
 
-            // Remove session variables
-
-            $_SESSION = array();
-            session_destroy();
-
-            // Remove cookies
-
-            // setcookie('login', '');
-            // setcookie('pass_hache', '');
-    	}
+	    // if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
+        //      $_SESSION = array();
+        //      session_destroy();
+    	// }
 ?>
 
 
 <!-- FOOTER -->
 
-    <?php include("mutual/footer.php") ?>
+    <?php include("block/footer.php") ?>
 
 
 <!-- JS VARIABLES INIT -->
 
     <script type = "text/javascript">
 
+        var user_login = "<?php ECHO $user_login; ?>";
+        var user_id = "<?php ECHO $user_id; ?>";
+        var status = "<?php ECHO $status; ?>";
+
         var env = "<?php ECHO $env; ?>";
         var base_url = "<?php ECHO $base_url; ?>";
+
+        // var login_status = "<?php ECHO $login_status; ?>";
 
     </script> 
 
 
 <!-- JS FILES -->
 
-	<script src = "../js/mutual/lib.js"></script>
-
-    <script src = "../js/mutual/header.js"></script>
-    <script src = "../js/mutual/menu.js"></script>
-    <script src = "../js/mutual/user.js"></script>
-    <script src = "../js/mutual/footer.js"></script>
+    <script src = "../js/lib/misc.js"></script>
+    
+    <script src = "../js/block/header.js"></script>
+    <script src = "../js/block/menu.js"></script>
+    <script src = "../js/block/user.js"></script>
+    <script src = "../js/block/footer.js"></script>
 
 	<script src = "../js/login.js"></script>
 

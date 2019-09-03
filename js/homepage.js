@@ -1,7 +1,7 @@
 
 /************************************************ INIT **********************************************/
 
-var pager_index = 2;
+var pager_index = [1, 1, 1, 1, 1];
 
 init_screen();
 
@@ -9,283 +9,281 @@ function init_screen() {
 
     // Display screen
 
+    set_cookie("url_cookie", page_url, 1);
+
     $("div#screen").fadeIn(1000);
     $("div#footer").show();
 
-    $("div#slideshow_pager_2").css("background", "rgb(120, 120, 120)");
+    for (index = 1; index <= 5; index++) {
+        $("div#pager_" + index + "_1").css("background", "rgb(120, 120, 120)");
+        $("img#left_arrow_container_" + index).hide();
 
-    $("iframe.live_player").attr("src", "https://www.invidio.us/embed/hbnzQtLS4T8?autoplay=1&fs=1&color=white&showinfo=0&rel=0&mute=0&disablekb=1");  
-
-
-    // $("div#footer").css("top", "5vw");
-    // $("img#layer").delay(5000).fadeOut(200);
-
-    if (window.innerWidth > trigger_width) {
-        $("div.info_panorama").hide();
-        $("div.info_portrait").hide();
-        $("div.info_squared").hide();
+        if (page_number[index] <= 1)
+            $("img#right_arrow_container_" + index).hide();
     }
 
-    $("div.slideshow_info").hide();
+    // $("div#slideshow_pager_2").css("background", "rgb(120, 120, 120)");
+
+    $("iframe.live_player").attr("src", "https://www.youtube.com/embed/w_yQp2G7k04?autoplay=1&fs=1&color=white&showinfo=0&rel=0&mute=0&disablekb=1");  
+    $("a#switch_fr").hide();
+
+    $("img#page_back").hide()
+
+    if (window.innerWidth > trigger_width) {
+        $("div.info_panorama, div.info_portrait, div.info_squared").hide();
+        $("div.series_info_panorama, div.series_info_squared").hide();
+    }
+
 
     // listen mouse over, scroll and resize
 
-    listen_slideshow_pager();
-    // listen_slideshow_container();
-    listen_slideshow_thumbnail();
+    listen_buttons();
 
-    listen_type_thumbnail();
-    listen_promo_thumbnail();
+    listen_switch();
+
+    // listen_slideshow_pager();
+    // listen_slideshow_container();
+    // listen_slideshow_thumbnail();
+
+    // listen_docu_thumbnail();
+    // listen_promo_thumbnail();
+
+    // listen_folder_thumbnail();
+    // listen_corner_thumbnail();
+
+    // listen_type_thumbnail();
+    // listen_category_thumbnail();
+
+    listen_pager();
+    listen_left_arrow();
+    listen_right_arrow();
+    listen_container();
     listen_content_thumbnail();
-    listen_category_thumbnail();
 
     addEventListener("resize", close_menu_and_user, false);
 }
 
 /********************************************** FUNCTION *********************************************/
 
-function scroll_slideshow_thumbnail(page_id) {
+function listen_switch() {
 
-    $("div#slideshow_pager_" + pager_index).css("background", "rgb(60, 60, 60)");
-    pager_index = page_id;
-    $("div#slideshow_pager_" + pager_index).css("background", "rgb(120, 120, 120)");
+    // Listen mouse over
 
-    page_position = - (page_id - 2) * 0.625 * window.width;
-    $("div#slideshow_container").animate({left : page_position}, 500);
+    $("a.switch").hover(function() {
+        $(this).css("color","white");
+        $(this).css("cursor","pointer");
+    },function() {
+        $(this).css("color","grey");
+        $(this).css("cursor","auto");
+    });
+
+    // Listen click on
+
+    $("a#switch_fr").click(function() {
+        $("iframe.live_player").attr("src", "https://www.youtube.com/embed/w_yQp2G7k04?autoplay=1&fs=1&color=white&showinfo=0&rel=0&mute=0&disablekb=1");  
+        $("a#switch_fr").hide();
+        $("a#switch_en").show();
+    });
+
+    $("a#switch_en").click(function() {
+        $("iframe.live_player").attr("src", "https://www.youtube.com/embed/svULUXvAblU?autoplay=1&fs=1&color=white&showinfo=0&rel=0&mute=0&disablekb=1");  
+        $("a#switch_en").hide();
+        $("a#switch_fr").show();
+    });
 
 }
+
+// function scroll_slideshow_thumbnail(page_id) {
+
+//     $("div#slideshow_pager_" + pager_index).css("background", "rgb(60, 60, 60)");
+//     pager_index = page_id;
+//     $("div#slideshow_pager_" + pager_index).css("background", "rgb(120, 120, 120)");
+
+//     page_position = - (page_id - 2) * 0.625 * window.width;
+//     $("div#slideshow_container").animate({left : page_position}, 500);
+
+// }
 
 
 /*********************************************** LISTEN *********************************************/
 
-function listen_slideshow_pager() {
 
-    // Listen mouse over
-
-    $("div.slideshow_pager").hover(function() {
-        $(this).css("cursor","pointer");
-        $(this).css("background", "rgb(200, 200, 200)");
-
-        pager_id = this.id;
-        pager_id = pager_id.replace("pager_", "");
-
-        page_id = pager_id.split("_")[1];
-
-    },function() {
-        $(this).css("cursor","auto");
-
-        if (pager_index == page_id) {
-            $(this).css("background", "rgb(120, 120, 120)");
-        }
-        else {
-            $(this).css("background", "rgb(60, 60, 60)");
-        }
-    });
-
-    // Listen click on
-
-    $("div.slideshow_pager").click(function() {
-        scroll_slideshow_thumbnail(page_id)
-    });   
-
-}
-
-function listen_slideshow_thumbnail() {
-
-    // Listen mouse over
-
-    $("div.slideshow_thumbnail_info").hover(function() {
-        $(this).css("cursor","pointer");
-
-        content_id = this.id.split("-")[2];
-
-        if (window.innerWidth > trigger_width) {
-            $("div#slideshow_info_" + content_id).fadeIn(200);
-        }
-
-    },function() {
-        $(this).css("cursor","auto");
-
-        if (window.innerWidth > trigger_width) {
-            $("div#slideshow_info_" + content_id).hide();
-        }
-    });
-
-    // Listen click on
-
-    $("div.slideshow_thumbnail_info").click(function() {
-
-        index = this.id.split("-")[1]
-        index = parseInt(index) + 1
-
-        console.log(index)
-        console.log(pager_index)
-
-        if (index == pager_index - 1) {
-            page_id = pager_index - 1
-            scroll_slideshow_thumbnail(page_id)
-        }
-        else if (index == pager_index + 1) {
-            page_id = pager_index + 1
-            scroll_slideshow_thumbnail(page_id)
-        }
-        else {
-            go_to("/php/series.php?type_id=tvshow&content_id=" + content_id);
-        }  
-    });
-}
-
-// function listen_slideshow_thumbnail() {
+// function listen_docu_thumbnail() {
 
 //     // Listen mouse over
 
-//     $("div.slideshow_thumbnail_info").hover(function() {
+//     $("img.docu").hover(function() {
 //         $(this).css("cursor","pointer");
-
-//         content_id = this.id.split("-")[1];
-
-//         console.log(content_id)
-
-//         if (window.innerWidth > trigger_width) {
-//             $("div#slideshow_info_" + content_id).fadeIn(200);
-//         }
-
 //     },function() {
 //         $(this).css("cursor","auto");
+//     });
 
-//         if (window.innerWidth > trigger_width) {
-//             $("div#slideshow_info_" + content_id).hide();
+//     // Listen click on
+
+//     $("img.docu").click(function() {
+//         image_source = this.src;
+//         image_source = image_source.split("/img/homepage/")[1];
+//         action = image_source.split(".")[0];
+
+//         if (action == "album_kalune") {
+//             go_to("/php/series.php?type_id=music&content_id=kalune_aimer"); 
+//         }
+
+//         if (action == "event_tres_court") {
+//             open("https://trescourt.com/fr/48h");
+//         }
+
+//         if (action == "event_otravia") {
+//             open("https://www.facebook.com/events/484611235640242/");
+//         }
+
+//         if (action == "event_low_carbon") {
+//             open("https://www.facebook.com/events/343132969887724/");
+//         }
+
+//         if (action == "cine_l_epoque") {
+//             open("http://www.bacfilms.com/distribution/fr/films/young-and-alive"); 
+//         }
+
+//         if (action == "cine_les_media_le_monde_et_moi") {
+//             open("https://lesmediaslemondeetmoi.com");
+//         }
+
+//         if (action == "spectacle_giorgia") {
+//             open("https://www.lanouvelleseine.com/event/4829/2019-05-23/"); 
+//         }
+
+//         if (action == "spectacle_nina") {
+//             open("https://www.marieclaireneveu.com/nina-des-tomates-et-des-bombes");
+//         }
+
+//         if (action == "tres_court_gaia") {
+//             go_to("/php/movie.php?type_id=shortfilm&content_id=gaia");
+//         }
+
+//         if (action == "tres_court_100_pourcent_dechets") {
+//             go_to("/php/movie.php?type_id=shortfilm&content_id=une_famille_100_pourcent_dechets");
+//         }
+
+//     });
+// }
+
+// function listen_promo_thumbnail() {
+
+//     // Listen mouse over
+
+//     $("img.promo").hover(function() {
+//         $(this).css("cursor","pointer");
+//     },function() {
+//         $(this).css("cursor","auto");
+//     });
+
+//     // Listen click on
+
+//     $("img.info").click(function() {
+//         go_to("/php/page.php?page_id=qui_sommes_nous");
+//     });
+
+//     $("img.donate").click(function() {
+//         go_to("/php/page.php?page_id=aidez_nous#help_1");
+//     });
+
+//     $("img.facebook").click(function() {
+//         open("https://www.facebook.com/imagotv.fr/");
+//     });
+
+//     $("img.subscribe").click(function() {
+//         if (status == "logout") {
+//             go_to("/php/login.php");
+//         }
+
+//         if (status == "login") {
+//             go_to("/php/member.php?");
 //         }
 //     });
 // }
 
-function listen_type_thumbnail() {
+// function listen_corner_thumbnail() {
 
-    // Listen mouse over
+//     // Listen mouse over
 
-    $("img.type").hover(function() {
-        $(this).css("cursor","pointer");
-    },function() {
-        $(this).css("cursor","auto");
-    });
+//     $("img.corner").hover(function() {
+//         $(this).css("cursor","pointer");
+//     },function() {
+//         $(this).css("cursor","auto");
+//     });
 
-    // Listen click on
+//     // Listen click on
 
-    $("img.type").click(function() {
-        image_source = this.src;
-        image_source = image_source.split("/img/homepage/")[1];
-        type_id = image_source.split("_")[0];
+//     $("img.corner").click(function() {
+//         image_source = this.src;
+//         image_source = image_source.split("/img/corner/")[1];
+//         corner_id = image_source.split(".")[0];
 
-        go_to("/php/category.php?type_id=" + type_id);
-    });
-}
+//         go_to("/php/corner.php?corner_id=" + corner_id);
+//     });
+// }
 
-function listen_promo_thumbnail() {
+// function listen_folder_thumbnail() {
 
-    // Listen mouse over
+//     // Listen mouse over
 
-    $("img.promo").hover(function() {
-        $(this).css("cursor","pointer");
-    },function() {
-        $(this).css("cursor","auto");
-    });
+//     $("img.folder").hover(function() {
+//         $(this).css("cursor","pointer");
+//     },function() {
+//         $(this).css("cursor","auto");
+//     });
 
-    // Listen click on
+//     // Listen click on
 
-    $("img.info").click(function() {
-        go_to("/php/page.php?page_id=presentation");
-        // open("https://imagotv.fr/pdf/imago_presentation.pdf");
-    });
+//     $("img.folder").click(function() {
+//         image_source = this.src;
+//         image_source = image_source.split("/img/folder/")[1];
+//         query_id = image_source.split(".")[0];
 
-    $("img.facebook").click(function() {
-        open("https://www.facebook.com/imagotv.fr/");
-    });
+//         go_to("/php/list.php?list_id=folder&query_id=" + query_id);
+//     });
+// }
 
-    $("img.subscribe").click(function() {
-        if (status == "logout") {
-            go_to("/php/subscribe.php");
-        }
+// function listen_category_thumbnail() {
 
-        if (status == "login") {
-            go_to("/php/member.php?");
-        }
-    });
-}
+//     // Listen mouse over
 
-function listen_content_thumbnail() {
+//     $("img.category").hover(function() {
+//         $(this).css("cursor","pointer");
+//     },function() {
+//         $(this).css("cursor","auto");
+//     });
 
-    // Listen mouse over
+//     // Listen click on
 
-    $("div.thumbnail_info").hover(function() {
-        $(this).css("cursor","pointer");
+//     $("img.category").click(function() {
+//         image_source = this.src;
+//         image_source = image_source.split("/img/homepage/category/")[1];
+//         category_id = image_source[0];
 
-        content_id = this.id.split("-")[3];
+//         go_to("/php/category.php?category_id=" + category_id);
+//     });
+// }
 
-        if (window.innerWidth > trigger_width) {
-            $("div#info_" + content_id).fadeIn(200);
-        }
+// function listen_type_thumbnail() {
 
-    },function() {
-        $(this).css("cursor","auto");
+//     // Listen mouse over
 
-        if (window.innerWidth > trigger_width) {
-            $("div#info_" + content_id).hide();
-        }
-    });
+//     $("img.type").hover(function() {
+//         $(this).css("cursor","pointer");
+//     },function() {
+//         $(this).css("cursor","auto");
+//     });
 
-    // Listen click on
+//     // Listen click on
 
-    $("div.thumbnail_info").click(function() {
+//     $("img.type").click(function() {
+//         image_source = this.src;
+//         image_source = image_source.split("/img/homepage/")[1];
+//         type_id = image_source.split("_")[0];
 
-        type_id = this.id.split("-")[2];
-        index = this.id.split("-")[1];
+//         go_to("/php/category.php?type_id=" + type_id);
+//     });
+// }
 
-        if (type_id == "tvshow" || type_id == "shortfilm" || type_id == "humour") {         
-            var page_size = 4;
-        }
-        if (type_id == "documentary" || type_id == "podcast" || type_id == "music") {         
-            var page_size = 5;   
-        }
-
-        list_id = this.id.split("-")[0];
-        test_id = index - page_size * (pager_index[list_id - 1] - 1);
-
-        if (test_id == -1) {
-            page_id = pager_index[list_id - 1] - 1
-            scroll_thumbnail(list_id, page_id)
-        }
-        else if (test_id == page_size) {
-            page_id = pager_index[list_id - 1] + 1
-            scroll_thumbnail(list_id, page_id)
-        }
-        else {
-            if (type_id == "tvshow" || type_id == "podcast" || type_id == "humour" || type_id == "music") {
-                go_to("/php/series.php?type_id=" + type_id + "&content_id=" + content_id);
-            }
-            else {
-                go_to("/php/movie.php?type_id=" + type_id + "&content_id=" + content_id);
-            }
-        }  
-    });
-}
-
-function listen_category_thumbnail() {
-
-    // Listen mouse over
-
-    $("img.category").hover(function() {
-        $(this).css("cursor","pointer");
-    },function() {
-        $(this).css("cursor","auto");
-    });
-
-    // Listen click on
-
-    $("img.category").click(function() {
-        image_source = this.src;
-        image_source = image_source.split("/img/homepage/category/")[1];
-        category_id = image_source[0];
-
-        go_to("/php/category.php?category_id=" + category_id);
-    });
-}

@@ -1,0 +1,31 @@
+
+@media all and (max-width : 480px)  {
+
+#screen {
+	display : none;
+	margin-top : 16vw;
+	margin-bottom : 6vw;
+}
+
+div#screen_title {
+	margin-top : 20vw;
+	margin-bottom : 6vw;
+	margin-left : 15vw;
+	margin-right : 15vw;
+	text-align : center;
+	font-size : 6vw;
+}
+
+div#button_header {
+	display : none;
+}
+
+/*div.list_container {
+	flex-wrap : wrap;
+}*/
+
+/*		div.panorama, div.portrait, div.squared {
+			margin-right : 1.8vw;
+		}*/
+
+}

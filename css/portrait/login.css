@@ -1,0 +1,111 @@
+
+@media all and (max-width : 480px)  {
+
+
+/************************************ IMAGE ************************************/
+
+img#login_background_image {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 90vw;
+	left : 50%;
+	margin-left : -45%;
+	opacity : 0.1;
+}
+
+
+/************************************ TITLE ************************************/
+
+a#login_title {
+	display : block;
+	margin-top : 30vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 8vw;
+	width : 60vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 5vw;
+}
+
+
+/************************************ INTPUT ************************************/
+
+section#login_connection {
+	position : absolute;
+	z-index : 2;
+	display : block;
+	width : 90vw;
+	left : 50%;
+	margin-left : -45%;
+}
+
+div.login_item {
+	margin-bottom : 2vw;
+	width : 80vw;
+	margin-left : auto;
+	margin-right : auto;
+	text-align : center;
+}
+
+		a.login_item_title {
+			display : block;
+			float : left;
+			width : 25vw;
+			font-size : 3.6vw;
+			color : rgb(200,200,200);
+		}
+
+		input.login_item {
+			background-color : transparent;
+			border-top : none;
+			border-left : none;
+			border-right : none;
+			border-radius: 0px;
+			border-bottom-color : grey;
+			height : 3.6vw;	
+			width : 45vw;
+			font-size : 3.6vw;
+			color : grey;
+		}
+
+a#message {
+	display : block;
+	margin-top : 10vw;
+	text-align : center;
+	color : red;
+}
+
+
+a.action {
+	display : block;
+	margin-top : 6vw;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width   : 50vw;
+	color : grey;
+	text-align : center;
+	font-size : 3.6vw;
+}
+
+a#subscribe {
+	display : block;
+}
+
+a {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+
+#footer {
+	margin-top : 80vw;
+}
+
+
+}

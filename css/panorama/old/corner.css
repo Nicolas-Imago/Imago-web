@@ -1,0 +1,25 @@
+
+@media all and (min-width : 481px)  {
+
+#screen {
+ 	display : none;
+	margin-top : 6vw;
+	min-height : 40vw;
+}
+
+	img#banner_image {
+		position : absolute;  
+		width : 30vw;
+		margin-left : 35vw;
+	}
+
+	section#list {
+		position : relative;
+		background-color : var(--main-bg-color);
+		margin-top : 19vw;
+	}
+
+
+
+
+}

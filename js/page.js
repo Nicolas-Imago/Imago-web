@@ -1,23 +1,21 @@
 
 /********************************************** INIT ***********************************************/
 
-if (page_id == "qui_sommes_nous") {var item = "1"}
-if (page_id == "manifeste") {var item = "2"}
-if (page_id == "media") {var item = "3"}
-if (page_id == "aidez_nous") {var item = "4"}
-if (page_id == "faq") {var item = "5"}
-if (page_id == "version") {var item = "6"}
+if (page_id == "qui_sommes_nous")   var item = "1";
+if (page_id == "manifeste")         var item = "2";
+if (page_id == "media")             var item = "3";
+if (page_id == "aidez_nous")        var item = "4";
+if (page_id == "faq")               var item = "5";
+if (page_id == "version")           var item = "6";
 
 init_screen(); 
-
-console.log(item)
-
 
 function init_screen() {
 
     // Display screen
 
     screen_update();
+    set_cookie("url_cookie", page_url, 1);
 
     $("div#screen").show();
     $("div#footer").show();
@@ -29,7 +27,7 @@ function init_screen() {
     listen_item();
 
     addEventListener("resize", screen_update, false);
-
+    addEventListener("scroll", screen_update, false);
 }
 
 
@@ -43,7 +41,7 @@ function listen_item() {
         $(this).css("cursor","pointer"); 
         $(this).css("color", "rgb(200, 200, 200)");
 		$("a#item_" + item).css("color", "white");       
-        }, function() {
+    }, function() {
         $(this).css("cursor","auto"); 
         $(this).css("color", "grey");
         $("a#item_" + item).css("color", "white");

@@ -1,120 +1,63 @@
 
-<?php require_once("mutual/init.php") ?>
+<?php require_once("lib/init.php") ?>
 
-<?php require_once("mutual/lib_model.php") ?>
-<?php require_once("mutual/lib_view.php") ?>
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
 
-<?php require_once("mutual/session.php") ?>
+<?php require_once("lib/session.php") ?>
 
 <?php
 
-    // Display functions
+	// Functions
 
-    function display_season() {
+	function display_list($screen, $list_id, $thumbnail_type, $type_id, $content_id, $author_id_list) {
 
-    	global $content;
-    	global $season_number;
+		global $page_number, $user_id, $has_comment, $comment_list;
 
-    	for ($season_index = 1; $season_index <= $season_number ; $season_index++) {
-    		ECHO ' <a ';
-	    		ECHO ' id = "season_' . $season_index . '" ';
-	    		ECHO ' class = "season" >';
-		    		ECHO ' SAISON ' . $season_index;
-    		ECHO ' </a>';
-    	}
-    }
+		if ($thumbnail_type == "content")
+			$content_list = get_related_content_list($type_id, $content_id, $author_id_list);
 
-    function display_video() {
+		if ($thumbnail_type == "comment") {
+			$content_list = get_related_comment_list($user_id, $content_id);
+			$comment_list = $content_list;
+		}
 
-    	global $content, $video_id_list;
-    	global $format, $content_id, $season_number, $video_number_last_season;
+		$item_number = sizeof($content_list);
+		$title = content_list_title_of($screen, $type_id, "", $item_number);
 
-    	for ($season_index = $season_number; $season_index >= 1; $season_index--) {
+		$page_number[$list_id] = page_number_of($type_id, $content_list);
 
-    		ECHO ' <div ';
-	    		ECHO ' id = "video_thumbnail_season_' . $season_index . '" ';
-	    		ECHO ' class = "video_thumbnail_season" ';
-    		ECHO ' > ';
+		if ($thumbnail_type == "content")
+			display_thumbnail_container($list_id, $thumbnail_type, $type_id, "", $title, $content_list);
 
-	        for ($video_index = 12; $video_index >= 1; $video_index--) {
-
-	            if (($season_index != $season_number) OR ($video_index <= $video_number_last_season)) {
-
-	            	$episod_id = 12 * ($season_index - 1) + $video_index;
-
-                	$hosting = $video_id_list[$episod_id - 1]["hosting"];
-                	$thumbnail = $video_id_list[$episod_id - 1]["thumbnail"];
-
-                	$video_id  = $video_id_list[$episod_id - 1][$hosting . '_id'];
-
-                	$publication_date = $video_id_list[$episod_id - 1]["publication_date"];
-                	$duration = $video_id_list[$episod_id - 1]["duration"];
-
-                	$title = "#" . $video_id_list[$episod_id - 1]["title"];
-                	$date = month_of($publication_date) . " " . year_of($publication_date);
-                	$duration = duration_of($duration);
-
-                	if ($title != "##") {$line_1 = $title;} else {$line_1 = "";}
-                	if ($duration != "0 min ") {$line_2 = $duration . '   -   ' . $date;} else {$line_2 = "";}
-
-    				if ($thumbnail == "youtube") {
-						$image_url = "https://img.youtube.com/vi/" . $video_id  . "/mqdefault.jpg";
-					}
-                	else {
-                		$image_url = "../img/video/" . $content_id . "/" . $video_id  . ".jpg";
-                	}
-
-		    		ECHO ' <div ';
-		                ECHO ' id = "thumbnail_' . $thumbnail . '_' . $episod_id . '" ';
-		                ECHO ' class = "thumbnail ' . $format . '" ';
-		    		ECHO ' > ';
-
-	                	ECHO ' <img ';
-		                	ECHO ' id = "thumbnail_image_' . $episod_id . '" ';
-		                	ECHO ' class = "thumbnail" ';
-		                	ECHO ' src = "' . $image_url . '" ';
-	                	ECHO ' > ';
-
-	                	ECHO ' <img ';
-		                	ECHO ' class = "play_logo_' . $format . '" ';
-		                	ECHO ' src = "../img/icons/play.png" ';
-	                	ECHO ' > ';
-
-		                ECHO ' <div ';
-		                ECHO ' id = "info_' . $episod_id . '" ';
-		                ECHO ' class = "info_' . $format . '" ' . $format . '" '; 
-		                ECHO ' > ';
-
-		                    ECHO ' <div>';
-		                    ECHO ' <a class = "line_1">' . $line_1 . '</a>';
-		                    ECHO ' </div>';
-
-		                    ECHO ' <div>';
-		                    ECHO ' <a class = "line_2">' . $line_2 . ' </a>';
-		                    ECHO ' </div>';
-
-		                ECHO ' </div>';
-
-	                ECHO '</div>';
-                }
-            }
-
-            ECHO '</div>';
-        }
-    }
+		if ($thumbnail_type == "comment")
+			display_thumbnail_container($list_id, "comment", $thumbnail_type, "", $title, $content_list);
+	}	
 
 
-    // Display screen
+    ////////////////////////////////// Get url param //////////////////////////////////
 
-	if (isset($_GET["type_id"])) {$type_id = $_GET["type_id"];} else {$type_id = "tvshow";}
-	if (isset($_GET["content_id"])) {$content_id = $_GET["content_id"];} else {$content_id = "";}
+	if (isset($_GET["type_id"])) 		$type_id 	= $_GET["type_id"];			else $type_id = "";
+	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
 
-	if (isset($_GET["season_id"])) {$season_id = $_GET["season_id"];} else {$season_id = "";}
-	if (isset($_GET["episod_id"])) {$episod_id = $_GET["episod_id"];} else {$episod_id = "";}
-	if (isset($_GET["video_id"])) {$video_id = $_GET["video_id"];} else {$video_id = "";}
+	if (isset($_GET["video_id"])) 		$video_id 	= $_GET["video_id"]; 		else $video_id = "";
 
-	if ($type_id == "podcast") {$format = "squared";}
-	if ($type_id != "podcast") {$format = "panorama";}
+	if (isset($_GET["season_id"])) 		$season_id	= $_GET["season_id"]; 		else $season_id = "";
+	if (isset($_GET["episod_id"])) 		$episod_id 	= $_GET["episod_id"]; 		else $episod_id = "";
+
+	if (isset($_GET["timecode"])) 		$timecode 	= $_GET["timecode"];		else $timecode = "";
+
+
+    ////////////////////////////////// Get data //////////////////////////////////
+
+	$type_list = ["tvshow", "podcast", "music", "humour"];
+
+	if (!in_array($type_id, $type_list)) {
+		include("404.php");
+		return;
+	}
+
 
 	$content = get_content_info($content_id);
 
@@ -123,48 +66,104 @@
 		return;
 	}
 
-	$category = $content["category"];
-	$info_title = "Format :";
-	$info_data = $content["sub_type"];
+	$page_number = array();
+	$page_number = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 	$author_id_list = get_author_id_list($content_id);
+    $author_name = display_author_name($author_id_list);
+
+	$category = $content["category"];
+
+	$info_title = "Format :";
+	$info_data = $content["format"];
+
+    $crowdfunding_url = $content["crowdfunding"];
+
 	$video_id_list = get_episod_id_list($content_id);
 
-	$video_number = sizeof($video_id_list);
-    $season_number = intval(($video_number - 1) / 12) + 1;
-    $video_number_last_season = $video_number - 12 * ($season_number - 1);
+	if($content["season_size"] != "") $season_size = intval($content["season_size"]); else $season_size = 12;
 
-    if ($season_id != "") {
-    	$current_season = $season_id;
-   	}
+    $video_number = sizeof($video_id_list);
+    $season_number = intval(($video_number - 1) / $season_size) + 1;
+
+    if ($season_id != "") $current_season = $season_id;
 
 	if ($episod_id != "") {
-		$current_season = intval(($episod_id - 1) / 12) + 1;
-		$hosting = $video_id_list[$episod_id - 1]["hosting"];
-        $thumbnail = $video_id_list[$episod_id - 1]["thumbnail"];
-        $video_id = get_video_id($content_id, $episod_id)[0][$hosting . '_id'];
+		$current_season = intval(($episod_id - 1) / $season_size) + 1;
+		
+		if (isset($video_id_list[$episod_id - 1])) {
+			$episod = $video_id_list[$episod_id - 1];
+
+	        $thumbnail = $episod["thumbnail"];
+	        $fact_check_url = $episod["fact_check"];
+
+			$hosting = $episod["hosting"];
+
+			if ($episod["type"] == "podcast")
+				$video_id = $episod["audio_id"];
+
+			else if ($hosting == "invidio") 
+				$video_id = $episod["youtube_id"];
+
+            else {$video_id = $episod[$hosting . '_id'];}
+	    }
+	    else {
+			include("404.php");
+			return;	    	
+	    }
     }
     else {
     	$current_season = $season_number;
-    	$hosting = "";
-    	$thumbnail = "";
+    	$hosting = "youtube";
+    	$thumbnail = "youtube";
+    	$fact_check_url = "";
     }
 
-    if ($status == "login" AND !empty(read_favorite_content($user_id, $content_id))) {
-    	$is_favorite = "1";
-    }
-    else {
-    	// add_favorite_content($user_id, $content_id);
-    	$is_favorite = "0";
-    }
+    if ($status == "user" AND !empty(read_favorite_content($user_id, $content_id, $episod_id))) $is_favorite = "1";
+    else $is_favorite = "0";
 
-    // tag 
+    if ($status == "user" AND !empty(read_watch_later_content($user_id, $content_id, $episod_id))) $watch_later = "1";
+    else $watch_later = "0";
+
+    if ($status == "user" AND !empty(get_user_comment_list($user_id, $content_id))) $has_comment = "1";
+    else $has_comment = "0";   
+
+    $background_url = "../img/content/" . $type_id . "/background/" . $content_id . ".jpg";
+	$logo_url = "../img/content/" . $type_id . "/thumbnail/" . $content_id . ".jpg";
+
+
+	$content_list = content_list_of($type_id, $category);
+	$content_list_size = sizeof($content_list);
+
+	for ($index = 0; $index < $content_list_size; $index++) 
+		if ($content_list[$index] == $content_id) $content_index = $index;
+
+	$previous_content_id = $content_list[$content_list_size - 1];
+	$next_content_id = $content_list[0];
+
+	if ($content_index > 0) $previous_content_id = $content_list[$content_index - 1];
+	if ($content_index < ($content_list_size - 1)) $next_content_id = $content_list[$content_index + 1];
+
+	$arrow_left_page_href = "series.php?type_id=" . $type_id . "&content_id=" . $previous_content_id;
+	$arrow_right_page_href = "series.php?type_id=" . $type_id . "&content_id=" . $next_content_id;
+
+
+    ////////////////////////////////// OG //////////////////////////////////
+
+	if ($type_id == "music" AND $episod_id != "") {
+		$og_info = $video_id_list[$episod_id - 1];
+		$og_name = $author_name . ' - ' . $og_info["title"];
+	}
+	else {
+		$og_name = $content["name"];
+	}
+
+    ////////////////////////////////// Tag //////////////////////////////////
+
 
 	$screen_tag = read_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 
-	if (empty($screen_tag)) {
-		create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
-	}
+	if (empty($screen_tag)) create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
@@ -175,130 +174,182 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
+   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "../css/series.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/series.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/series.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/series.css"/>
 
     <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
 
-    <title>ImagoTV</title>
+    <title> <?php ECHO $og_name ?> sur Imago TV </title>
 
-    <meta property = "og:title" content = "<?php ECHO $content["name"] ?>" />
+    <meta property = "og:title" content = "<?php ECHO $og_name ?>" />
 	<meta property = "og:description" content = "<?php ECHO $content["description"] ?>" />
-	<meta property = "og:image" content = "<?php display_image("og_image") ?>" />
+	<meta property = "og:image" content = "<?php display_og_image($type_id, $content_id, $thumbnail, $episod_id, $video_id) ?>" />
 
-	<script src = "../lib/jquery.js"></script>
+    <script src = "../js/lib/jquery.js"></script>
+	<script src = "../js/lib/jquery.jrumble.1.3.js"></script>
 
 	<!-- TRACKING -->
 
-	<?php include("mutual/tracking.php") ?>
+	<?php include("lib/tracking.php") ?>
 
 </head>
 
 
 <body>	
 
-<!-- HEADER -->
-	
-	<?php include("mutual/header.php") ?>
-	
+<!-- HEADER, MENU & USER -->
 
-<!-- MENU & USER -->	
+	<?php include("block/header.php") ?>	
 
-	<?php include("mutual/menu.php") ?>
-	<?php include("mutual/user.php") ?>
+	<?php include("block/menu.php") ?>
+	<?php include("block/user.php") ?>
+
+	<div id = "black_layer"> </div>
 
 
-<!-- SCREEN -->	
+<!-- SERIES SCREEN -->	
 
 	<div id = "screen">
 
-		<img class = "background_image" <?php display_image("background") ?> ></img>
+		<img class = "background_image" src = <?php ECHO $background_url ?> ></img>
 		<div class = "background_shadow"></div>
 
-		<?php include("mutual/button.php") ?>
-		<?php include("mutual/information.php") ?>
+		<?php include("block/button.php") ?>
+		<?php include("block/information.php") ?>
 
-		<section id = "filter_list"> 
-
+		<section id = "filter"> 
 			<div id = "season_list">
-				<?php display_season() ?>
-	    		<img id = "season_selector" src = "../img/icons/tvshow/season_selector_grey.png"></img>
+				<?php display_season($season_number) ?>
+	    		<!-- <img id = "season_selector" src = "../img/icons/tvshow/season_selector_grey.png"></img> -->
 	    	</div>
-
-<!-- 	    	<img id = "list_icon" class = "display_icon" src = "../img/icons/series/list_icon_grey.png"></img>
-	    		<img id = "sheet_icon" class = "display_icon" src = "../img/icons/series/sheet_icon_grey.png"></img>
-				<img id = "mosaic_icon" class = "display_icon" src = "../img/icons/series/mosaic_icon_grey.png"></img>
-	    		<img id = "icons_selector" src = "../img/icons/series/selector_icon.png"></img> -->
+	    	
+			<img id = "grid" class = "display" src = "../img/icons/tvshow/mosaic_icon_dark_grey.png"></img>
+			<img id = "list" class = "display" src = "../img/icons/tvshow/sheet_icon_dark_grey.png"></img>
 
 		</section>
 
 		<section id = "video_thumbnail">
-			<?php display_video() ?>			
+			<?php display_series_video($content_id, $content, $video_id_list, $type_id) ?>			
 		</section> 
+
+
+		<hr color = "grey" width = "90%" bottom = "4vw">
+
+			<?php display_list("series", "1", "content", "tvshow", $content_id, $author_id_list) ?>
+			<?php display_list("series", "2", "content", "documentary", $content_id, $author_id_list) ?>
+			<?php display_list("series", "3", "content", "podcast", $content_id, $author_id_list) ?>			
+			<?php display_list("series", "4", "content", "shortfilm", $content_id, $author_id_list) ?>
+
+		<hr color = "grey" width = "90%">
+
+			<?php display_list("series", "5", "comment", "comment", $content_id, "") ?>
+
+		<hr color = "grey" width = "90%">
+
+			<?php display_list("series", "6", "content", "book", "", $author_id_list) ?>			
 
 		<div id = "shadow_info"></div>
 
-	</div> 
 
-	<a <?php display_next() ?> > <img id = "page_right" src = "../img/icons/footer/page_right_grey.png"></a>
-	<a <?php display_preview() ?> > <img id = "page_left" src = "../img/icons/footer/page_left_grey.png"></a>
+
+		<a href = "<?php ECHO $arrow_left_page_href ?>" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+		</a>
+
+		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
+			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+		</a>
+
+	</div> 
 
 
 <!-- POP UP -->
 
-	<?php include("mutual/pop_up.php") ?>
+	<?php include("block/pop_up.php") ?>
+
+	<!-- <div id="player"></div> -->
 
 
 <!-- FOOTER -->
 
-	<?php include("mutual/footer.php") ?>
+	<?php include("block/footer.php") ?>
 
 
 <!-- JS VARIABLES INIT -->
 
     <script type = "text/javascript">
 
-    	var env = "<?php ECHO $env; ?>";
-    	var base_url = "<?php ECHO $base_url; ?>";
-    	var page_url = "<?php ECHO $page_url; ?>";
+    	var user_login = "<?php ECHO $user_login ?>";
+    	var user_id = "<?php ECHO $user_id ?>";
+    	var status = "<?php ECHO $status ?>";
 
-    	var type_id = "<?php ECHO $type_id; ?>";
-    	var content_id = "<?php ECHO $content_id; ?>";
-    	var video_id = "<?php ECHO $video_id; ?>";
-    	var current_season = "<?php ECHO $current_season; ?>";
+    	var env = "<?php ECHO $env ?>";
+    	var base_url = "<?php ECHO $base_url ?>";
+    	var page_url = "<?php ECHO $page_url ?>";
+
+    	var type_id = "<?php ECHO $type_id ?>";
+    	var category = "<?php ECHO $category ?>";
+
+    	var content_id = "<?php ECHO $content_id ?>";
+    	var video_id = "<?php ECHO $video_id ?>";
+    	var episod_id = "<?php ECHO $episod_id ?>";
+    	var timecode = "<?php ECHO $timecode ?>";
     	
-    	var category = "<?php ECHO $category; ?>";
-    	var hosting = "<?php ECHO $hosting; ?>";
+    	var current_season = "<?php ECHO $current_season ?>";
 
-    	var is_favorite = "<?php ECHO $is_favorite; ?>";
-    	var user_id = "<?php ECHO $user_id; ?>";
+    	var content_index = "<?php ECHO $content_index ?>";
+    	var content_list_size = "<?php ECHO $content_list_size ?>";
 
-    	var note_1 = "<?php ECHO $content["note_1"]; ?>";
-    	var note_2 = "<?php ECHO $content["note_2"]; ?>";
-    	var note_3 = "<?php ECHO $content["note_3"]; ?>";
+    	var hosting = "<?php ECHO $hosting ?>";
+
+		var fact_check_url = "<?php ECHO $fact_check_url ?>";
+		var crowdfunding_url = "<?php ECHO $crowdfunding_url ?>";
+
+    	var is_favorite = "<?php ECHO $is_favorite ?>";
+    	var watch_later = "<?php ECHO $watch_later ?>";
+
+    	var has_comment = "<?php ECHO $has_comment ?>";
+    	var comment_list = <?php echo json_encode($comment_list) ?>;
+
+    	var page_number = [];
+
+    	page_number[1] = "<?php ECHO $page_number["1"] ?>";
+    	page_number[2] = "<?php ECHO $page_number["2"] ?>";
+    	page_number[3] = "<?php ECHO $page_number["3"] ?>";
+    	page_number[4] = "<?php ECHO $page_number["4"] ?>";
+    	page_number[5] = "<?php ECHO $page_number["5"] ?>";
+    	page_number[6] = "<?php ECHO $page_number["6"] ?>";
+
+    	var note_1 = "<?php ECHO $content["note_1"] ?>";
+    	var note_2 = "<?php ECHO $content["note_2"] ?>";
+    	var note_3 = "<?php ECHO $content["note_3"] ?>";
 
   	</script> 
 
 
 <!-- JS FILES -->
 
-	<script src = "../js/mutual/lib.js"></script>
+	<script src = "../js/lib/misc.js"></script>
 
-	<!-- <script src = "<?php ECHO $root_url; ?>/js/mutual/lib.js"></script> -->
+	<script src = "../js/block/header.js"></script>
+	<script src = "../js/block/menu.js"></script>
+	<script src = "../js/block/user.js"></script>
+	<script src = "../js/block/footer.js"></script>
 
-	<script src = "../js/mutual/header.js"></script>
-	<script src = "../js/mutual/menu.js"></script>
-	<script src = "../js/mutual/user.js"></script>
-	<script src = "../js/mutual/footer.js"></script>
+    <script src = "../js/block/button.js"></script>
+    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "../js/block/information.js"></script>
+
+    <script src = "../js/block/player.js"></script>
 
 	<script src = "../js/series.js"></script>
 

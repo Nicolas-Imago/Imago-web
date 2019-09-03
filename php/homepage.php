@@ -1,135 +1,91 @@
 
-<?php require_once("mutual/init.php") ?>
+<?php require_once("lib/init.php") ?>
 
-<?php require_once("mutual/lib_model.php") ?>
-<?php require_once("mutual/lib_view.php") ?>
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
+
+<?php require_once("lib/session.php") ?>
 
 <?php
 
-	// Display fuctions
 
-    function display_slideshow($tvshow_list) {
+	////////////////////////////////// Get data //////////////////////////////////
 
-            // Display slideshow
+	function tile_class_of($corner_size) {
 
-            // ECHO ' <div ';
-            //     ECHO ' id = "slideshow_container" ';
-            // ECHO ' > ';
-            //     display_slideshow_thumbnail($tvshow_list);
-            // ECHO ' </div> ';
+		if ($corner_size == "1") $tile_class = "one_tile";
+		if ($corner_size == "2") $tile_class = "two_tiles";
+		if ($corner_size == "3") $tile_class = "three_tiles";
+		if ($corner_size == "4") $tile_class = "four_tiles";
 
-           // Display pager
-
-            // ECHO ' <div class = "slideshow_pager_container" > ';
-
-            // for ($index = 1; $index <= 4; $index++) {
-            //     ECHO ' <div ';
-            //         ECHO ' id = "slideshow_pager_' . $index . '" ';
-            //         ECHO ' class = "slideshow_pager" ';
-            //         ECHO ' > ';
-            //     ECHO ' </div> ' ;
-            // }
-
-            // ECHO ' </div> ';
-    }
-
-
-    function display_slideshow_thumbnail($tvshow_list) {
-
-        for ($index = 0; $index < 4; $index++) {
-
-            $content_id = $tvshow_list[$index]["content_id"];
-
-            $line_1 = $tvshow_list[$index]["name"];
-            // $line_2 = $tvshow_list[$index]["description"];
-
-            // $line_2 = substr($line_2, 0, 200);
-            // $line_2 = $line_2 . "...";
-
-            ECHO ' <div ';
-            ECHO ' id = "slideshow-' . $index . '-' . $content_id . '" ';
-            ECHO ' class = "slideshow_thumbnail_info slideshow" ';
-            ECHO ' > ';
-
-                ECHO ' <img ';
-                ECHO ' src = "../img/tvshow/background/' . $tvshow_list[$index]["content_id"] . '.jpg" ';
-                ECHO ' class = "slideshow_thumbnail slideshow" ';
-                // ECHO ' alt = "' . $content_id . '" ';
-                ECHO ' > ';
-
-                ECHO ' <div ';
-                ECHO ' id = "slideshow_info_' . $content_id . '" ';
-                ECHO ' class = "slideshow_info slideshow" ';
-                ECHO ' > ';
-
-                    ECHO ' <div ';
-                    ECHO ' id = "slideshow_info_line_1_' . $content_id . '" ';
-                	ECHO ' class = "slideshow_info_line_1" ';
-                    ECHO ' >';
-                    	ECHO '<a class = "slideshow_line_1">' . $line_1 . '</a>';
-                    ECHO ' </div>';
-
-                 //    ECHO ' <div ';
-                 //    ECHO ' id = "slideshow_info_line_2_' . $content_id . '" ';
-                	// ECHO ' class = "slideshow_info_line_2" ';
-                 //    ECHO ' >';
-                 //    	ECHO '<a class = "slideshow_line_2">' . $line_2 . '</a>';
-                 //    ECHO ' </div>';
-
-                ECHO ' </div>';
-
-            ECHO ' </div>';
-        } 
-    }
-
-
-	// Display functions
-
-	function content_list_of($type_id) {
-
-        global $data_base, $env;
-
-        if ($type_id == "documentary") {$limit = "5";} else {$limit = "4";}
-
-        if ($env == "prod") {
-
-	        $content_list = $data_base->prepare("
-	        	SELECT content_id, name, short_description, description, sub_type, video_number, duration, playback   
-	        	FROM imago_info_content
-	        	WHERE type = ?
-	        	AND env = ? 
-		        AND playback != ''
-		        ORDER BY RAND()
-	        	LIMIT $limit ");
-
-	        $content_list->execute(array($type_id, $env));
-	    }
-	    else {
-	        $content_list = $data_base->prepare("
-	        	SELECT content_id, name, short_description, description, sub_type, video_number, duration, playback  
-	        	FROM imago_info_content
-	        	WHERE type = ?
-		        AND playback != ''
-		        ORDER BY RAND()
-	        	LIMIT $limit ");
-
-	        $content_list->execute(array($type_id));
-	    }
-
-        return $content_list->fetchAll(); 
+		return $tile_class;
 	}
 
-	$tvshow_list = content_list_of("tvshow");
-	$documentary_list = content_list_of("documentary");	
-	$shortfilm_list = content_list_of("shortfilm");	
+	function display_folder($folder_list, $folder_index) {
 
-	// tag
+		$tile_title = $folder_list[$folder_index - 1]["title"];
+		$tile_href_text = $folder_list[$folder_index - 1]["href"];
+		$tile_type = "folder";
+
+		$tile_href[0] = $tile_href_text;
+		$tile_image[0] = $folder_list[$folder_index - 1]["image_url"];
+		$tile_class[0] = "one_tile";
+
+		for ($index = 1; $index <=3; $index++) {
+			$tile_href[$index] = "";
+			$tile_image[$index] = "";
+			$tile_class[$index] = "no_display";
+		}
+	 
+		include("block/tile.php");
+
+	}
+
+	function display_corner($corner_sub_type, $corner_size) {
+
+		$corner_list = homepage_corner_list($corner_sub_type);
+		$corner_tile_class = tile_class_of($corner_size);
+
+		$tile_title = $corner_list[0]["title"];
+		$tile_href_text = "";
+		$tile_type = "corner";
+
+		for ($index = 0; $index <= $corner_size - 1 ; $index++) {
+			$tile_href[$index] = $corner_list[$index]["href"];
+			$tile_image[$index] = $corner_list[$index]["image_url"];
+			$tile_class[$index] = $corner_tile_class;
+		}
+
+		for ($index = $corner_size; $index <=  3 ; $index++) {
+			$tile_href[$index] = "";
+			$tile_image[$index] = "";
+			$tile_class[$index] = "no_display";
+		}
+	 
+		include("block/tile.php");
+
+	}
+
+    ////////////////////////////////// Get data //////////////////////////////////
+
+	$video_list = homepage_video_id_list(8);
+	$audio_list = homepage_audio_id_list(6);
+
+	$folder_list = homepage_folder_list();
+
+	$tvshow_list = homepage_content_list_of("tvshow", 8);
+	$documentary_list = homepage_content_list_of("documentary", 10);	
+	$shortfilm_list = homepage_content_list_of("shortfilm", 8);	
+
+	$member_number = count_member()[0];
+
+
+    ////////////////////////////////// Tag //////////////////////////////////
 
 	$screen_tag = read_tag("homepage", "", "", "", "");
 
-	if (empty($screen_tag)) {
-		create_tag("homepage", "", "", "", "");
-	}
+	if (empty($screen_tag)) create_tag("homepage", "", "", "", "");
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
@@ -140,143 +96,196 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel = "stylesheet" href = "../css/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
+   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "../css/slideshow.css"/>
-
-    <link rel = "stylesheet" href = "../css/homepage.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/homepage.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/homepage.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/homepage.css"/>
 
     <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
 
-    <title>ImagoTV</title>
+    <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
 
-    <meta property = "og:title" content = "ImagoTV" />
-	<meta property = "og:description" content = "La plateforme vidéo des vidéos engagés dans la transition" />
+    <meta property = "og:title" content = "Imago TV" />
+    <meta property = "og:type" content = "website" />
+	<meta property = "og:description" content = "La plateforme vidéo gratuite de la transition" />
 	<meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-	<script src = "../lib/jquery.js"></script>
+	<meta name = "description" content = "Imago TV propose une sélection de plus de 2000 vidéos parmi les meilleurs documentaires, web séries, courts-métrages ou podcasts engagés dans la transition." />
+
+    <script src = "../js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
-	<?php include("mutual/tracking.php") ?>
+	<?php include("lib/tracking.php") ?>
 
 </head>
 
+
 <body>	
 
-<!-- HEADER -->
-	
-	<?php include("mutual/header.php") ?>
-	
+<!-- HEADER, MENU & USER -->
 
-<!-- MENU & USER -->	
+	<?php include("block/header.php") ?>	
 
-	<?php include("mutual/menu.php") ?>
-	<?php include("mutual/user.php") ?>
+	<?php include("block/menu.php") ?>
+	<?php include("block/user.php") ?>
+
+	<div id = "black_layer"> </div>
 
 
 <!-- HOMEPAGE SCREEN -->	
 
 	<div id = "screen">
 
-		<section id = "slideshow">
-			<?php display_slideshow($tvshow_list) ?>
-		</section>
+		<div id = "screen_title">
+			<a> Plus de 2000 vidéos, docu et podcasts ! </a> 
+		</div>
 
-		<section id = "type" class = "list">
+		<?php include("block/button.php") ?>
 
-			<a id = "type_list_title" class = "title"> Tous les programmes </a>
-			<div id = "type_list_thumbnail" class = "link">
-				<img class = "type link" src = "../img/homepage/tvshow_image.jpg"></img>
-				<img class = "type link" src = "../img/homepage/documentary_image.jpg"></img>
-				<img class = "type link" src = "../img/homepage/podcast_image.jpg"></img>
-				<img class = "type link" src = "../img/homepage/shortfilm_image.jpg"></img>
-			</div>
 
-		</section>
+		<?php
+
+			ECHO '<section id = "category" class = "list">';
+			ECHO 	'<a id = "category_list_title" class = "title"> Toutes les thématiques </a>';
+			ECHO 	'<div id = "category_list_thumbnail" class = "link"> ';
+
+			for ($index = 1; $index <= 4; $index++) {
+
+				ECHO '<a href = "category.php?type_id=' . type_of($index) . '" >';
+				ECHO 	'<img class = "four_tiles" src = "../img/homepage/' . type_of($index) . '_image.jpg"></img>';
+				ECHO '</a> ';
+			}
+
+			ECHO	'</div>';
+			ECHO '</section>';
+
+		?>
 
 <!-- 		<section id = "live">
-
 			<a id = "live_title" class = "title"> En ce moment sur ImagoTV</a>
 			<div class = "live_player">
 				<iframe class = "live_player" allowfullscreen></iframe>
 			</div>
-
+			<a id = "switch_en" class = "switch" > (Ecouter en anglais) </a>
+			<a id = "switch_fr" class = "switch" > (Ecoute en français) </a>
 		</section> -->
 
-		<section id = "type" class = "list">
+		<?php 
 
-			<a id = "type_list_title" class = "title"> Découvrez Imago ! </a>
-			<div id = "type_list_thumbnail" class = "link">
-				<img class = "promo link info" src = "../img/homepage/link_info.jpg"></img>
-				<img class = "promo link facebook" src = "../img/homepage/link_facebook.jpg"></img>
-				<img class = "promo link subscribe" src = "../img/homepage/link_subscribe.jpg"></img>
-			</div>
+			display_corner("tres_court", 3);
 
-		</section>
+			display_corner("info", 4);
 
-		<section id = "list">
-			<?php display_thumbnail_list("1", "tvshow", "Emissions - à découvrir", $tvshow_list); ?>
-		</section>
+			display_folder($folder_list, 1);
 
-		<section id = "list">
-			<?php display_thumbnail_list("2", "documentary", "Documentaires - à découvrir", $documentary_list); ?>
-		</section>
+			// display_corner("cine", 2);
 
-		<section id = "list">
-			<?php display_thumbnail_list("3", "shortfilm", "Courts-métrages - à découvrir", $shortfilm_list); ?>
-		</section>
+			// display_folder($folder_list, 2);
 
-		<section id = "category" class = "list">
+			display_thumbnail_container("1", "video", "tvshow", "", "Les dernières vidéos", $video_list);
 
-			<a id = "category_list_title" class = "title"> Toutes les thématiques </a>
-			<div id = "category_list_thumbnail" class = "link">
-				<img class = "category link" src = "../img/homepage/category/1_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/2_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/3_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/4_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/5_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/6_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/7_grey.jpg"></img>
-				<img class = "category link" src = "../img/homepage/category/8_grey.jpg"></img>
-			</div>
+			display_folder($folder_list, 3);
 
-		</section>
+			display_thumbnail_container("2", "audio", "podcast", "", "Les derniers podcasts", $audio_list);
+
+			display_folder($folder_list, 4);
+
+			// display_corner("theatre", 2);
+
+			// display_folder($folder_list, 5);
+
+			display_thumbnail_container("3", "content", "tvshow", "", "Emissions", $tvshow_list);
+
+			display_folder($folder_list, 6);
+
+			display_thumbnail_container("4", "content", "documentary", "", "Documentaires", $documentary_list);
+
+			display_folder($folder_list, 7);
+
+			display_corner("media", 4);
+
+			display_folder($folder_list, 8);
+
+			display_corner("asso", 4);
+
+			display_folder($folder_list, 9);
+
+			display_corner("producer", 4);
+
+			display_folder($folder_list, 10);
+
+			display_thumbnail_container("5", "content", "shortfilm", "", "Courts-métrages", $shortfilm_list);
+
+			display_folder($folder_list, 11);
+
+
+			ECHO '<section id = "category" class = "list">';
+			ECHO 	'<a id = "category_list_title" class = "title"> Toutes les thématiques </a>';
+			ECHO 	'<div id = "category_list_thumbnail" class = "link"> ';
+
+			for ($index = 1; $index <= 8; $index++) {
+
+				ECHO '<a href = "category.php?category_id=' . $index . '" >';
+				ECHO 	'<img class = "four_tiles" src = "../img/homepage/category/' . $index . '_grey.jpg"></img>';
+				ECHO '</a> ';
+			}
+
+			ECHO	'</div>';
+			ECHO '</section>';
+
+			display_folder($folder_list, 12);
+		?>
 
 	</div>
 
 
 <!-- FOOTER -->
 
-	<?php include("mutual/footer.php") ?>
+	<?php include("block/footer.php") ?>
 
 
 <!-- JS VARIABLES INIT -->
 
     <script type = "text/javascript">
 
-        var env = "<?php ECHO $env; ?>";
-        var base_url = "<?php ECHO $base_url; ?>";
+    	var user_login = "<?php ECHO $user_login; ?>";
+    	var user_id = "<?php ECHO $user_id; ?>";
+    	var status = "<?php ECHO $status; ?>";
+
+    	var env = "<?php ECHO $env; ?>";
+    	var base_url = "<?php ECHO $base_url; ?>";
+    	var page_url = "<?php ECHO $page_url; ?>";
+
+    	var page_number = [];
+
+    	page_number["1"] = 2;
+    	page_number["2"] = 1;
+    	page_number["3"] = 2;
+    	page_number["4"] = 2;
+    	page_number["5"] = 2;
 
     </script> 
 
 
 <!-- JS FILES -->
 
-	<script src = "../js/mutual/lib.js"></script>
-	
-	<script src = "../js/mutual/header.js"></script>
-	<script src = "../js/mutual/menu.js"></script>
-	<script src = "../js/mutual/user.js"></script>
-	<script src = "../js/mutual/footer.js"></script>
+	<script src = "../js/lib/misc.js"></script>
+    	
+	<script src = "../js/block/header.js"></script>
+	<script src = "../js/block/menu.js"></script>
+	<script src = "../js/block/user.js"></script>
+	<script src = "../js/block/footer.js"></script>
+
+    <script src = "../js/block/button.js"></script>
+    <script src = "../js/block/thumbnail.js"></script>
 
 	<script src = "../js/homepage.js"></script>
 

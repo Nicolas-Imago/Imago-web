@@ -1,8 +1,11 @@
 
-<?php require_once("mutual/init.php") ?>
+<?php require_once("lib/init.php") ?>
 
-<?php require_once("mutual/lib_model.php") ?>
-<?php require_once("mutual/lib_view.php") ?>
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
+
+<?php require_once("lib/session.php") ?>
 
 <?php
 
@@ -125,49 +128,46 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
+   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
    	
-    <link rel = "stylesheet" href = "../css/member.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/member.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/member.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/member.css"/>
 
     <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
 
-    <title>ImagoTV</title>
+    <title> Imago TV - La plateforme vidéo de la transition </title>
 
-    <meta property = "og:title" content = "ImagoTV" />
-	<meta property = "og:description" content = "La plateforme vidéo des vidéastes engagés dans la transition" />
+    <meta property = "og:title" content = "Imago TV" />
+	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
 	<meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-	<script src = "../lib/jquery.js"></script>
+    <script src = "../js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
-	<?php include("mutual/tracking.php") ?>
+	<?php include("lib/tracking.php") ?>
 
 </head>
 
 
 <body>	
 
-<!-- HEADER -->
-	
-	<?php include("mutual/header.php") ?>
-	
+<!-- HEADER, MENU & USER -->
 
-<!-- MENU & USER -->	
+	<?php include("block/header.php") ?>	
 
-	<?php include("mutual/menu.php") ?>
-	<?php include("mutual/user.php") ?>
+	<?php include("block/menu.php") ?>
+	<?php include("block/user.php") ?>
 
 
-<!-- TV SHOW SCREEN -->	
+<!-- MEMBER SCREEN -->	
 
 	<div id = "screen">
 
@@ -304,12 +304,16 @@
 
 <!-- FOOTER -->
 
-	<?php include("mutual/footer.php") ?>
+	<?php include("block/footer.php") ?>
 
 
 <!-- JS VARIABLES INIT -->
 
     <script type = "text/javascript">
+
+    	var user_login = "<?php ECHO $user_login; ?>";
+    	var user_id = "<?php ECHO $user_id; ?>";
+    	var status = "<?php ECHO $status; ?>";
 
         var env = "<?php ECHO $env; ?>";
         var base_url = "<?php ECHO $base_url; ?>";
@@ -319,12 +323,12 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/mutual/lib.js"></script>
-
-	<script src = "../js/mutual/header.js"></script>
-	<script src = "../js/mutual/menu.js"></script>
-	<script src = "../js/mutual/user.js"></script>
-	<script src = "../js/mutual/footer.js"></script>
+	<script src = "../js/lib/misc.js"></script>
+    
+	<script src = "../js/block/header.js"></script>
+	<script src = "../js/block/menu.js"></script>
+	<script src = "../js/block/user.js"></script>
+	<script src = "../js/block/footer.js"></script>
 
 	<script src = "../js/member.js"></script>
 

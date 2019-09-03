@@ -1,0 +1,23 @@
+
+@media all and (min-width : 481px)  {
+
+/*#screen {
+ 	display : none;
+	margin-top : 6vw;
+	min-height : 40vw;
+}*/
+
+	img#banner_image {
+		position : absolute; 
+		background-color: orange; 
+		width : 30vw;
+		margin-left : 35vw;
+	}
+
+	section#list {
+		position : relative;
+		background-color : rgb(35, 35, 35);
+		margin-top : 19vw;
+	}
+
+}

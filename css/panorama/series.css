@@ -1,0 +1,242 @@
+
+@media all and (min-width : 481px)  {
+
+#screen {
+	display : none;
+	min-height : 80vw;
+}
+
+/********************************************* BACKGROUND *********************************************/
+
+img.background_image {
+	position : absolute;
+	z-index : 1;  
+	right : 0px;
+	width : 70vw;
+}
+
+div.background_shadow {
+	background : linear-gradient(90deg, rgba(35, 35, 35,1), rgba(35, 35, 35,0));
+	position : absolute;
+	z-index : 1;  
+	top : 0px;
+	right : 20vw;
+	width : 50vw;
+	height : 30vw;
+}
+
+
+/************************************************ INFO ************************************************/
+
+section#information {
+	position : fixed;
+	z-index : 5;
+	top : 6vw;
+	padding-left : 1.5vw;
+	width : 80vw;
+}
+
+#information_header {
+	/*top : 10px;*/
+}
+
+		img.logo_image {
+			float : left;
+			width : 4.5vw;
+		}
+
+		#title {
+			float : left;
+			padding-left : 1vw;
+		}
+
+		a.name {
+			display : block;
+			padding-right : 1vw;
+			font-size : 2.4vw;
+			color : white;
+			text-decoration : none;
+		}
+
+		a.author {
+			display : block;
+			padding-right : 0.7vw;
+			font-size : 1.6vw;	
+			color : grey;
+		}
+
+		img.author_image {
+			visibility : hidden;
+			min-height : 5vw;
+			padding-left : 0.7vw;
+			width : 5%;
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+		}
+
+		img.author_image:hover {
+			-webkit-transform : scale(1.10);
+			-moz-transform : scale(1.10);
+			-ms-transform : scale(1.10);
+			-o-transform : scale(1.10);
+			transform : scale(1.10);
+		}
+
+		img#heart, img#time, img#lines {
+			display : none;
+			width : 1.5vw;
+		}
+		
+
+div.description {
+	padding-top: 6.5vw;
+	width : 50vw;
+	text-align: justify;
+	font-size : 1.2vw;
+	color : rgb(200,200,200);
+}
+
+/*a.producer {
+	text-decoration : underline;
+}
+*/
+
+a.data {
+	text-decoration : none;
+	color : grey;
+}
+
+a.more_info {
+	text-decoration : underline;
+	font-size : 1.2vw;
+	color : grey;
+}
+
+div.date {
+	display : none;
+}
+
+div.number {
+	padding-top : 1.5vw;
+}
+
+div#note_1 {
+	padding-top : 1.5vw;
+}
+
+a.info_title {
+	font-size : 1.2vw;
+	color : rgb(200, 200, 200);
+}
+
+div.note_title {
+	float : left;
+	width : 20vw;
+}
+
+div.note {
+	width : 28vw;
+}
+
+img.note_image {
+	position : relative;
+	width : 1vw;
+}
+
+/*a.more_note {
+	position : relative;
+	left : 30vw;
+	text-decoration : underline;
+	color : grey;
+}*/
+
+a.set_note {
+	display : none;
+	position : relative;
+	left : 30vw;
+	top : -1.8vw;
+}
+
+
+/*********************************************** SAISONS **********************************************/
+
+div#season_list {
+	position : relative;
+	z-index : 4;	
+	margin-top : 36vw;
+	list-style-type : none;
+	padding-left : 1.5vw;  /* padding à cause de la gestion du sélecteur : 6vw */
+
+/*	overflow-x : scroll;
+	overflow-y : hidden;
+	white-space : nowrap;*/
+}
+
+/*div#season_list.fixed {
+	position : fixed;
+	margin-top : 0vw;
+	top : 9vw;
+}*/
+
+		a.season {
+			display : inline;
+			margin-right : 1vw;
+			margin-left : 1vw;
+			color : grey; 
+			text-decoration : none;
+		}
+
+		a.season {
+			margin-right : 2vw;
+			margin-left : 0vw;
+			font-size : 2.2vw;
+		}
+
+	img#list {
+		position : absolute;
+		z-index : 4;	
+		top : 36.5vw;
+		right : 9vw;
+		width : 2.5vw;
+	}
+
+	img#grid {
+		position : absolute;
+		z-index : 4;	
+		top : 36.5vw;
+		right : 5.5vw;
+		width : 2.5vw;
+	}
+
+/*img#season_selector {
+	position : absolute;
+	top : 100%;
+}*/
+
+/*div#shadow_info {
+	position : fixed;
+	background-color : rgb(35, 35, 35);
+	z-index : 3;
+	display : none;
+	top : 0px;
+	width : 100vw;
+	height : 12vw;
+}*/
+
+
+/*********************************************** THUMBNAIL ***********************************************/
+
+section#video_thumbnail {
+	position : relative;
+	z-index : 2;
+	margin-top : 1vw;
+	margin-left : 5vw;
+	margin-bottom : 2vw;
+	color : grey;
+}
+
+}

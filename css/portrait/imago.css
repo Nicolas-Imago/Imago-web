@@ -1,0 +1,594 @@
+
+@media all and (max-width : 480px)  {
+
+/************************************************ GLOBAL ***********************************************/
+
+@font-face {
+	font-family : "Avenir";
+	src : url("../../font/AvenirLTStd-Light.otf");
+}
+
+body {
+	background-color : rgb(35, 35, 35);
+	margin : 0;
+	padding : 0;
+	overflow-x : hidden;
+
+	font-family : Avenir;
+	font-size : 3.5vw;
+	color : grey;
+}
+
+/************************************************ HEADER ***********************************************/
+
+div#header {
+	position : fixed;
+	z-index : 20;
+	background-color : rgb(35, 35, 35);
+	top : 0px;
+	width : 100%;
+	height : 15vw;
+	box-shadow: 0vw 1vw 1vw #000;
+}
+
+a.header_text {
+	display : none;
+}
+
+span#header_left {
+	display : none;
+}
+
+		img#menu_button {
+			position : fixed;
+			padding-top : 4vw;
+			padding-left : 2vw;
+			width : 8vw;
+		}
+
+		img#imago_logo {
+			margin-top : 3vw;
+			padding-left : 35vw;
+			width : 30vw;
+		}
+
+
+span#header_right {
+	display : none;
+}
+
+		img#user_button {
+			position : fixed;
+			padding-top : 4vw;
+			padding-left : 25vw;
+			width : 8vw;
+		}
+
+a.header_text {
+	display : none;
+}
+
+ol#sub_list {
+	display : none;
+}
+
+
+/************************************************* MENU ************************************************/
+
+div#menu {
+	display : none;
+	position : fixed;
+	background-color : rgb(35, 35, 35);
+	z-index : 10;
+	top : 0vw;
+	margin-left : -80vw;
+	width : 78vw;
+	height : 100%;
+	overflow-y : auto;
+	box-shadow : 1vw 0vw 1vw #000;
+}
+
+span.item_menu {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_menu {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_menu {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;
+			margin-left : 2vw;
+			text-decoration : none;	
+		}
+
+		img.icon_item_down {
+			width : 10vw; 
+			float : right; 
+			margin-right : 4vw;
+		}
+
+
+span.tvshow_list_item {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}
+
+ol.sub_list {
+	list-style-type : none;
+}
+
+		ol.sub_list li {
+			line-height: 250%;
+		}
+
+		a.sub_list_item {
+			color : grey;
+			text-decoration : none;
+			font-size : 5vw;
+			margin-left : 10vw;
+		}
+
+		a.sub_list_item:hover {
+			color : white;
+		}
+
+span#item_menu_0 {margin-top : 30vw} 
+span#item_menu_3 {margin-top : 10vw}
+
+
+/************************************************* USER ************************************************/
+
+div#user {
+	display : none;
+	position : fixed;
+	background-color : rgb(35, 35, 35);
+	z-index : 10;
+	top : 0vw;
+	margin-left : 102vw;
+	width : 78vw;
+	height : 100%;
+	overflow-y : auto;
+	box-shadow : -1vw 0vw 1vw #000;
+}
+
+span.item_user {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_user {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_user {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;	
+		}
+
+span#item_user_1 {margin-top : 30vw} 
+span#item_user_3 {margin-top : 10vw}
+
+
+/*********************************************** BUTTONS **********************************************/
+
+div#black_layer {
+	position : fixed;
+	display : none;
+	z-index : 9;
+	top : 0px;
+	width : 100%;
+	height : 100%;
+	background-color : black;
+	opacity : 0.5;
+}
+
+
+/*********************************************** BUTTONS **********************************************/
+
+div#button_header {
+	position : fixed;
+	z-index : 4;
+	top : 17vw;
+	margin-left : 88vw;
+	width : 25vw;
+}
+
+/*div#button_header.player {
+	top : 74vw;
+}*/
+
+		img.button {
+			display : none;
+			margin-bottom : 1.5vw;
+			width : 40%;
+
+    		-webkit-filter: grayscale(20%);
+    		filter: grayscale(20%);
+    		box-shadow: 4px 4px 8px #000;
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+    	}
+
+    	img.button:hover {
+			-webkit-transform : scale(1.05);
+			-moz-transform : scale(1.05);
+			-ms-transform : scale(1.05);
+			-o-transform : scale(1.05);
+			transform : scale(1.05);
+		}
+
+		img.sharing {
+			display : block;
+			margin-left : 2.5vw;
+			width : 30%;
+		}
+
+/*		img.sharing.player {
+			display : block;
+			width : 30%;
+		}*/
+
+div#eqds_button {
+	display : none;
+	position : fixed;
+	z-index : 50;
+	top : 75vw;
+	margin-left : 2vw;
+	width : 98vw;
+}
+
+		img.eqds_button {
+			display : none;
+			margin-bottom : 0.5vw;
+			width : 12%;
+
+    		-webkit-filter: grayscale(20%);
+    		filter: grayscale(20%);
+    		box-shadow: 4px 4px 8px #000;
+
+			-webkit-transition : all 0.2s ease;
+			-moz-transition : 0.2s ease;
+			-o-transition : all 0.2s ease;
+			-ms-transition : all 0.2s ease;
+			transition : all 0.2s ease;
+    	}
+
+    	img.eqds_button:hover {
+			-webkit-transform : scale(1.05);
+			-moz-transform : scale(1.05);
+			-ms-transform : scale(1.05);
+			-o-transform : scale(1.05);
+			transform : scale(1.05);
+		}
+
+		a.eqds_text {
+			position : fixed;
+			top : 74vw;
+			margin-left : 4vw;
+			margin-top : 1vw;
+			width : 80vw;
+			color : white;
+		}
+
+
+/********************************************* RIGTH / LEFT *********************************************/
+
+img#arrow_left_page {
+	position: fixed;
+	cursor : default;
+	z-index : 8;
+	left : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#arrow_left_page:hover {
+	cursor : pointer;
+}
+
+img#arrow_right_page {
+	position: fixed;
+	cursor : default;
+	z-index : 8;
+	right : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#arrow_right_page:hover {
+	cursor : pointer;
+}
+
+
+/*********************************************** THUMBNAIL ***********************************************/
+
+a.title {
+	margin-left : 2vw;
+	font-size : 6vw;
+	color : grey; 
+	text-decoration : none;
+}
+
+	a.title.mosaic {
+		display : none;
+	}
+
+div.pager_container {
+	display : none;
+}
+
+div.pager{
+	display : none;
+}
+
+div.scrolling_container {
+	position : relative;
+}
+
+div.list_container {
+	display : flex;
+	padding-top : 2vw;
+	padding-left : 2vw;
+	padding-bottom : 6vw;
+
+	overflow-x : scroll;
+	overflow-y : hidden;
+	white-space : nowrap;
+}
+
+		div.list_container.mosaic {
+			flex-wrap : wrap;
+		}
+
+		div.panorama, div.portrait, div.squared, div.post_it div.rounded {
+			margin-top : 0.8vw;
+			margin-left : 0.8vw;
+			margin-right : 0.8vw;
+			margin-bottom : 2vw;
+			flex : 0 0 45vw;
+		}
+
+		div.post_it {
+			border-bottom-left-radius : 30vw;
+		}
+
+		div.rounded {
+			border-style : round;
+			border-radius : 20vw;
+		}
+
+
+		div.thumbnail_info {
+			display : flex;
+			box-shadow : 5px 5px 5px #000;
+		}
+
+		img.panorama, img.portrait, img.squared, img.post_it img.rounded {
+			width : 100%;
+			height : 100%;
+		}
+
+		img.play_logo_panorama {
+			display : none;
+		}
+
+		img.play_logo_squared {
+			display : none;
+		}
+
+		div.info_panorama, div.info_portrait, div.info_squared {
+			display : none;			
+		}
+
+		a.info_free {
+			display : none;
+		}
+
+		a.line_1 {
+			display : none;
+		}
+
+		a.line_2 {
+			display : none;
+		}
+
+		div.left_arrow_container_panorama {
+			display : none;
+		}
+
+		div.right_arrow_container_panorama {
+			display : none;
+		}
+
+		div.left_arrow_container_portrait {
+			display : none;
+		}
+
+		div.right_arrow_container_portrait {
+			display : none;
+		}
+
+
+/************************************************ PLAYER ***********************************************/
+
+img#background_shadow {
+	position : fixed;
+	display : none;	
+	z-index : 40;
+	opacity : 0.8;
+	top : 0vw;
+	left: : 0vw;
+	width : 100%;
+	height : 100%;
+}
+
+img#close_player {
+	position : fixed;
+	display : none;	
+	z-index : 60;
+	opacity : 0.7;
+	top : 2vw;
+	right : 2vw;
+	width : 10vw;
+	height : 10vw;
+}
+
+iframe#video_popup {
+	position : fixed;
+	display : none;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 56.25vw;
+	border : black;
+}
+
+/*iframe#audio_popup_soundcloud {
+	position : fixed;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}
+
+iframe#audio_popup_pippa {
+	position : fixed;
+	z-index : 50;
+	top : 30vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+	display : none;
+}*/
+
+audio#audio_popup {
+	position : fixed;
+	display : none;
+	z-index : 50;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+}
+
+img#audio_popup_image{
+	position : fixed;
+	display : none;
+	z-index : 40;
+	top : 0vh;
+	left : 0vw;
+	padding-top: 15vw;
+	width : 100vw; 
+	height : 100vw;
+	border : black;
+}
+
+
+/*********************************************** COOKIES ***********************************************/
+
+div#cookie_popup {
+	display : none;
+	background-color : rgb(20, 20, 20);
+	position : fixed;
+	z-index : 50;
+	bottom : 0px;
+	padding-top : 4vw;
+	padding-left : 4vw;
+	padding-right : 4vw;
+	padding-bottom : 8vw;
+	text-align : center;
+}
+
+img#close_cookies {
+	position : fixed;
+	opacity : 0.7;
+	width : 10vw;
+	height : 10vw;
+	bottom : 20vw;
+	right : 2vw;	
+}
+
+
+/************************************************ SCROLL ***********************************************/
+
+img#page_back {
+	position: fixed;
+	z-index : 5;
+	bottom : 4vw;
+	left : 4vw;
+}
+
+img#page_up {
+	position: fixed;
+	z-index : 5;
+	bottom : 0vw;
+	left : 50%;
+	width : 20vw;
+ 	margin-left: -10vw;
+}
+
+
+/************************************************ FOOTER ***********************************************/
+
+#footer {
+	background-color : rgb(10, 10, 10);
+	position : relative;
+	padding-top : 6vw;
+	height : 30vw;
+	text-align : center;
+	display : none;
+}
+
+a#info_footer {
+	color : rgb(60, 60, 60);
+}
+
+ol#footer_list {
+	list-style-type : none;
+	padding-left : 0vw; 
+	margin-left : 0vw;
+}
+
+		ol#footer_list li { 
+			display : inline;
+			padding-left : 4vw; 
+			padding-right : 4vw; 
+		}
+
+		.item_footer {
+			color : grey; 
+			text-decoration : none;
+		}
+
+
+/************************************************* FIN ************************************************/
+
+}

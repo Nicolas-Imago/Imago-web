@@ -2,5 +2,7 @@ admin
 analytics
 htaccess.pouet
 json
-php/mutual/init.php
+php/lib/init.php
 img
+1.0.8
+mp3

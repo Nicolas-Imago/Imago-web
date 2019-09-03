@@ -1,0 +1,150 @@
+
+@media all and (min-width : 481px)  {
+
+/************************************ IMAGE ************************************/
+
+/*img#member_background_image {
+	position : fixed;
+	z-index : 1;
+ 	margin-top : 40vh;
+ 	transform : translateY(-50%);
+	width : 60vw;
+	left : 50%;
+	margin-left : -30%;
+	opacity : 0.1;
+}*/
+
+/************************************ TITLE ************************************/
+
+a#member_title {
+	display : block;
+	margin-top : 6vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 4vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 2vw;
+}
+
+
+/************************************ INTPUT ************************************/
+
+section#member_information {
+	position : absolute;
+	z-index : 2;
+	display : block;
+	width : 30vw;
+	left : 50%;
+	margin-left : -15%;
+}
+
+.readonly {
+	border : none;
+	cursor : default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+div.member_item {
+	/*background-color : orange;*/
+	margin-bottom : 0.8vw;
+	width : 40vw;
+	margin-left : auto;
+	margin-right : auto;
+	/*text-align : center;*/
+}
+
+a.member_item_title {
+	display : block;
+	float : left;
+	width : 15vw;
+	font-size : 1.2vw;
+	color : rgb(200,200,200);
+}
+
+div#member_mod_date_input, div#member_login_input {
+	margin-bottom : 4vw;
+}
+
+div#member_id_input{
+	margin-top : 4vw;
+} 
+
+div#member_first_name_input {
+	margin-top : 2vw;
+}
+
+div#member_new_pwd_input_1 {
+	margin-top : 7vw;
+}
+
+div#member_new_pwd_input_2 {
+	margin-bottom : 4vw;
+}
+
+div#member_pwd_input {
+	margin-top : 1.5vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom-color : grey; 	
+	height : 1.2vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a.member_item_value {
+	height : 1.2vw;
+	margin-left : 2vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a#member_new_pwd_title {
+	display : block;
+	float : left;
+	width : 36vw;
+	font-size : 1.2vw;
+}
+
+a#member_update_button {
+	display : block;
+	text-align : center;
+	margin-top : 4vw;
+	margin-bottom : 4vw;
+	font-size : 1.2vw;
+}
+
+a#member_update_message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width   : 18vw;
+	color : red;
+	text-align : center;
+	font-size : 1.2vw;
+}
+
+a {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#footer {
+	margin-top : 90vw;
+}
+
+/************************************************* FIN ************************************************/
+
+}

@@ -1,98 +1,63 @@
 
-<?php require_once("mutual/init.php") ?>
+<?php require_once("lib/init.php") ?>
 
-<?php require_once("mutual/lib_model.php") ?>
-<?php require_once("mutual/lib_view.php") ?>
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
+
+<?php require_once("lib/session.php") ?>
 
 <?php
 
-    // Display functions
+    // Functions
 
-    function display_video($movie_type) {
+	function display_list($screen, $list_id, $thumbnail_type, $type_id, $content_id, $author_id_list) {
 
-    	global $content, $content_id;
-    	global $video_id_list;
+		global $page_number, $user_id, $has_comment, $comment_list;
 
-    	if (isset($video_id_list[$movie_type])) {
-	       	$video_number = sizeof($video_id_list[$movie_type]);
-	    }
-	    else {$video_number = 0;}
+		if ($thumbnail_type == "content")
+			$content_list = get_related_content_list($type_id, $content_id, $author_id_list);
 
-	    ECHO ' <div ';
-	    	ECHO ' class = "video_thumbnail_type" ';
-    	ECHO ' > ';
+			if ($thumbnail_type == "comment") {
+				$content_list = get_related_comment_list($user_id, $content_id);
+				$comment_list = $content_list;
+			}
 
-    	if ($video_number > 0) {
-	    	for ($video_index = 0; $video_index <= $video_number - 1; $video_index++) {
+		$item_number = sizeof($content_list);
+		$title = content_list_title_of($screen, $type_id, "", $item_number);
 
-                $hosting = $video_id_list[$movie_type][$video_index]["hosting"];
-                $thumbnail = $video_id_list[$movie_type][$video_index]["thumbnail"];
+		$page_number[$list_id] = page_number_of($type_id, $content_list);
 
-	    		$video_id = $video_id_list[$movie_type][$video_index][$hosting . '_id'];
+		if ($thumbnail_type == "content")
+			display_thumbnail_container($list_id, $thumbnail_type, $type_id, "", $title, $content_list);
 
-                if ($content["thumbnail"] == "local") {
-                	$image_url = "../img/video/" . $content_id . "/" . $video_id . ".jpg";
-                }
-    			if ($content["thumbnail"] == "youtube") {
-					$image_url = "https://img.youtube.com/vi/" . $video_id . "/mqdefault.jpg";
-				}
+		if ($thumbnail_type == "comment")
+			display_thumbnail_container($list_id, "comment", $thumbnail_type, "", $title, $content_list);
+	}	
 
-	    		// $image_id = $movie_type . "-" . $video_index;
 
-		    	ECHO ' <div ';
-		            ECHO ' id = "thumbnail_' . $thumbnail . '_' . $movie_type . "-" . $video_index . '" ';
-		            ECHO ' class = "thumbnail" ';
-		    	ECHO ' > ';
+    ////////////////////////////////// Get url param //////////////////////////////////
 
-	                ECHO ' <img ';
-		                ECHO ' id = "thumbnail_image_' . $movie_type . "-" . $video_index . '" ';
-	                	ECHO ' class = "thumbnail" ';
-		                ECHO ' src = "' . $image_url . '" ';
-	                ECHO ' > ';
+	if (isset($_GET["type_id"])) 		$type_id 	= $_GET["type_id"];			else $type_id = "";
+	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
 
-	                ECHO ' <img ';
-		                ECHO ' class = "play_logo" ';
-		                ECHO ' src = "../img/icons/play.png" ';
-	                ECHO ' > ';
+	if (isset($_GET["video_id"])) 		$video_id 	= $_GET["video_id"]; 		else $video_id = "";
 
-	            ECHO '</div>';
-	    	}
-	    }
-	    // else if ($movie_type == "movie") {
+	if (isset($_GET["section_id"])) 	$section_id = $_GET["section_id"]; 		else $section_id = "";
+	if (isset($_GET["episod_id"])) 		$episod_id 	= $_GET["episod_id"]; 		else $episod_id = "";
 
-	    // 	$message = "Ce documentaire n'est malheureusement pas encore disponible au visionnage gratuit. Notre objectif est de travailler avec les ayants droits pour le rendre ponctuellement visionnable gratuitement. Plus nous serons à utiliser Imago, plus nous aurons de poids pour y arriver ! Aidez-nous ! Faites connaître Imago ! <br> <br> En attendant, il vous est possible de louer (VOD) ou d'acheter (DVD) ce documentaire via les liens disponibles sur cette page. Cette transaction se fait directement auprès de l'ayant droit et ne passe pas par Imago. Notre service est gratuit et ne prend pas de commission.";
+	if (isset($_GET["timecode"])) 		$timecode 	= $_GET["timecode"];		else $timecode = "";
 
-	    // 	ECHO ' <div ';
-     //           	ECHO ' class = "movie_message" ';
-     //            ECHO ' >';
-     //               	ECHO '<a class = "movie_message"> ' . $message . '</a>';
-     //        ECHO ' </div>';
-	    // }
 
-        ECHO '</div>';
+    ////////////////////////////////// Get data //////////////////////////////////
+
+	$type_list = ["documentary", "shortfilm"];
+
+	if (!in_array($type_id, $type_list)) {
+		include("404.php");
+		return;
 	}
 
-    function display_title($movie_type) {
-
-    	global $video_id_list;
-
-    	if (isset($video_id_list[$movie_type])) {
-	       	$video_number = sizeof($video_id_list[$movie_type]);
-	    }
-	    else {$video_number = 0;}
-
-	    // if ($video_number == 0 AND $movie_type != "movie") {
-	    if ($video_number == 0) {
-	    	ECHO ' style = "display:none;" ';
-	    }
-    }
-
-
-    // Display screen
-
-	if (isset($_GET["type_id"])) {$type_id = $_GET["type_id"];} else {$type_id = "documentary";}
-	if (isset($_GET["content_id"])) {$content_id = $_GET["content_id"];} else {$content_id = "";}
-	if (isset($_GET["video_id"])) {$video_id = $_GET["video_id"];} else {$video_id = "";}
 
 	$content = get_content_info($content_id);
 
@@ -101,18 +66,20 @@
 		return;
 	}
 
-	$category = $content["category"];
-	$hosting = $content["hosting"];
-	$thumbnail = $content["thumbnail"];
-	$link = $content["link"];
-
-	$info_title = "Prod. / Distribution :";
-	$info_data = "Non renseigné";
-
-	if (strlen($content["vod"]) != 0) {$vod = true;} else {$vod = false;}
-	if (strlen($content["dvd"]) != 0) {$dvd = true;} else {$dvd = false;}
+	$page_number = array();
+	$page_number = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 	$author_id_list = get_author_id_list($content_id);
+    $author_name = display_author_name($author_id_list);
+
+	$category = $content["category"];
+
+	$info_title = "Prod. / Distribution :";
+	$info_data = $content["producer"];
+
+	if ($info_data == "default") $info_data = "non renseigné";
+
+    $crowdfunding_url = $content["crowdfunding"];
 
 	$producer_id = $content["producer"];
 	// $producer = get_producer_name_json($producer_id);
@@ -122,15 +89,72 @@
 	$video_id_list["excerpt"] = get_video_id_list("excerpt", $content_id);
 	$video_id_list["bonus"] = get_video_id_list("bonus", $content_id);
 
-	// var_dump($teaser_id_list);
 
-    // tag 
+	if ($section_id != "" && $episod_id != "") {
+		
+		if (isset($video_id_list[$section_id][$episod_id - 1])) {
+			$episod = $video_id_list[$section_id][$episod_id - 1];
+
+	        $thumbnail = $episod["thumbnail"];
+	        $fact_check_url = $episod["fact_check"];
+
+			$hosting = $episod["hosting"];
+
+			if ($hosting == "invidio") $video_id = $episod["youtube_id"];
+            else $video_id = $episod[$hosting . '_id'];
+	    }
+	    else {
+			include("404.php");
+			return;	    	
+	    }
+    }
+    else {
+    	$hosting = "youtube";
+    	$thumbnail = "youtube";
+    	$fact_check_url = "";
+    }
+
+	if (isset($video_id_list["movie"]["0"])) $fact_check_url = $video_id_list["movie"]["0"]["fact_check"];
+	else $fact_check_url = "";
+
+    if ($status == "user" AND !empty(read_favorite_content($user_id, $content_id, $episod_id))) $is_favorite = "1";
+    else $is_favorite = "0";
+
+    if ($status == "user" AND !empty(read_watch_later_content($user_id, $content_id, $episod_id))) $watch_later = "1";
+    else $watch_later = "0";
+
+	if ($status == "user" AND !empty(get_user_comment_list($user_id, $content_id))) $has_comment = "1";
+	else $has_comment = "0";   
+	
+	$background_url = "../img/content/" . $type_id . "/background/" . $content_id . ".jpg";
+	$cover_url = "../img/content/" . $type_id . "/cover_big/" . $content_id . ".jpg";
+	$logo_url = "../img/content" . $type_id . "/thumbnail/" . $content_id . ".jpg";
+
+	$partner_url = "../img/icons/partner/parc_avesnois.png"; 
+
+
+	$content_list = content_list_of($type_id, $category);
+	$content_list_size = sizeof($content_list);
+
+	for ($index = 0; $index < $content_list_size; $index++)
+		if ($content_list[$index] == $content_id) $content_index = $index;
+
+	$previous_content_id = $content_list[$content_list_size - 1];
+	$next_content_id = $content_list[0];
+
+	if ($content_index > 0) $previous_content_id = $content_list[$content_index - 1];
+	if ($content_index < ($content_list_size - 1)) $next_content_id = $content_list[$content_index + 1];
+
+	$arrow_left_page_href = "movie.php?type_id=" . $type_id . "&content_id=" . $previous_content_id;
+	$arrow_right_page_href = "movie.php?type_id=" . $type_id . "&content_id=" . $next_content_id;
+
+
+    ////////////////////////////////// Tag //////////////////////////////////
+    
 
 	$screen_tag = read_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 
-	if (empty($screen_tag)) {
-		create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
-	}
+	if (empty($screen_tag)) create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
@@ -139,150 +163,175 @@
 
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/mobile/imago.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
+   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "../css/movie.css"/>
-    <link rel = "stylesheet" href = "../css/mobile/movie.css"/>
+    <link rel = "stylesheet" href = "../css/panorama/movie.css"/>
+    <link rel = "stylesheet" href = "../css/portrait/movie.css"/>
 
     <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
 
-    <title>ImagoTV</title>
+    <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
 
     <meta property = "og:title" content = "<?php ECHO $content["name"] ?>" />
 	<meta property = "og:description" content = "<?php ECHO $content["description"] ?>" />
-	<meta property = "og:image" content = "<?php display_image("og_image") ?>" />
+	<meta property = "og:image" content = "<?php display_og_image($type_id, $content_id, $thumbnail, $episod_id, $video_id) ?>" />
 
-	<script src = "../lib/jquery.js"></script>
+    <script src = "../js/lib/jquery.js"></script>
+	<script src = "../js/lib/jquery.jrumble.1.3.js"></script>
 
 	<!-- TRACKING -->
 
-	<?php include("mutual/tracking.php") ?>
+	<?php include("lib/tracking.php") ?>
 
 </head>
 
 
 <body>	
 
-<!-- HEADER -->
-	
-	<?php include("mutual/header.php") ?>
-	
+<!-- HEADER, MENU & USER -->
 
-<!-- MENU & USER -->	
+	<?php include("block/header.php") ?>	
 
-	<?php include("mutual/menu.php") ?>
-	<?php include("mutual/user.php") ?>
+	<?php include("block/menu.php") ?>
+	<?php include("block/user.php") ?>
+
+	<div id = "black_layer"> </div>
 
 
-<!-- SCREEN -->
+<!-- MOVIE SCREEN -->
 
 	<div id = "screen">
 
-		<img class = "background_image" <?php display_image("background") ?> ></img>
-		<img class = "cover_image" <?php display_image("cover") ?> ></img>
+		<img class = "background_image" src = <?php ECHO $background_url ?> ></img>
+		<img class = "cover_image" src = <?php ECHO $cover_url ?> ></img>
+
+<!-- 		<a class = "partner_text"> En partenariat avec : </a>
+		<img class = "partner_image" src = <?php ECHO $partner_url ?> ></img> -->
 		
-		<?php include("mutual/button.php") ?>
-		<?php include("mutual/information.php") ?>
+		<?php include("block/button.php") ?>
+		<?php include("block/information.php") ?>
 
 		<section id = "video">
-
-			<a class = "thumbnail_title" <?php display_title("teaser") ?> > Bande annonce : </a>
-			<div id = "teaser_thumbnail" >
-				<?php display_video("teaser") ?>
-			</div>
-
-			<a class = "thumbnail_title" <?php display_title("movie") ?> > Film : </a>
-			<div id = "movie_thumbnail" >
-				<?php display_video("movie") ?>
-			</div>
-
-			<a class = "thumbnail_title" <?php display_title("excerpt") ?> > Extrait(s) : </a>
-			<div id = "excerpt_thumbnail" >
-				<?php display_video("excerpt") ?>
-			</div>
-
-			<a class = "thumbnail_title" <?php display_title("bonus") ?> > Bonus : </a>
-			<div id = "bonus_thumbnail" >
-				<?php display_video("bonus") ?>
-			</div>
-
+			<?php display_movie_video($content_id, $content, $video_id_list, $type_id, "teaser") ?>
+			<?php display_movie_video($content_id, $content, $video_id_list, $type_id, "movie") ?>
+			<?php display_movie_video($content_id, $content, $video_id_list, $type_id, "excerpt") ?>
+			<?php display_movie_video($content_id, $content, $video_id_list, $type_id, "bonus") ?>
 		</section>
 
-		<section id = "link">
 
-			<a class = "link_title" > Louer / Acheter : </a>
+		<hr color = "grey" width = "90%">
 
-			<a target = "_blank" id = "vod_link" class = "link" <?php display_link("vod") ?> > 
-				<img id = "vod_image" class = "icons_image" <?php display_image("vod") ?> ></img>
-			</a>
+			<?php display_list("series", "1", "content", "tvshow", $content_id, $author_id_list) ?>
+			<?php display_list("series", "2", "content", "documentary", $content_id, $author_id_list) ?>
+			<?php display_list("series", "3", "content", "podcast", $content_id, $author_id_list) ?>			
+			<?php display_list("series", "4", "content", "shortfilm", $content_id, $author_id_list) ?>
 
-			<a target = "_blank" id = "dvd_link" class = "link" <?php display_link("dvd") ?> > 
-				<img id = "dvd_image" class = "icons_image" <?php display_image("dvd") ?> ></img>
-			</a>
+		<hr color = "grey" width = "90%">
 
-		</section>
+			<?php display_list("series", "5", "comment", "comment", $content_id, "") ?>			
+
+		<hr color = "grey" width = "90%">
+
+			<?php display_list("series", "6", "content", "book", "", $author_id_list) ?>
+
+
+
+		<a href = "<?php ECHO $arrow_left_page_href ?>" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+		</a>
+
+		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
+			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+		</a>
 
 	</div> 
-
-	<a <?php display_next() ?> > <img id = "page_right" src = "../img/icons/footer/page_right_grey.png"></a>
-	<a <?php display_preview() ?> > <img id = "page_left" src = "../img/icons/footer/page_left_grey.png"></a>
 
 
 <!-- POP UP -->
 
-	<?php include("mutual/pop_up.php") ?>
+	<?php include("block/pop_up.php") ?>
 
 
 <!-- FOOTER -->
 
-	<?php include("mutual/footer.php") ?>
+	<?php include("block/footer.php") ?>
 
 
 <!-- JS VARIABLES INIT -->
 
     <script type = "text/javascript">
 
-       	var env = "<?php ECHO $env; ?>";
-    	var base_url = "<?php ECHO $base_url; ?>";
-    	var page_url = "<?php ECHO $page_url; ?>";
+    	var user_login = "<?php ECHO $user_login ?>";
+    	var user_id = "<?php ECHO $user_id ?>";
+    	var status = "<?php ECHO $status ?>";
 
-    	var type_id = "<?php ECHO $type_id; ?>";
-    	var content_id = "<?php ECHO $content_id; ?>";
-    	var video_id = "<?php ECHO $video_id; ?>";
+    	var env = "<?php ECHO $env ?>";
+    	var base_url = "<?php ECHO $base_url ?>";
+    	var page_url = "<?php ECHO $page_url ?>";
 
-    	var producer_id = "<?php ECHO $producer_id; ?>";
-    	var category = "<?php ECHO $category; ?>";
+    	var type_id = "<?php ECHO $type_id ?>";
+    	var category = "<?php ECHO $category ?>";
 
-    	var hosting = "<?php ECHO $hosting; ?>";
-    	var thumbnail = "<?php ECHO $thumbnail; ?>";
+    	var content_id = "<?php ECHO $content_id ?>";
+    	var video_id = "<?php ECHO $video_id ?>";
+    	var episod_id = "<?php ECHO $episod_id ?>";
+    	var timecode = "<?php ECHO $timecode ?>";
 
-		var vod = "<?php ECHO $vod; ?>";
-		var dvd = "<?php ECHO $dvd; ?>";
-		var link = "<?php ECHO $link; ?>";
+    	var producer_id = "<?php ECHO $producer_id ?>";
 
-    	var note_1 = "<?php ECHO $content["note_1"]; ?>";
-    	var note_2 = "<?php ECHO $content["note_2"]; ?>";
-    	var note_3 = "<?php ECHO $content["note_3"]; ?>";
+    	var content_index = "<?php ECHO $content_index ?>";
+    	var content_list_size = "<?php ECHO $content_list_size ?>";
+
+    	var hosting = "<?php ECHO $hosting ?>";
+
+		var fact_check_url = "<?php ECHO $fact_check_url ?>";
+		var crowdfunding_url = "<?php ECHO $crowdfunding_url ?>";
+
+    	var is_favorite = "<?php ECHO $is_favorite ?>";
+    	var watch_later = "<?php ECHO $watch_later ?>";
+
+    	var has_comment = "<?php ECHO $has_comment ?>";
+    	var comment_list = <?php echo json_encode($comment_list) ?>;
+
+    	var page_number = [];
+
+    	page_number["1"] = "<?php ECHO $page_number["1"] ?>";
+    	page_number["2"] = "<?php ECHO $page_number["2"] ?>";
+    	page_number["3"] = "<?php ECHO $page_number["3"] ?>";
+    	page_number["4"] = "<?php ECHO $page_number["4"] ?>";
+    	page_number["5"] = "<?php ECHO $page_number["5"] ?>";
+    	page_number["6"] = "<?php ECHO $page_number["6"] ?>";
+
+    	var note_1 = "<?php ECHO $content["note_1"] ?>";
+    	var note_2 = "<?php ECHO $content["note_2"] ?>";
+    	var note_3 = "<?php ECHO $content["note_3"] ?>";
 
   	</script>
 
 
 <!-- JS FILES -->
 
-	<script src = "../js/mutual/lib.js"></script>
+	<script src = "../js/lib/misc.js"></script>
+    
+	<script src = "../js/block/header.js"></script>
+	<script src = "../js/block/menu.js"></script>
+	<script src = "../js/block/user.js"></script>
+	<script src = "../js/block/footer.js"></script>
 
-	<script src = "../js/mutual/header.js"></script>
-	<script src = "../js/mutual/menu.js"></script>
-	<script src = "../js/mutual/user.js"></script>
-	<script src = "../js/mutual/footer.js"></script>
+    <script src = "../js/block/button.js"></script>
+    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "../js/block/information.js"></script>
+
+    <script src = "../js/block/player.js"></script>
 
 	<script src = "../js/movie.js"></script>
 
