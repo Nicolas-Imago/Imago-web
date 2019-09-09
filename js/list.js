@@ -16,8 +16,12 @@ function init_screen() {
     $("div#screen").fadeIn(1000);
     $("div#footer").show();
 
-    if (screen != "search" && screen != "friend")
+    // if (screen != "search" && screen != "friend")
+    if (screen != "search")
         $("section#query").hide();
+
+    if (screen == "search" || screen == "folder")
+        $("a#warning").hide();
 
     $("input#query").focus();
 
@@ -39,6 +43,9 @@ function init_screen() {
         $("div.info_panorama, div.info_portrait, div.info_squared, div.info_rounded").hide();
         $("div.series_info_panorama, div.series_info_squared").hide();
     }
+
+    set_mosaic_mode();
+
 
     // listen mouse over, scroll and resize
 

@@ -38,26 +38,12 @@
 
     ////////////////////////////////// Get url param //////////////////////////////////
 
-	if (isset($_GET["type_id"])) 		$type_id 	= $_GET["type_id"];			else $type_id = "";
 	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
-
-	if (isset($_GET["video_id"])) 		$video_id 	= $_GET["video_id"]; 		else $video_id = "";
-
 	if (isset($_GET["section_id"])) 	$section_id = $_GET["section_id"]; 		else $section_id = "";
-	if (isset($_GET["episod_id"])) 		$episod_id 	= $_GET["episod_id"]; 		else $episod_id = "";
-
-	if (isset($_GET["timecode"])) 		$timecode 	= $_GET["timecode"];		else $timecode = "";
+	if (isset($_GET["episod_id"])) 		$episod_id 	= (int)$_GET["episod_id"]; 	else $episod_id = "";
 
 
-    ////////////////////////////////// Get data //////////////////////////////////
-
-	$type_list = ["documentary", "shortfilm"];
-
-	if (!in_array($type_id, $type_list)) {
-		include("404.php");
-		return;
-	}
-
+    //////////////////////////////// Protect data ////////////////////////////////
 
 	$content = get_content_info($content_id);
 
@@ -65,6 +51,32 @@
 		include("404.php");
 		return;
 	}
+
+	$type_id = $content["type"];
+
+	$section_list = ["teaser", "movie", "bonus", "excerpt", ""];
+
+	if (!in_array($section_id, $section_list)) {
+		include("404.php");
+		return;
+	}
+
+	$video_id_list["teaser"] = get_video_id_list("teaser", $content_id);
+	$video_id_list["movie"] = get_video_id_list("movie", $content_id);
+	$video_id_list["excerpt"] = get_video_id_list("excerpt", $content_id);
+	$video_id_list["bonus"] = get_video_id_list("bonus", $content_id);
+
+	if ($episod_id == "0") {
+		include("404.php");
+		return;
+	}
+
+	if ($episod_id != "" AND !isset($video_id_list[$section_id][$episod_id - 1])) {
+		include("404.php");
+		return;
+	}
+
+    ////////////////////////////////// Get data //////////////////////////////////
 
 	$page_number = array();
 	$page_number = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -76,41 +88,26 @@
 
 	$info_title = "Prod. / Distribution :";
 	$info_data = $content["producer"];
-
 	if ($info_data == "default") $info_data = "non renseigné";
 
     $crowdfunding_url = $content["crowdfunding"];
 
 	$producer_id = $content["producer"];
-	// $producer = get_producer_name_json($producer_id);
-
-	$video_id_list["teaser"] = get_video_id_list("teaser", $content_id);
-	$video_id_list["movie"] = get_video_id_list("movie", $content_id);
-	$video_id_list["excerpt"] = get_video_id_list("excerpt", $content_id);
-	$video_id_list["bonus"] = get_video_id_list("bonus", $content_id);
-
 
 	if ($section_id != "" && $episod_id != "") {
-		
-		if (isset($video_id_list[$section_id][$episod_id - 1])) {
-			$episod = $video_id_list[$section_id][$episod_id - 1];
+		$episod = $video_id_list[$section_id][$episod_id - 1];
 
-	        $thumbnail = $episod["thumbnail"];
-	        $fact_check_url = $episod["fact_check"];
+	    $thumbnail = $episod["thumbnail"];
+		$hosting = $episod["hosting"];
 
-			$hosting = $episod["hosting"];
+		$video_id = $episod[$hosting . '_id'];
 
-			if ($hosting == "invidio") $video_id = $episod["youtube_id"];
-            else $video_id = $episod[$hosting . '_id'];
-	    }
-	    else {
-			include("404.php");
-			return;	    	
-	    }
+		$fact_check_url = $episod["fact_check"];
     }
     else {
-    	$hosting = "youtube";
-    	$thumbnail = "youtube";
+    	$thumbnail = "";
+    	$hosting = "";
+    	$video_id = "";
     	$fact_check_url = "";
     }
 
@@ -130,7 +127,7 @@
 	$cover_url = "../img/content/" . $type_id . "/cover_big/" . $content_id . ".jpg";
 	$logo_url = "../img/content" . $type_id . "/thumbnail/" . $content_id . ".jpg";
 
-	$partner_url = "../img/icons/partner/parc_avesnois.png"; 
+	// $partner_url = "../img/icons/partner/parc_avesnois.png"; 
 
 
 	$content_list = content_list_of($type_id, $category);
@@ -154,7 +151,9 @@
 
 	$screen_tag = read_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 
-	if (empty($screen_tag)) create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
+	if (empty($screen_tag)) {
+		create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
+	}
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
@@ -228,29 +227,25 @@
 		</section>
 
 
-		<hr color = "grey" width = "90%">
+		<!-- <hr color = "grey" width = "90%" > -->
 
-			<?php display_list("series", "1", "content", "tvshow", $content_id, $author_id_list) ?>
+<!-- 			<?php display_list("series", "1", "content", "tvshow", $content_id, $author_id_list) ?>
 			<?php display_list("series", "2", "content", "documentary", $content_id, $author_id_list) ?>
 			<?php display_list("series", "3", "content", "podcast", $content_id, $author_id_list) ?>			
-			<?php display_list("series", "4", "content", "shortfilm", $content_id, $author_id_list) ?>
+			<?php display_list("series", "4", "content", "shortfilm", $content_id, $author_id_list) ?> -->
 
-		<hr color = "grey" width = "90%">
+		<!-- <hr color = "grey" width = "90%" > -->
 
-			<?php display_list("series", "5", "comment", "comment", $content_id, "") ?>			
-
-		<hr color = "grey" width = "90%">
-
-			<?php display_list("series", "6", "content", "book", "", $author_id_list) ?>
-
+<!-- 			<?php display_list("series", "5", "comment", "comment", $content_id, "") ?>			
+			<?php display_list("series", "6", "content", "book", "", $author_id_list) ?> -->
 
 
 		<a href = "<?php ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/arrow/page_left_grey.png" >
 		</a>
 
 		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/arrow/page_right_grey.png" >
 		</a>
 
 	</div> 
@@ -284,7 +279,6 @@
     	var content_id = "<?php ECHO $content_id ?>";
     	var video_id = "<?php ECHO $video_id ?>";
     	var episod_id = "<?php ECHO $episod_id ?>";
-    	var timecode = "<?php ECHO $timecode ?>";
 
     	var producer_id = "<?php ECHO $producer_id ?>";
 

@@ -27,13 +27,15 @@ function init_screen() {
     $("iframe.live_player").attr("src", "https://www.youtube.com/embed/w_yQp2G7k04?autoplay=1&fs=1&color=white&showinfo=0&rel=0&mute=0&disablekb=1");  
     $("a#switch_fr").hide();
 
-    $("img#page_back").hide()
+    // $("img#page_back").hide()
 
     if (window.innerWidth > trigger_width) {
         $("div.info_panorama, div.info_portrait, div.info_squared").hide();
         $("div.series_info_panorama, div.series_info_squared").hide();
     }
 
+    set_mosaic_mode();
+    
 
     // listen mouse over, scroll and resize
 

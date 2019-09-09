@@ -21,7 +21,7 @@ div#button_header {
 /********************************************** THUMBNAIL **********************************************/
 
 div.list_container {
-	flex-wrap : wrap;
+	/*flex-wrap : wrap;*/
 
 /*	overflow-x : scroll;
 	overflow-y : hidden;

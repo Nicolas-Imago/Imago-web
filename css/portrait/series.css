@@ -68,8 +68,9 @@ section#information {
 			display : none;
 		}
 
-		img#heart {
+		img#heart, img#time, img#lines {
 			display : none;
+			width : 3vw;
 		}
 
 
@@ -141,6 +142,7 @@ div#season_list {
 	margin-top : 1vw;
 	list-style-type : none;
 	padding-left : 0vw;
+	/*width : 65vw;*/
 
 	overflow-x : scroll;
 	overflow-y : hidden;
@@ -164,9 +166,26 @@ div#season_list.fixed_season {
 
 			color : grey; 
 			text-decoration : none;
+			font-size : 6vw;
 		}
 
-img#season_selector {
+	img#list {
+		position : absolute;
+		z-index : 4;	
+		top : 152vw;
+		right : 16vw;
+		width : 9vw;
+	}
+
+	img#grid {
+		position : absolute;
+		z-index : 4;	
+		top : 152vw;
+		right : 5vw;
+		width : 9vw;
+	}
+
+/*img#season_selector {
 	position : absolute;
 	top : 100%;
 }
@@ -178,7 +197,7 @@ div#shadow_info {
 	top : 0px;
 	width : 100%;
 	height : 40vw;
-}
+}*/
 
 
 /*********************************************** VIDEOS ***********************************************/
@@ -188,96 +207,23 @@ section#video_thumbnail {
 	z-index : 1;
 	margin-top : 2vw;
 	margin-left : 1vw;
+	margin-bottom : 8vw;
 	color : grey;
 	/*min-height : 600px;*/
 }
 
-a.title {
-	margin-left : 2vw;
-	font-size : 6vw;
-}
-
-div.pager_container {
-	display : none;
-}
-
-div.pager{
-	display : none;
-}
-
-div.scrolling_container {
-	position : relative;
-}
-
-div.video_thumbnail_season {
-	display : flex;
-	flex-wrap : wrap;
-	padding-top : 2vw;
-	padding-left : 2vw;
-	padding-bottom : 6vw;
-
-/*	overflow-x : scroll;
-	overflow-y : hidden;
-	white-space : nowrap;*/
-}
-
-		div.panorama, div.portrait, div.squared {
-			margin-top : 0.8vw;
-			margin-left : 0.8vw;
-			margin-right : 0.8vw;
-			margin-bottom : 2vw;
-			flex : 0 0 45vw;
+		img.series_play_panorama {
+			position : absolute;
+			margin-top : -22vw;
+			margin-left : 15vw;
+			width : 15vw;
 		}
 
-
-		div.thumbnail_info {
-			display : flex;
-			box-shadow : 5px 5px 5px #000;
-		}
-
-		img.panorama, img.portrait, img.squared {
-			width : 100%;
-			height : 100%;
-		}
-
-		img.play_logo_panorama {
-			display : none;
-		}
-
-		img.play_logo_squared {
-			display : none;
-		}
-
-		div.info_panorama, div.info_portrait, div.info_squared {
-			display : none;			
-		}
-
-		a.info_free {
-			display : none;
-		}
-
-		a.line_1 {
-			display : none;
-		}
-
-		a.line_2 {
-			display : none;
-		}
-
-		div.left_arrow_container_panorama {
-			display : none;
-		}
-
-		div.right_arrow_container_panorama {
-			display : none;
-		}
-
-		div.left_arrow_container_portrait {
-			display : none;
-		}
-
-		div.right_arrow_container_portrait {
-			display : none;
+		img.series_play_squared {
+			position : absolute;
+			margin-top : -32vw;
+			margin-left : 15vw;
+			width : 15vw;
 		}
 
 }

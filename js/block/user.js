@@ -69,8 +69,8 @@ function listen_user_level1() {
     });
 
     $("span#item_user_3").click(function() {
-        set_cookie("url_cookie", "/php/list.php?list_id=friends", 1);
-        go_to("/php/list.php?list_id=friends");
+        set_cookie("url_cookie", "/php/list.php?list_id=friend", 1);
+        go_to("/php/list.php?list_id=friend");
     });
 
     $("span#item_user_4").click(function() {

@@ -1,8 +1,6 @@
 
 /******************************************* INIT SCREEN ********************************************/
 
-streaming = streaming_type_of(hosting);
-
 var mode = "splashscreen";
 
 init_screen();
@@ -41,8 +39,7 @@ function listen_player() {
 
         $("img#logo_play, img#logo_imago, div#content_layer").fadeOut(2000);
 
-        if (streaming == "video") {launch_video_player(hosting, video_id)} 
-        if (streaming == "audio") {launch_audio_player(hosting, video_id)} 
+        launch_video_player(hosting, video_id);
 
         $("img#thumbnail_image").delay(3000).fadeOut(2000);
 

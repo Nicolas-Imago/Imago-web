@@ -706,6 +706,23 @@
         return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    function get_view_list($content_id, $section_id, $episod_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT SUM(view)
+            FROM imago_tag_screen
+            WHERE  content_id = ?
+            AND section_id = ?
+            AND episod_id = ?
+        ");
+
+        $request->execute(array($content_id, $section_id, $episod_id));
+
+        return $request->fetch();
+    }
+
 
     function get_video_id_list($section_id, $content_id) {
 
@@ -751,7 +768,6 @@
 
         return $author;
     }
-
 
 
     ////////////////////////////////// Get favorite information //////////////////////////////////
@@ -836,7 +852,7 @@
     }
 
 
-    function increment_tag($id, $screen_id, $type_id, $category_id, $content_id, $video_id, $view) {
+    function increment_tag($id, $screen_id, $type_id, $category_id, $content_id, $episod_id, $view) {
 
         global $data_base;
 
@@ -848,7 +864,7 @@
                 type_id = :type_id, 
                 category_id = :category_id,
                 content_id = :content_id,
-                video_id = :video_id,
+                episod_id = :episod_id,
                 view = :view
             WHERE 
                 id = :id
@@ -859,7 +875,7 @@
             'type_id' => $type_id, 
             'category_id' => $category_id, 
             'content_id' => $content_id, 
-            'video_id' => $video_id, 
+            'episod_id' => $episod_id, 
             'view' => $view, 
             'id' => $id
         ));

@@ -68,11 +68,11 @@ function listen_left_arrow() {
 
     $("img.left_arrow_container").hover(function() {
         $(this).css("cursor","pointer");
-        $(this).attr("src", "../img/icons/category/page_left_white.png");  
+        $(this).attr("src", "../img/icons/arrow/page_left_white.png");  
 
     },function() {
         $(this).css("cursor","auto");
-        $(this).attr("src", "../img/icons/category/page_left_grey.png");
+        $(this).attr("src", "../img/icons/arrow/page_left_grey.png");
     });
 
     // Listen click on
@@ -93,11 +93,11 @@ function listen_right_arrow() {
 
     $("img.right_arrow_container").hover(function() {
         $(this).css("cursor","pointer");
-        $(this).attr("src", "../img/icons/category/page_right_white.png"); 
+        $(this).attr("src", "../img/icons/arrow/page_right_white.png"); 
                
     },function() {
         $(this).css("cursor","auto");
-        $(this).attr("src", "../img/icons/category/page_right_grey.png");
+        $(this).attr("src", "../img/icons/arrow/page_right_grey.png");
     });
 
     // Listen click on
@@ -127,8 +127,6 @@ function listen_content_thumbnail(comment_list) {
         content_id = this.id.split("-")[3];
         section_id = this.id.split("-")[4];
         episod_id = this.id.split("-")[5];
-
-        console.log("ici")
 
         if (window.innerWidth > trigger_width && thumbnail_type != "comment") {
 

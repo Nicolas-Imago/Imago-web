@@ -97,8 +97,9 @@ img.logo_image {
 			visibility : hidden;
 		}
 
-		img#heart {
+		img#heart, img#time, img#lines {
 			display : none;
+			width : 3vw;
 		}
 
 div.description {
@@ -192,7 +193,21 @@ div.video_thumbnail_type {
 	white-space : nowrap;*/
 }
 
-		div.panorama, div.portrait, div.squared {
+		img.series_play_panorama {
+			position : absolute;
+			margin-top : -22vw;
+			margin-left : 15vw;
+			width : 15vw;
+		}
+
+		img.series_play_squared {
+			position : absolute;
+			margin-top : -32vw;
+			margin-left : 15vw;
+			width : 15vw;
+		}
+
+/*		div.panorama, div.portrait, div.squared {
 			margin-top : 0.8vw;
 			margin-left : 0.8vw;
 			margin-right : 0.8vw;
@@ -249,6 +264,6 @@ div.video_thumbnail_type {
 
 		div.right_arrow_container_portrait {
 			display : none;
-		}
+		}*/
 
 }

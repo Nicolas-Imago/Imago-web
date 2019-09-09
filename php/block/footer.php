@@ -25,7 +25,7 @@
     <img id = "close_cookies" src = "../img/icons/close_player.png"></img>
 </div>
 
-<img id = "page_back" src = "../img/icons/footer/page_back_grey.png">
+<!-- <img id = "page_back" src = "../img/icons/footer/page_back_grey.png"> -->
 
 <div id="footer">
     <a id="info_footer"> ImagoTV</a>

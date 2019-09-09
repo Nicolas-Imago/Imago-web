@@ -1,6 +1,12 @@
 
 <?php require_once("lib/init.php") ?>
 
+<?php require_once("lib/model.php") ?>
+<?php require_once("lib/view.php") ?>
+<?php require_once("lib/misc.php") ?>
+
+<?php require_once("lib/session.php") ?>
+
 <?php
 
     header("HTTP/1.0 404 Not Found");
@@ -56,7 +62,7 @@
 		<a id = "splashscreen_title"> Cette page n'existe pas ! </a>
         <a id = "splashscreen_title"> Découvrez Imago en cliquant ci-dessous ! </a>
 
-		<img id = "splashscreen_image" src = "../img/login/imago.png"></img>
+		<img id = "splashscreen_image" src = "../img/icons/imago.png"></img>
 
 	</div>
 
@@ -85,7 +91,7 @@
     <script src = "../js/block/user.js"></script>
     <script src = "../js/block/footer.js"></script>
 
-	<script src = "../index.js"></script>
+	<script src = "../js/index.js"></script>
 
 </body>
 </html>

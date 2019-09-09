@@ -36,28 +36,14 @@
 	}	
 
 
-    ////////////////////////////////// Get url param //////////////////////////////////
+    //////////////////////////////// Get url param ///////////////////////////////
 
-	if (isset($_GET["type_id"])) 		$type_id 	= $_GET["type_id"];			else $type_id = "";
 	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
+	if (isset($_GET["episod_id"])) 		$episod_id 	= (int)$_GET["episod_id"]; 	else $episod_id = "";
 
-	if (isset($_GET["video_id"])) 		$video_id 	= $_GET["video_id"]; 		else $video_id = "";
+	if ($episod_id == 0) $episod_id = "";
 
-	if (isset($_GET["season_id"])) 		$season_id	= $_GET["season_id"]; 		else $season_id = "";
-	if (isset($_GET["episod_id"])) 		$episod_id 	= $_GET["episod_id"]; 		else $episod_id = "";
-
-	if (isset($_GET["timecode"])) 		$timecode 	= $_GET["timecode"];		else $timecode = "";
-
-
-    ////////////////////////////////// Get data //////////////////////////////////
-
-	$type_list = ["tvshow", "podcast", "music", "humour"];
-
-	if (!in_array($type_id, $type_list)) {
-		include("404.php");
-		return;
-	}
-
+    //////////////////////////////// Protect data ////////////////////////////////
 
 	$content = get_content_info($content_id);
 
@@ -65,6 +51,23 @@
 		include("404.php");
 		return;
 	}
+
+	$type_id = $content["type"];
+
+	$video_id_list = get_episod_id_list($content_id);
+    $video_number = sizeof($video_id_list);
+
+	if ($episod_id == "0") {
+		include("404.php");
+		return;
+	}
+
+	if ($episod_id != "" AND !isset($video_id_list[$episod_id - 1])) {
+		include("404.php");
+		return;
+	}
+
+    ////////////////////////////////// Get data //////////////////////////////////
 
 	$page_number = array();
 	$page_number = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -77,45 +80,32 @@
 	$info_title = "Format :";
 	$info_data = $content["format"];
 
-    $crowdfunding_url = $content["crowdfunding"];
 
-	$video_id_list = get_episod_id_list($content_id);
+    $crowdfunding_url = $content["crowdfunding"];
 
 	if($content["season_size"] != "") $season_size = intval($content["season_size"]); else $season_size = 12;
 
-    $video_number = sizeof($video_id_list);
     $season_number = intval(($video_number - 1) / $season_size) + 1;
-
-    if ($season_id != "") $current_season = $season_id;
 
 	if ($episod_id != "") {
 		$current_season = intval(($episod_id - 1) / $season_size) + 1;
-		
-		if (isset($video_id_list[$episod_id - 1])) {
-			$episod = $video_id_list[$episod_id - 1];
+		$episod = $video_id_list[$episod_id - 1];
 
-	        $thumbnail = $episod["thumbnail"];
-	        $fact_check_url = $episod["fact_check"];
+	    $thumbnail = $episod["thumbnail"];
+		$hosting = $episod["hosting"];
 
-			$hosting = $episod["hosting"];
+		if ($type_id == "podcast" and $hosting != "imago") 
+			$video_id = $episod["audio_id"];
+        else 
+        	$video_id = $episod[$hosting . '_id'];
 
-			if ($episod["type"] == "podcast")
-				$video_id = $episod["audio_id"];
-
-			else if ($hosting == "invidio") 
-				$video_id = $episod["youtube_id"];
-
-            else {$video_id = $episod[$hosting . '_id'];}
-	    }
-	    else {
-			include("404.php");
-			return;	    	
-	    }
+		$fact_check_url = $episod["fact_check"];
     }
     else {
     	$current_season = $season_number;
-    	$hosting = "youtube";
-    	$thumbnail = "youtube";
+    	$thumbnail = "";
+    	$hosting = "";
+    	$video_id = "";
     	$fact_check_url = "";
     }
 
@@ -163,7 +153,9 @@
 
 	$screen_tag = read_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
 
-	if (empty($screen_tag)) create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
+	if (empty($screen_tag)) {
+		create_tag("sheet", $type_id, category_id_of($category), $content_id, $video_id);
+	}
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
@@ -232,8 +224,8 @@
 	    		<!-- <img id = "season_selector" src = "../img/icons/tvshow/season_selector_grey.png"></img> -->
 	    	</div>
 	    	
-			<img id = "grid" class = "display" src = "../img/icons/tvshow/mosaic_icon_dark_grey.png"></img>
-			<img id = "list" class = "display" src = "../img/icons/tvshow/sheet_icon_dark_grey.png"></img>
+<!-- 			<img id = "grid" class = "display" src = "../img/icons/tvshow/mosaic_icon_dark_grey.png"></img>
+			<img id = "list" class = "display" src = "../img/icons/tvshow/sheet_icon_dark_grey.png"></img> -->
 
 		</section>
 
@@ -242,31 +234,25 @@
 		</section> 
 
 
-		<hr color = "grey" width = "90%" bottom = "4vw">
+		<!-- <hr color = "grey" width = "90%" > -->
 
 			<?php display_list("series", "1", "content", "tvshow", $content_id, $author_id_list) ?>
 			<?php display_list("series", "2", "content", "documentary", $content_id, $author_id_list) ?>
 			<?php display_list("series", "3", "content", "podcast", $content_id, $author_id_list) ?>			
 			<?php display_list("series", "4", "content", "shortfilm", $content_id, $author_id_list) ?>
 
-		<hr color = "grey" width = "90%">
+		<!-- <hr color = "grey" width = "90%" > -->
 
-			<?php display_list("series", "5", "comment", "comment", $content_id, "") ?>
-
-		<hr color = "grey" width = "90%">
-
+			<?php // display_list("series", "5", "comment", "comment", $content_id, "") ?>
 			<?php display_list("series", "6", "content", "book", "", $author_id_list) ?>			
-
-		<div id = "shadow_info"></div>
-
 
 
 		<a href = "<?php ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/arrow/page_left_grey.png" >
 		</a>
 
 		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/arrow/page_right_grey.png" >
 		</a>
 
 	</div> 
@@ -302,7 +288,6 @@
     	var content_id = "<?php ECHO $content_id ?>";
     	var video_id = "<?php ECHO $video_id ?>";
     	var episod_id = "<?php ECHO $episod_id ?>";
-    	var timecode = "<?php ECHO $timecode ?>";
     	
     	var current_season = "<?php ECHO $current_season ?>";
 

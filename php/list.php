@@ -208,6 +208,8 @@
 			<?php if ($screen != "folder") {ECHO '<a>' . $screen_title . '</a>';} ?>
 		</div>
 
+		<a id = "warning"> Cette fonctionnalité ouvre fin septembre !! </a>
+
 		<?php include("block/button.php") ?>
 
 		<div id = "folder_image">

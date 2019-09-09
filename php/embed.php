@@ -9,22 +9,13 @@
 
 <?php
 
+    //////////////////////////////// Get url param ///////////////////////////////
 
-    ////////////////////////////////// Get url param //////////////////////////////////
-
-
-	if (isset($_GET["type_id"])) {$type_id = $_GET["type_id"];} else {$type_id = "";}
-	if (isset($_GET["content_id"])) {$content_id = $_GET["content_id"];} else {$content_id = "";}
-
-	if (isset($_GET["video_id"])) {$video_id = $_GET["video_id"];} else {$video_id = "";}
-
-	if (isset($_GET["season_id"])) {$season_id = $_GET["season_id"];} else {$season_id = "";}
-	if (isset($_GET["episod_id"])) {$episod_id = $_GET["episod_id"];} else {$episod_id = "";}
+	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
+	if (isset($_GET["episod_id"])) 		$episod_id 	= (int)$_GET["episod_id"]; 	else $episod_id = "";
 
 
-
-    ////////////////////////////////// Get data //////////////////////////////////
-
+    //////////////////////////////// Protect data ////////////////////////////////
 
 	$content = get_content_info($content_id);
 
@@ -33,46 +24,31 @@
 		return;
 	}
 
-	$category = $content["category"];
-
-	$author_id_list = get_author_id_list($content_id);
-    $author_name = display_author_name($author_id_list);
+	$type_id = $content["type"];
 
 	$video_id_list = get_episod_id_list($content_id);
     $video_number = sizeof($video_id_list);
 
-	if ($episod_id != "") {		
-		if (isset($video_id_list[$episod_id - 1])) {
-			$episod = $video_id_list[$episod_id - 1];
+	if ($episod_id == 0 OR ($episod_id != "" AND !isset($video_id_list[$episod_id - 1]))) {
+		include("404.php");
+		return;
+	}
 
-	        $thumbnail = $episod["thumbnail"];
-	        $fact_check_url = $episod["fact_check"];
+    ////////////////////////////////// Get data //////////////////////////////////
 
-			$hosting = $episod["hosting"];
+	$category = $content["category"];
 
-			if ($hosting == "invidio") {$video_id = $episod["youtube_id"];}
-            else {$video_id = $episod[$hosting . '_id'];}
-	    }
-	    else {
-			include("404.php");
-			return;	    	
-	    }
-    }
-    else {
-    	$hosting = "youtube";
-    	$thumbnail = "youtube";
-    }
+	$episod = $video_id_list[$episod_id - 1];
 
-    if ($thumbnail == "local") {
+	$thumbnail = $episod["thumbnail"];
+	$hosting = $episod["hosting"];
+
+	$video_id = $episod[$hosting . '_id'];
+
+    if ($thumbnail == "local")
         $thumbnail_image = "/img/video/" . $content_id . "/hd/" . $episod_id . ".jpg";
-        $mini_thumbnail_image = "/img/video/" . $content_id . "/" . $episod_id . ".jpg";
-    }
-    else {
+    else
         $thumbnail_image = "https://img.youtube.com/vi/" . $video_id . "/maxresdefault.jpg";
-        $mini_thumbnail_image = "https://img.youtube.com/vi/" . $video_id . "/default.jpg";
-     }
-
-	$logo_url = "../img/" . $type_id . "/thumbnail/" . $content_id . ".jpg";
 
 
     ////////////////////////////////// Tag //////////////////////////////////
@@ -93,7 +69,7 @@
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang = "fr">
 
 <head>
     <meta charset = "utf-8"/>
@@ -116,18 +92,15 @@
 
 	<div id = "screen">
 
-		<iframe id = "video" frameborder = "0" allowfullscreen allow = "autoplay" ></iframe>
+		<iframe id = "video" frameborder = "0" allowfullscreen allow = "autoplay" > </iframe>
 
 		<div id = "layer">
 			<div id = "content_layer">
-				<img id = "logo_imago" src = "../img/icons/header/logo_white.png"; ></img> 
+				<img id = "logo_imago" src = "../img/icons/header/logo_white.png" > </img> 
 			</div>
-<!-- 			<div id = "episod_layer">
-				<img id = "mini_thumbnail_image" src = <?php ECHO $mini_thumbnail_image ?> ></img>	
-			</div> -->
 		</div>
 
-		<img id = "thumbnail_image" src = <?php ECHO $thumbnail_image ?> ></img>
+		<img id = "thumbnail_image" src = <?php ECHO $thumbnail_image ?> > </img>
 		<img id = "logo_play" src = "../img/icons/play.png"; > 
 
 	</div> 

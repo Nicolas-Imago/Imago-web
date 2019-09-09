@@ -5,7 +5,6 @@ var pager_index = [1, 1, 1, 1, 1, 1, 1, 1];
 
 init_screen(); 
 
-
 function init_screen() {
 
     // Display screen
@@ -31,8 +30,10 @@ function init_screen() {
 
     // Switch Mosaic / Horizontal scroll
     
-    if (type_id != "" && category_id != "") 
-        $("a.title, div.pager_container, div.list_container, div.arrow_container").addClass("mosaic");
+    if (type_id != "" && category_id != "") {
+        $("a.title").addClass("mosaic");
+        set_mosaic_mode();
+    }
     else {
         $("img#arrow_left_page").hide();
         $("img#arrow_right_page").hide();
@@ -55,6 +56,9 @@ function init_screen() {
     listen_right_arrow();
     listen_container();
     listen_content_thumbnail();
+
+    listen_left_page_arrow();
+    listen_right_page_arrow();
 
     addEventListener("resize", screen_update, false);
     addEventListener("scroll", screen_update, false);
@@ -87,7 +91,6 @@ function listen_title() {
     //         go_to("/php/category.php?type_id=" + type_id + "&category_id=" + category_id);
     // });
 }
-
 
 /********************************************** RESIZE *********************************************/
 

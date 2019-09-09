@@ -17,7 +17,7 @@
 		<img id = "cock_a_doodle_doo" class = "sharing button" src = "../img/icons/share/cock_a_doodle_doo.png"> </img>
 	</a>
 	
-	<a id = "favorite" class = "my_content" >
+<!-- 	<a id = "favorite" class = "my_content" >
 		<img id = "favorite" class = "my_content button" src = "../img/icons/button/favorite_off.png"> </img>
 	</a>
 			
@@ -27,7 +27,7 @@
 
 	<a id = "comment">
 		<img id = "comment" class = "my_content button" src = "../img/icons/button/comment.png"> </img>
-	</a>
+	</a> -->
 
 <!-- 	<a id = "tag">
 		<img id = "comment" class = "my_content button" src = "../img/icons/button/tag.png"> </img>

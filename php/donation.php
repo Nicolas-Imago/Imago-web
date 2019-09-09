@@ -79,7 +79,9 @@
 		<a id = "donation_title"> Mes promesses de dons </a>
 		<a id = "donation_done"> Mes dons effectués </a>
 
-		<a id = "donation_select"> Tout sélectionner </a>
+		<a id = "warning"> Cette fonctionnalité ouvre fin septembre !! </a>
+
+		<!-- <a id = "donation_select"> Tout sélectionner </a> -->
 
 		<section id = donation >
 
@@ -90,8 +92,8 @@
 
 		</section>
 
-		<a id = "donation_pay" > CONCRETISER LE DON </a>
-		<a id = "donation_remove" > Supprimer les promesses sélectionnées </a>
+<!-- 		<a id = "donation_pay" > CONCRETISER LE DON </a>
+		<a id = "donation_remove" > Supprimer les promesses sélectionnées </a> -->
 
 	</div> 
 

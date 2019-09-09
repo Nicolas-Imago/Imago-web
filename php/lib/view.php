@@ -60,13 +60,13 @@
 
             $left_img_id = "left_arrow_container_" . $list_id;
             $left_img_class = "left_arrow_container";
-            $left_img_src = "../img/icons/category/page_left_grey.png";
+            $left_img_src = "../img/icons/arrow/page_left_grey.png";
 
             $right_div_class = "arrow_container right_arrow_container_" . $format;
 
             $right_img_id = "right_arrow_container_" . $list_id;
             $right_img_class = "right_arrow_container";
-            $right_img_src = "../img/icons/category/page_right_grey.png";
+            $right_img_src = "../img/icons/arrow/page_right_grey.png";
 
             include("block/arrow.php");
 
@@ -109,7 +109,7 @@
         global $content;
         global $season_number;
 
-        for ($season_index = 1; $season_index <= $season_number ; $season_index++) {
+        for ($season_index = $season_number; $season_index >= 1 ; $season_index--) {
             ECHO ' <a ';
                 ECHO ' id = "season_' . $season_index . '" ';
                 ECHO ' class = "season" >';
@@ -253,7 +253,7 @@
         // $th_div_class = "thumbnail_info " . $format; 
 
         if ($type_id == "documentary" OR $type_id == "shortfilm") {
-            $href = 'movie.php?type_id=' . $type_id . '&content_id=' . $content_id;
+            $href = 'movie.php?content_id=' . $content_id;
             $target = "";
         }
         else if ($type_id == "book") {
@@ -261,7 +261,7 @@
             $target = "_blank";
         }
         else {
-            $href = 'series.php?type_id=' . $type_id . '&content_id=' . $content_id;
+            $href = 'series.php?content_id=' . $content_id;
             $target = "";
         }
 
@@ -310,12 +310,12 @@
         if ($thumbnail["thumbnail"] == "local") {
 
             if ($section_id == "")
-                $image_url = "../img/video/" . $content_id . "/" . $episod_id . ".jpg";
+                $image_url = "../img/video/" . $type_id . "/" . $content_id . "/" . $episod_id . ".jpg";
     
             if ($section_id != "")
-                $image_url = "../img/video/" . $content_id . "/" . $section_id . "_" . $episod_id . ".jpg";
+                $image_url = "../img/video/" . $type_id . "/" . $content_id . "/" . $section_id . "_" . $episod_id . ".jpg";
 
-            if(!file_exists($image_url)) $image_url = "../img/video/" . $content_id . "/default.jpg";
+            if(!file_exists($image_url)) $image_url = "../img/video/" . $type_id . "/" . $content_id . "/default.jpg";
         }
 
         if ($thumbnail["thumbnail"] == "youtube")
@@ -323,6 +323,8 @@
 
 
         // Prepare thumbnail text
+
+        $view = get_view_list($content_id, "", $episod_id)[0];
 
         $line_1 = "";
         $line_2 = "";
@@ -336,7 +338,7 @@
         $line_1 = '#' .$thumbnail["title"];
         $line_2 = $timing;
         $line_3 = $thumbnail["description"];
-        $line_4 = 'Lu ' . '356' . ' fois sur Imago';
+        $line_4 = 'Lu ' . $view . ' fois sur Imago';
 
 
         // Prepare HTML params
@@ -345,9 +347,9 @@
         $th_div_class = "series_thumbnail series_" . $format; 
 
         if ($type_id == "documentary" OR $type_id == "shortfilm")
-            $href = "movie.php?type_id=" . $type_id . "&content_id=" . $content_id . "&section_id=" . $section_id . "&episod_id=" . $episod_id;
+            $href = "movie.php?content_id=" . $content_id . "&section_id=" . $section_id . "&episod_id=" . $episod_id;
         else 
-            $href = "series.php?type_id=" . $type_id . "&content_id=" . $content_id . "&episod_id=" . $episod_id;
+            $href = "series.php?content_id=" . $content_id . "&episod_id=" . $episod_id;
 
         $image_class = "series_thumbnail series_" . $format;
 
@@ -364,9 +366,12 @@
     <div id = "<?php ECHO $th_div_id ?>" class = "<?php ECHO $th_div_class ?>" > 
 
         <a href = "<?php ECHO $href ?>" >
-            <img class = "<?php ECHO $image_class ?>" src = " <?php ECHO $image_url ?>" > </a>
-            
-        <img class = "<?php ECHO $play_class ?>" src = "../img/icons/play_new.png" > </img>
+            <img class = "<?php ECHO $image_class ?>" src = " <?php ECHO $image_url ?>" > </img>
+        </a>
+        
+        <a href = "<?php ECHO $href ?>" >    
+            <img class = "<?php ECHO $play_class ?>" src = "../img/icons/play_new.png" > </img>
+        </a>
 
         <div id = "<?php ECHO $text_div_id ?>" class = "<?php ECHO $text_div_class ?>" >
             <div> <a class = "series_line_1"> <?php ECHO $line_1 ?> </a> </div>
@@ -404,7 +409,7 @@
         $th_div_class = 'thumbnail_info ' . $format; 
 
         $image_class = 'thumbnail ' . $format;
-        $image_src = '../img/icons/comment_' . $thumbnail["color"] . '.png';
+        $image_src = '../img/icons/comment/comment_' . $thumbnail["color"] . '.png';
 
         $text_div_id = "info_" . $list_id;
         $text_div_class = "info_" . $format;

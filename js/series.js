@@ -2,9 +2,11 @@
 /******************************************* INIT SCREEN ********************************************/
 
 var format = get_cookie("display_mode");
-if (format != "grid" && format != "list") format = "list";
+if (format != "grid" && format != "list") format = "grid";
 
 var pager_index = [1, 1, 1, 1, 1, 1];
+
+var timecode = 0;
 
 var note_value = new Array();
 note_value[1] = note_1;

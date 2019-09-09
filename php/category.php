@@ -168,11 +168,11 @@
 		</section>
 
 		<a href = "<?php ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/arrow/page_left_grey.png" >
 		</a>
 
 		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/arrow/page_right_grey.png" >
 		</a>
 
 	</div>

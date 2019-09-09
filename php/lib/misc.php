@@ -379,7 +379,7 @@
         }
         else {
             if ($thumbnail == "local")
-                ECHO 'https://www.imagotv.fr/img/video/' . $content_id . '/hd/' . $episod_id . '.jpg';
+                ECHO 'https://www.imagotv.fr/img/video/' . $type_id . '/' . $content_id . '/hd/' . $episod_id . '.jpg';
             else
                 ECHO 'https://img.youtube.com/vi/' . $video_id . '/maxresdefault.jpg';
         }

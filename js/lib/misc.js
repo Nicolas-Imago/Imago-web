@@ -62,9 +62,17 @@ function move_element(target, height_factor, speed) {
 
     header_height = height_factor * window.innerWidth;
     image_top = header_height + speed * (window.scrollY);
-    $(target).css("top", image_top);
-        
-};
+    $(target).css("top", image_top);       
+}
+
+
+function set_mosaic_mode() {
+
+    $("div.pager_container").addClass("mosaic");
+    $("div.list_container").addClass("mosaic");
+    $("div.arrow_container").addClass("mosaic");    
+    $("a.line_2").hide();
+}
 
 
 function callback_status(data) {
@@ -77,7 +85,7 @@ function callback_status(data) {
     if (status == "not_connected") go_to("/php/login.php"); 
 
     return status       
-};
+}
 
 
 /********************************************** FUNCTIONS **********************************************/

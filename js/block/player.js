@@ -160,7 +160,7 @@ function launch_audio_player(hosting, episod_id, audio_id, timecode) {
         $("audio#audio_popup").attr("src", audio_url);
         $("audio#audio_popup").show();
 
-        image_url = "../img/video/" + content_id + "/" + episod_id + ".jpg"
+        image_url = "../img/video/podcast/" + content_id + "/" + episod_id + ".jpg"
         $("img#audio_popup_image").attr("src", image_url);
         $("img#audio_popup_image").show();
 

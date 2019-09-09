@@ -73,6 +73,7 @@ a#message {
 section#list {
 	position : relative;
 	background-color : rgb(35, 35, 35);
+	/*box-shadow : 0vw -0.5vw 0.5vw #000;*/
 }
 
 section.folder {

@@ -30,9 +30,9 @@ function listen_footer_page_right() {
     // Listen mouse over
 
     $("img#arrow_right_page").hover(function() {
-        $(this).attr("src", "../img/icons/category/page_right_white.png");
+        $(this).attr("src", "../img/icons/arrow/page_right_white.png");
     },function() {
-        $(this).attr("src", "../img/icons/category/page_right_grey.png");
+        $(this).attr("src", "../img/icons/arrow/page_right_grey.png");
     });
 }
 
@@ -41,9 +41,9 @@ function listen_footer_page_left() {
     // Listen mouse over
 
     $("img#arrow_left_page").hover(function() {
-        $(this).attr("src", "../img/icons/category/page_left_white.png");
+        $(this).attr("src", "../img/icons/arrow/page_left_white.png");
     },function() {
-        $(this).attr("src", "../img/icons/category/page_left_grey.png");
+        $(this).attr("src", "../img/icons/arrow/page_left_grey.png");
     });
 }
 
