@@ -1,0 +1,102 @@
+
+@media all and (min-width : 481px)  {
+
+div#screen {
+	display : none;
+}
+
+img.cover_image {
+	position : fixed;
+	top : 6vw;
+	left : 1.5vw;
+	width : 20vw;
+}
+
+img.background_image {
+	position : fixed;
+	top : 4vw;
+	width : 120vw;
+	left : 0vw;
+	overflow : hidden;
+}
+
+
+/************************************************ INFO ************************************************/
+
+section#information {
+	padding-left : 24vw;
+	width : 65vw;
+}
+
+		img.logo_image {
+			display : none;
+		}
+
+		#info_title {
+			padding-left : 0vw;
+		}
+
+		div.date {
+			padding-top : 1.5vw;
+		}
+
+		div.number {
+			display : none;
+		}
+
+		div.description {
+			width : 70vw;
+		}
+
+
+/*********************************************** THUMBNAIL ***********************************************/
+
+section#video {
+	position : relative;
+	z-index: 10;
+	margin-top : 36vw;
+	margin-left : 24vw;
+}
+
+a.thumbnail_title {
+	z-index : 10;
+	padding-left : 0vw;
+	font-size : 2.2vw;
+}
+
+div.scrolling_container {
+	padding-left : 3vw;
+	/*width : 70vw;*/
+}
+
+		a.series_line_1 {
+			display : none;
+		}
+
+		a.series_line_2 {
+			display : none;
+		}
+
+/************************************************ RELATED ************************************************/
+
+div.more_content {
+	position : relative;
+	z-index : 2;
+	width : 70vw;
+	height : 2px;
+	top : 2vw;
+	left : 24vw;
+	background-color : rgb(80, 80, 80);
+}
+
+section#related_thumbnail {
+	position : relative;
+	margin-top : 4vw;
+	margin-left : 19.5vw;
+}
+
+	a.title {
+		padding-left : 3vw;
+	}
+		
+}

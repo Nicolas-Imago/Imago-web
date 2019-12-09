@@ -25,9 +25,7 @@
 
 			display_list($screen, $index + 1, $title, "video", "tvshow", $content_id);
 		}
-
 	}
-
 
 	function display_list($screen, $list_id, $title, $thumbnail_type, $type_id, $content_id) {
 
@@ -41,7 +39,6 @@
 
 		display_thumbnail_container($list_id, $thumbnail_type, $type_id, "", $title, $content_list);
 	}
-
 
 
     ////////////////////////////////// Get url param //////////////////////////////////
@@ -65,7 +62,7 @@
 	$message = "";
 	$request_size = "0";
 
-	$banner_image_url = "../img/corner/" . $corner_id . ".jpg";
+	$banner_image_url = "/img/corner/" . $corner_id . ".jpg";
 
 	if ($episod_id != "" and $content_id != "") {	
 
@@ -113,21 +110,21 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
    	
-    <link rel = "stylesheet" href = "../css/panorama/corner.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/corner.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/corner_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/corner_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
     <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
 
     <meta property = "og:title" content = "Imago TV" />
 	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
-	<meta property = "og:image" content = "../img/icons/imago.jpg" />
+	<meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -205,19 +202,19 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
 
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header_v110.js"></script>
+	<script src = "/js/block/menu_v110.js"></script>
+	<script src = "/js/block/user_v110.js"></script>
+	<script src = "/js/block/footer_v110.js"></script>
 
-    <script src = "../js/block/button.js"></script>
-    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "/js/block/button_v110.js"></script>
+    <script src = "/js/block/thumbnail_v110.js"></script>
 
-    <script src = "../js/block/player.js"></script>
+    <script src = "/js/block/player_v110.js"></script>
 
-	<script src = "../js/corner.js"></script>
+	<script src = "/js/corner_v110.js"></script>
 
 </body>
 </html>

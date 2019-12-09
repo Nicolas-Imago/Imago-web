@@ -1,36 +1,38 @@
 
-<div id = "button_header">
+<section id = "button_list" >
+
+	<!--  CROWDFUNDING  -->
 	
-	<a target = "_blank" id = "crowdfunding" >
-		<img id = "crowdfunding" class = "donate button" src = "../img/icons/button/crowdfunding.png" > </img>
+	<a id = "crowdfunding" class = "button_href" target = "_blank" >
+		<img id = "crowdfunding" class = "button donation" src = "/img/icons/button/tipeee.png" > </img>
 	</a>
 
-	<a target = "_blank" id = "fact_check" >
-		<img id = "fact_check" class = "button" src = "../img/icons/button/fact_check.png"> </img>
+	<a id = "g1" class = "button_href" target = "_blank" >
+		<img id = "g1" class = "button donation" src = "/img/icons/button/g1.png" > </img>
 	</a>
+
+	<!--  FACT CHECKING  -->
+
+	<a id = "captain_fact" class = "button_href" target = "_blank" >
+		<img id = "captain_fact" class = "button fact_check" src = "/img/icons/button/captain_fact.png"> </img>
+	</a>
+
+	<!--  SOCIAL NETWORK  -->
 			
-	<a id = "trombinobooq" >
-		<img id = "trombinobooq" class = "sharing button" src = "../img/icons/share/trombinobooq.png"> </img>
+	<a id = "trombinobooq" class = "button_href" target = "_blank" >
+		<img id = "trombinobooq" class = "button sharing" src = "/img/icons/share/trombinobooq.png"> </img>
 	</a>
 		
-	<a id = "cock_a_doodle_doo" >
-		<img id = "cock_a_doodle_doo" class = "sharing button" src = "../img/icons/share/cock_a_doodle_doo.png"> </img>
+	<a id = "cock_a_doodle_doo" class = "button_href" target = "_blank" >
+		<img id = "cock_a_doodle_doo" class = "button sharing" src = "/img/icons/share/cock_a_doodle_doo.png"> </img>
 	</a>
 	
-<!-- 	<a id = "favorite" class = "my_content" >
-		<img id = "favorite" class = "my_content button" src = "../img/icons/button/favorite_off.png"> </img>
-	</a>
-			
-	<a id = "watch_later" class = "my_content" >
-		<img id = "watch_later" class = "my_content button" src = "../img/icons/button/watch_later_off.png"> </img>
-	</a>
+	<!--  MY CONTENT  -->
 
-	<a id = "comment">
-		<img id = "comment" class = "my_content button" src = "../img/icons/button/comment.png"> </img>
-	</a> -->
+	<img id = "favorite" 		class = "button my_content" 	src = "/img/icons/button/favorite_off.png"> </img>
+	<img id = "content_later" 	class = "button my_content" 	src = "/img/icons/button/later_off.png"> </img>
+	<img id = "content_reco" 	class = "button my_content" 	src = "/img/icons/button/reco_off.png"> </img>
+	<img id = "episod_later" 	class = "button my_content" 	src = "/img/icons/button/later_off.png"> </img>
+	<img id = "episod_reco" 	class = "button my_content" 	src = "/img/icons/button/reco_off.png"> </img>
 
-<!-- 	<a id = "tag">
-		<img id = "comment" class = "my_content button" src = "../img/icons/button/tag.png"> </img>
-	</a> -->
-
-</div>
+</section>

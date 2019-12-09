@@ -266,7 +266,7 @@
 
     ///////////// Favorite /////////////
 
-    function favorite_video_list_of($user_id) {
+    function favorite_video_list_of($user_id, $level) {
 
         global $data_base;
 
@@ -278,16 +278,17 @@
             AND i.episod_id = f.episod_id
             AND i.type = 'tvshow'
             AND f.user_id = ?
+            AND f.visibility <= ? 
             ORDER BY f.add_date DESC
         ");
 
-        $request->execute(array($user_id));
+        $request->execute(array($user_id, $level));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
     
 
-    function favorite_audio_list_of($user_id) {
+    function favorite_audio_list_of($user_id, $level) {
 
         global $data_base;
 
@@ -299,16 +300,17 @@
             AND i.episod_id = f.episod_id
             AND i.type = 'podcast'
             AND f.user_id = ?
+            AND f.visibility <= ? 
             ORDER BY f.add_date DESC
         ");
 
-        $request->execute(array($user_id));
+        $request->execute(array($user_id, $level));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
 
 
-    function favorite_content_list_of($type_id, $user_id) {
+    function favorite_content_list_of($type_id, $user_id, $level) {
 
         global $data_base;
 
@@ -320,7 +322,73 @@
             AND i.type = ?
             AND f.user_id = ?
             AND f.episod_id = ''
+            AND f.visibility <= ? 
             ORDER BY f.add_date DESC 
+        ");
+
+        $request->execute(array($type_id, $user_id, $level));
+
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
+
+    ///////////// Watch later /////////////
+
+    function later_video_list_of($user_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT *
+            FROM imago_info_video i
+            INNER JOIN imago_my_later l
+            ON i.content_id = l.content_id
+            AND i.episod_id = l.episod_id
+            AND i.type = 'tvshow'
+            AND l.user_id = ?
+            ORDER BY l.add_date DESC
+        ");
+
+        $request->execute(array($user_id));
+
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } 
+    
+
+    function later_audio_list_of($user_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT *
+            FROM imago_info_video i 
+            INNER JOIN imago_my_later l
+            ON i.content_id = l.content_id
+            AND i.episod_id = l.episod_id
+            AND i.type = 'podcast'
+            AND l.user_id = ?
+            ORDER BY l.add_date DESC
+        ");
+
+        $request->execute(array($user_id));
+
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
+
+    function later_content_list_of($type_id, $user_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT *
+            FROM imago_info_content i 
+            INNER JOIN imago_my_later l
+            ON i.content_id = l.content_id 
+            AND i.type = ?
+            AND l.user_id = ? 
+            AND l.episod_id = ''
+            ORDER BY l.add_date DESC
         ");
 
         $request->execute(array($type_id, $user_id));
@@ -329,21 +397,21 @@
     } 
 
 
-    ///////////// Watch later /////////////
+    ///////////// Recommended /////////////
 
-    function watch_later_video_list_of($user_id) {
+    function reco_video_list_of($user_id) {
 
         global $data_base;
 
         $request = $data_base->prepare("
             SELECT *
             FROM imago_info_video i
-            INNER JOIN imago_my_later f
-            ON i.content_id = f.content_id
-            AND i.episod_id = f.episod_id
+            INNER JOIN imago_my_reco r
+            ON i.content_id = r.content_id
+            AND i.episod_id = r.episod_id
             AND i.type = 'tvshow'
-            AND f.user_id = ?
-            ORDER BY f.add_date DESC
+            AND r.user_id = ?
+            ORDER BY r.add_date DESC
         ");
 
         $request->execute(array($user_id));
@@ -352,19 +420,19 @@
     } 
     
 
-    function watch_later_audio_list_of($user_id) {
+    function reco_audio_list_of($user_id) {
 
         global $data_base;
 
         $request = $data_base->prepare("
             SELECT *
             FROM imago_info_video i 
-            INNER JOIN imago_my_later f
-            ON i.content_id = f.content_id
-            AND i.episod_id = f.episod_id
+            INNER JOIN imago_my_reco r
+            ON i.content_id = r.content_id
+            AND i.episod_id = r.episod_id
             AND i.type = 'podcast'
-            AND f.user_id = ?
-            ORDER BY f.add_date DESC
+            AND r.user_id = ?
+            ORDER BY r.add_date DESC
         ");
 
         $request->execute(array($user_id));
@@ -373,19 +441,19 @@
     } 
 
 
-    function watch_later_content_list_of($type_id, $user_id) {
+    function reco_content_list_of($type_id, $user_id) {
 
         global $data_base;
 
         $request = $data_base->prepare("
             SELECT *
             FROM imago_info_content i 
-            INNER JOIN imago_my_later f
-            ON i.content_id = f.content_id 
+            INNER JOIN imago_my_reco r
+            ON i.content_id = r.content_id 
             AND i.type = ?
-            AND f.user_id = ? 
-            AND f.episod_id = ''
-            ORDER BY f.add_date DESC
+            AND r.user_id = ? 
+            AND r.episod_id = ''
+            ORDER BY r.add_date DESC
         ");
 
         $request->execute(array($type_id, $user_id));
@@ -441,9 +509,10 @@
         global $data_base;
 
         $request = $data_base->prepare("
-            SELECT id, login
+            SELECT *
             FROM imago_list_member m
             WHERE LOWER(replace(m.login,'é','e')) LIKE replace(LOWER(?),'é','e')
+
         ");
 
         $request->execute(array("%" . $query_id . "%"));
@@ -507,6 +576,27 @@
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
 
+
+    function are_friends($user_id_1, $user_id_2) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT id
+            FROM imago_my_friend
+            WHERE (user_id_1 = ? AND user_id_2 = ?)
+            OR (user_id_2 = ? AND user_id_1 = ?)
+        ");
+
+        $request->execute(array($user_id_1, $user_id_2, $user_id_1, $user_id_2));
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+
+        if (sizeof($result) == 0) $result = false;
+        else $result = true;
+
+        return $result;
+    }
+
     
     ////////////////////////////////// Get content information //////////////////////////////////
 
@@ -527,7 +617,7 @@
                 ORDER BY content_id ASC
             ");
 
-            $request->execute(array($type_id, $category_id));
+            $request->execute(array($type_id, $category_id, $env));
         }
 
         else {
@@ -580,17 +670,18 @@
     } 
 
 
-    function get_author_id_list($content_id) {
+    function get_author_id_list($type_id, $content_id) {
 
         global $data_base;
 
         $request = $data_base->prepare("
             SELECT author_id 
             FROM imago_related_author 
-            WHERE content_id = ? 
+            WHERE type_id = ?
+            AND content_id = ? 
         ");
 
-        $request->execute(array($content_id));
+        $request->execute(array($type_id, $content_id));
 
         return $request->fetchAll(PDO::FETCH_COLUMN, 0); 
     }
@@ -612,6 +703,26 @@
     }
 
 
+    function get_more_content_list($type_id, $content_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT *
+            FROM imago_info_content
+            WHERE type = ?
+            AND content_id != ?
+            AND env = 'prod'
+            ORDER BY RAND()
+            LIMIT 3
+        ");
+
+        $request->execute(array($type_id, $content_id));
+
+        return $request->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
     function get_related_content_list($type_id, $content_id, $author_id_list) {
 
         global $data_base;
@@ -620,10 +731,13 @@
             SELECT *
             FROM imago_info_content i
             INNER JOIN imago_related_author c
-            ON i.content_id = c.content_id 
+            ON i.content_id = c.content_id
+            AND i.type = c.type_id 
             AND i.type = ?
             AND i.content_id != ?
             WHERE c.author_id IN (?)
+            ORDER BY RAND()
+            LIMIT 3
         ");
 
         $request->execute(array($type_id, $content_id, $author_id_list[0]));
@@ -690,20 +804,52 @@
 
     ////////////////////////////////// Get video information //////////////////////////////////
 
-
-    function get_episod_id_list($content_id) {
+    function get_video_id_list($section_id, $content_id) {
 
         global $data_base;
 
         $request = $data_base->prepare("
-            SELECT * 
+            SELECT *
             FROM imago_info_video 
-            WHERE content_id = ? 
+            WHERE section_id = ?
+            AND content_id = ? 
         ");
 
-        $request->execute(array($content_id));
+        $request->execute(array($section_id, $content_id));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
+    // function get_episod_id_list($content_id) {
+
+    //     global $data_base;
+
+    //     $request = $data_base->prepare("
+    //         SELECT * 
+    //         FROM imago_info_video 
+    //         WHERE content_id = ?
+    //         AND section_id = 'season'
+    //     ");
+
+    //     $request->execute(array($content_id));
+
+    //     return $request->fetchAll(PDO::FETCH_ASSOC);
+    // }
+
+    function get_episod_resume_list($content_id, $user_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT episod_id, resume_time 
+            FROM imago_my_resume
+            WHERE content_id = ?
+            AND user_id = ?
+        ");
+
+        $request->execute(array($content_id, $user_id));
+
+        return $request->fetchAll(PDO::FETCH_BOTH);
     }
 
     function get_view_list($content_id, $section_id, $episod_id) {
@@ -722,23 +868,6 @@
 
         return $request->fetch();
     }
-
-
-    function get_video_id_list($section_id, $content_id) {
-
-        global $data_base;
-
-        $request = $data_base->prepare("
-            SELECT *
-            FROM imago_info_video 
-            WHERE section_id = ?
-            AND content_id = ? 
-        ");
-
-        $request->execute(array($section_id, $content_id));
-
-        return $request->fetchAll(PDO::FETCH_ASSOC);
-    } 
 
 
     ////////////////////////////////// Get Author information //////////////////////////////////
@@ -790,8 +919,7 @@
         return $request->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-
-    function read_watch_later_content($user_id, $content_id, $episod_id) {
+    function read_later_content($user_id, $content_id, $episod_id) {
 
         global $data_base;
 
@@ -803,12 +931,30 @@
             AND episod_id = ?
         "); 
             
-        $request->execute(array($user_id, $content_id, $episod_id));   
+        $request->execute(array($user_id, $content_id, $episod_id)); 
 
         return $request->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-    ////////////////////////////////// Get tag information //////////////////////////////////
+    function read_reco_content($user_id, $content_id, $episod_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT * 
+            FROM imago_my_reco 
+            WHERE user_id = ?
+            AND content_id = ?
+            AND episod_id = ?
+        "); 
+            
+        $request->execute(array($user_id, $content_id, $episod_id));   
+
+        return $request->fetchAll(PDO::FETCH_ASSOC); 
+    }
+
+
+    ////////////////////////////////// Screen tag //////////////////////////////////
 
 
     function read_tag($screen_id, $type_id, $category_id, $content_id, $video_id) {
@@ -882,6 +1028,88 @@
 
         return;
     }
+
+
+    ////////////////////////////////// Video tag //////////////////////////////////
+
+
+    function read_tag_video($type_id, $content_id, $section_id, $episod_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT * 
+            FROM imago_tag_video 
+            WHERE type_id = ? 
+            AND content_id = ?
+            AND section_id = ?
+            AND episod_id = ?
+        "); 
+        
+        $request->execute(array($type_id, $content_id, $section_id, $episod_id));    
+
+        return $request->fetch(); 
+    } 
+
+
+    function create_tag_video($type_id, $content_id, $section_id, $episod_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            INSERT INTO imago_tag_video
+                (`type_id`, `content_id`, `section_id`, `episod_id`, `view`) 
+            VALUES 
+                (:type_id, :content_id, :section_id, :episod_id, :view)");
+
+        $request->execute(array(
+            'type_id' => $type_id, 
+            'content_id' => $content_id, 
+            'section_id' => $section_id, 
+            'episod_id' => $episod_id, 
+            'view' => 1, 
+        ));  
+    }
+
+
+    function increment_tag_video($id, $view) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            UPDATE imago_tag_video 
+            SET view = :view
+            WHERE id = :id
+        ");
+
+        $request->execute(array( 
+            'view' => $view, 
+            'id' => $id
+        ));
+
+        return;
+    }
+
+
+    ////////////////////////////////// Read Resume  //////////////////////////////////
+
+
+    function read_resume_time($user_id, $content_id, $episod_id) {
+
+        global $data_base;
+
+        $request = $data_base->prepare("
+            SELECT * 
+            FROM imago_my_resume 
+            WHERE user_id = ?
+            AND content_id = ?
+            AND episod_id = ?
+        "); 
+            
+        $request->execute(array($user_id, $content_id, $episod_id));
+
+        return $request->fetchAll(PDO::FETCH_ASSOC); 
+    } 
 
 
 

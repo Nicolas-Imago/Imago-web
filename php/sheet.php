@@ -130,11 +130,11 @@
 	if ($status == "user" AND !empty(get_user_comment_list($user_id, $content_id))) $has_comment = "1";
 	else $has_comment = "0";   
 	
-	$background_url = "../img/content/" . $type_id . "/background/" . $content_id . ".jpg";
-	$cover_url = "../img/content/" . $type_id . "/cover_big/" . $content_id . ".jpg";
-	$logo_url = "../img/content/" . $type_id . "/thumbnail/" . $content_id . ".jpg";
+	$background_url = "/img/content/" . $type_id . "/background/" . $content_id . ".jpg";
+	$cover_url = "/img/content/" . $type_id . "/cover_big/" . $content_id . ".jpg";
+	$logo_url = "/img/content/" . $type_id . "/thumbnail/" . $content_id . ".jpg";
 
-	$partner_url = "../img/icons/partner/parc_avesnois.png"; 
+	$partner_url = "/img/icons/partner/parc_avesnois.png"; 
 
 	$content_list = content_list_of($type_id, $category);
 	$content_list_size = sizeof($content_list);
@@ -182,13 +182,13 @@ else {
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago.css"/>
 
-    <link rel = "stylesheet" href = "../css/panorama/sheet.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/sheet.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/sheet.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/sheet.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
     <title> <?php ECHO $og_name ?> sur Imago TV </title>
 
@@ -196,8 +196,8 @@ else {
 	<meta property = "og:description" content = "<?php ECHO $content["description"] ?>" />
 	<meta property = "og:image" content = "<?php display_og_image($type_id, $content_id, $thumbnail, $episod_id, $video_id) ?>" />
 
-    <script src = "../js/lib/jquery.js"></script>
-	<script src = "../js/lib/jquery.jrumble.1.3.js"></script>
+    <script src = "/js/lib/jquery.js"></script>
+	<script src = "/js/lib/jquery.jrumble.1.3.js"></script>
 
 	<!-- TRACKING -->
 
@@ -250,11 +250,11 @@ else {
 		<div id = "shadow_info"></div>
 
 		<a href = "<?php ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/category/page_left_grey.png" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "/img/icons/category/page_left_grey.png" >
 		</a>
 
 		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/category/page_right_grey.png" >
+			<img id = "arrow_right_page" class = "arrow_page" src = "/img/icons/category/page_right_grey.png" >
 		</a>
 
 	</div> 
@@ -327,20 +327,20 @@ else {
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc.js"></script>
     
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header.js"></script>
+	<script src = "/js/block/menu.js"></script>
+	<script src = "/js/block/user.js"></script>
+	<script src = "/js/block/footer.js"></script>
 
-    <script src = "../js/block/button.js"></script>
-    <script src = "../js/block/thumbnail.js"></script>
-    <script src = "../js/block/information.js"></script>
+    <script src = "/js/block/button.js"></script>
+    <script src = "/js/block/thumbnail.js"></script>
+    <script src = "/js/block/information.js"></script>
 
-    <script src = "../js/block/player.js"></script>
+    <script src = "/js/block/player.js"></script>
 
-	<script src = "../js/sheet.js"></script>
+	<script src = "/js/sheet.js"></script>
 
 </body>
 </html>

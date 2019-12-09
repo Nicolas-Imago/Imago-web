@@ -1,0 +1,1165 @@
+
+@media all and (max-width : 480px)  {
+
+/************************************************ GLOBAL ***********************************************/
+
+@font-face {
+	font-family : "Avenir";
+	src : url("../../font/AvenirLTStd-Light.otf");
+}
+
+body {
+	background-color : rgb(35, 35, 35);
+	margin : 0;
+	padding : 0;
+	overflow-x : hidden;
+
+	font-family : Avenir;
+	font-size : 3.5vw;
+	color : grey;
+}
+
+/************************************************ HEADER ***********************************************/
+
+div#header {
+	position : fixed;
+	z-index : 80;
+	background-color : rgb(35, 35, 35);
+	top : 0px;
+	width : 100%;
+	height : 15vw;
+	box-shadow : 0vw 1vw 1vw #000;
+}
+
+a.header_text {
+	display : none;
+}
+
+span#header_left {
+	/*display : none;*/
+}
+
+		img#menu_button {
+			position : fixed;
+			padding-top : 4vw;
+			padding-left : 2vw;
+			padding-right : 25vw;
+			padding-bottom : 4vw;
+			width : 8vw;
+		}
+
+		img#imago_logo {
+			margin-top : 3vw;
+			padding-left : 35vw;
+			width : 30vw;
+		}
+
+
+span#header_right {
+	display : none;
+}
+
+		img#user_button {
+			position : fixed;
+			padding-top : 4vw;
+			padding-left : 25vw;
+			padding-bottom : 4vw;
+			width : 8vw;
+		}
+
+a.header_text {
+	display : none;
+}
+
+ol#sub_list {
+	display : none;
+}
+
+
+/************************************************* MENU ************************************************/
+
+div#menu {
+	display : none;
+	background-color : rgb(35, 35, 35);
+	z-index : 60;
+	position : fixed;
+	top : 0vw;
+	margin-left : -80vw;
+	width : 78vw;
+	height : 100%;
+	overflow-y : auto;
+	box-shadow : 1vw 0vw 1vw #000;
+}
+
+span.item_menu {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_menu {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_menu {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;
+			margin-left : 2vw;
+			text-decoration : none;	
+		}
+
+		img.icon_item_down {
+			width : 10vw; 
+			float : right; 
+			margin-right : 4vw;
+		}
+
+
+span.tvshow_list_item {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}
+
+ol.sub_list {
+	list-style-type : none;
+}
+
+		ol.sub_list li {
+			line-height: 250%;
+		}
+
+		a.sub_list_item {
+			color : grey;
+			text-decoration : none;
+			font-size : 5vw;
+			margin-left : 10vw;
+		}
+
+		a.sub_list_item:hover {
+			color : white;
+		}
+
+span#item_menu_0 {margin-top : 30vw} 
+span#item_menu_3 {margin-top : 10vw}
+
+
+/************************************************* USER ************************************************/
+
+div#user {
+	display : none;
+	background-color : rgb(35, 35, 35);
+	z-index : 60;
+	position : fixed;
+	top : 0vw;
+	margin-left : 102vw;
+	width : 78vw;
+	height : 100%;
+	overflow-y : auto;
+	box-shadow : -1vw 0vw 1vw #000;
+}
+
+span.item_user {
+	position : relative; 
+	display : block; 
+	width : 100%;
+}  
+
+		img.icon_item_user {
+			width : 10vw;
+			margin-left : 4vw;
+			vertical-align : middle;
+		}
+
+		a.text_item_user {
+			color : grey; 
+			font-size : 5vw;
+			vertical-align : middle;	
+		}
+
+span#item_user_1 {margin-top : 30vw} 
+span#item_user_5 {margin-top : 10vw}
+span#item_user_8 {margin-top : 10vw}
+span#item_user_9 {margin-top : 10vw}
+
+div#black_layer {
+	display : none;
+	position : absolute;
+	background-color : black;
+	opacity : 0.7;
+	z-index : 50;
+	top : 0px;
+	left : 0px;
+	width : 100%;
+	height : 100%;
+}
+
+
+/************************************************ TITLE ***********************************************/
+
+div#screen {
+	display : none;
+	margin-top : 6vw;
+	min-height : 40vw;
+}
+
+div.screen_title {
+	margin-top : 22vw;
+	margin-bottom : 8vw;
+	margin-left : 10vw;
+	width : 80vw;
+	text-align : center;
+}
+
+	h1.screen_title {
+		position : relative;
+		font-size : 6vw;
+		color : rgb(200, 200, 200); 
+		font-weight : normal;
+	}
+
+	a.screen_title {
+		position : relative;
+		font-size : 3.6vw;
+		color : grey; 
+	}
+
+a#warning {
+	margin-top : -0.5vw;
+	margin-bottom : 2vw;
+	margin-left : 20vw;
+}
+
+
+/********************************************* BUTTONS *********************************************/
+
+section#button_list {
+	position : fixed;
+	display : inline;
+	background-color : rgb(35, 35, 35);
+	z-index : 100;
+	padding-top : 2vw;
+	padding-left : 1vw;
+	padding-right : 1vw;
+	padding-bottom : 1vw;
+	bottom : 0vw;
+	left : 0vw;
+	right : 0vw;
+
+	box-shadow : 5vw 4vw 2vw 5vw #000;
+
+	overflow-y : scroll;
+	white-space : nowrap;
+}
+
+		a.button_href {
+			text-decoration : none;
+		}
+
+		img.button {
+			display : inline;
+			margin-left : 1vw;
+			margin-right : 1vw;
+			width : 12vw;
+
+    		box-shadow: 4px 4px 8px #000;
+    	}
+
+		img.my_content, img#crowdfunding, img#g1, img#captain_fact {
+			display : none;
+		}
+
+
+/********************************************* RIGTH / LEFT *********************************************/
+
+img#arrow_left_page {
+	display: none;
+	position: fixed;
+	cursor : default;
+	z-index : 8;
+	left : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#arrow_left_page:hover {
+	cursor : pointer;
+}
+
+img#arrow_right_page {
+	display: none;
+	position: fixed;
+	cursor : default;
+	z-index : 8;
+	right : 0vw;
+	top : 50%;
+	height : 20vw;
+ 	margin-top: -10vw;
+}
+
+img#arrow_right_page:hover {
+	cursor : pointer;
+}
+
+
+/************************************************ INFO ************************************************/
+
+section#information {
+	position : relative;
+	z-index : 3;
+	background-color : rgb(35, 35, 35);
+	margin-top : 58vw;
+	padding-top : 2vw;
+	padding-bottom : 5vw;
+	padding-left : 2vw;
+	padding-right : 2vw;
+}
+
+div#my_content_display {
+	position : absolute;
+	top : 18vw;
+	left : 2vw;
+}
+
+		img#heart_pc, img#time_pc, img#medal_pc {
+			display : none;
+		}
+
+		img#heart_mobile, img#time_mobile, img#medal_mobile {
+			display : none;
+			position : relative;
+			width : 8vw;
+			/*padding-right : 2vw;*/
+		}
+
+div#information_header {
+	margin-top : 1vw;
+	width : 100vw;
+}
+
+		img.logo_image {
+			float : left;
+			width : 10vw;
+		}
+
+		#info_title {
+			float : left;
+			padding-left : 2vw;
+
+			overflow-x : scroll;
+			overflow-y : hidden;
+			white-space : nowrap;
+		}
+
+		h1.name {
+			display : block;
+			font-size : 5vw;
+			color : white;
+			text-decoration : none;
+			font-weight: normal;
+			margin : 0vw;
+		}
+
+		a.author {
+			display : block;
+			color : grey;
+		}
+
+		img.author_image {
+			display : none;
+		}
+
+div#information_body {
+	font-size : 3.8vw;
+}
+
+
+div.description {
+	display : relative;
+	margin-top : 15vw;
+	width : 96vw;
+	text-align : justify;
+	color : rgb(200,200,200);
+}
+
+a.data {
+	text-decoration : none;
+	color : grey;
+}
+
+a.more_info {
+	text-decoration : underline;
+	color : grey;
+}
+
+div.number {
+	padding-top : 4vw;
+}
+
+div#note_1 {
+	padding-top : 4vw;
+}
+
+a.info_title {
+	color : rgb(200, 200, 200);
+}
+
+div.note_title {
+	float : left;
+	width : 70vw;
+}
+
+img.note_image {
+	width : 3.5vw;
+}
+
+
+/*********************************************** THUMBNAIL ***********************************************/
+
+a.title {
+	position : relative;
+	margin-left : 2vw;
+	font-size : 6vw;
+	color : grey; 
+	text-decoration : none;
+}
+
+div.pager_container {
+	display : none;
+}
+
+div.pager{
+	display : none;
+}
+
+div.scrolling_container {
+	position : relative;
+}
+
+div.list_container {
+	padding-top : 2vw;
+	padding-left : 2vw;
+	padding-bottom : 6vw;
+
+	overflow-y : hidden;
+	white-space : nowrap;
+}
+
+		div.thumbnail {
+			display : inline-block;
+			position : relative;
+		}
+
+		div.user_thumbnail {
+			/*display : inline-block;*/
+			position : relative;
+		}
+
+		img.thumbnail {
+			box-shadow : 5px 5px 5px #000;
+		}
+
+		img.panorama {
+			margin-top : 0.6vw;
+			margin-left : 1.2vw;
+			margin-right : 1.2vw;
+			margin-bottom : 0.6vw;
+
+			width : 45vw;
+			height : 25.3vw;
+		}
+
+		img.portrait {
+			margin-top : 0.6vw;
+			margin-left : 1.2vw;
+			margin-right : 1.2vw;
+			margin-bottom : 0.6vw;
+
+			width : 45vw;
+			height : 60vw;
+		}
+
+		img.squared, img.post_it, img.rounded {
+			margin-top : 0.6vw;
+			margin-left : 1.2vw;
+			margin-right : 1.2vw;
+			margin-bottom : 0.6vw;
+
+			width : 45vw;
+			height : 45vw;
+		}
+
+		img.rounded {
+			width : 18vw;
+			height : 18vw;
+
+			border-style : round;
+			border-radius : 45vw;
+		}
+
+		img.user_layer {
+			position : absolute;
+			top : 1vw;
+			left : 80vw;
+			width : 16vw;
+		}
+
+		img.user_action {
+			position : absolute;
+			top : 0vw;
+			left : 80vw;
+			width : 16vw;
+		}
+
+		img.play_logo_panorama {
+			display : none;
+		}
+
+		img.play_logo_squared {
+			display : none;
+		}
+
+		div.info_panorama, div.info_portrait, div.info_squared {
+			display : none;			
+		}
+
+		div.info_rounded {
+			position : absolute;
+			margin-top : -13vw;
+			margin-left : 22vw;
+			width : 55vw;
+			font-size : 4.5vw;
+			text-align : left;		
+		}
+
+		a.line_1 {
+			color : white;
+		}
+
+		a.line_2 {
+			display : none;
+		}
+
+		div.left_arrow_container_panorama {
+			display : none;
+		}
+
+		div.right_arrow_container_panorama {
+			display : none;
+		}
+
+		div.left_arrow_container_portrait {
+			display : none;
+		}
+
+		div.right_arrow_container_portrait {
+			display : none;
+		}
+
+/************************************************ VIDEO ***********************************************/
+
+section#video_thumbnail {
+	position : relative;
+	z-index : 1;
+	margin-top : 10vw;
+	margin-left : 1vw;
+	margin-bottom : 8vw;
+	color : grey;
+}
+
+	div.video_thumbnail_season {
+		margin-left : -0.5vw;
+	}
+
+		div.series_thumbnail {
+			display : inline-block;
+			position : relative;
+		}
+
+		img.series_thumbnail {
+			box-shadow : 5px 5px 5px #000;
+		}
+
+		img.series_panorama {
+			margin-top : 0.6vw;
+			margin-left : 1.2vw;
+			margin-right : 1.2vw;
+			margin-bottom : 0.6vw;
+
+			width : 45vw;
+			height : 25.3vw;
+		}
+
+		img.series_squared {
+			margin-top : 0.6vw;
+			margin-left : 1.2vw;
+			margin-right : 1.2vw;
+			margin-bottom : 0.6vw;
+
+			width : 45vw;
+			height : 45vw;
+		}
+
+		img.series_play_panorama {
+			position : absolute;
+			top : 5vw;
+			left : 16vw;
+			width : 15vw;
+		}
+
+		img.series_play_squared {
+			position : absolute;
+			top : 15vw;
+			left : 16vw;
+			width : 15vw;
+		}
+
+		div.resume_bar_13 {
+			display : none;
+		}
+
+		div.resume_bar_21 {
+			display : none;
+		}
+
+		div.resume_bar_45 {
+			position : absolute;
+			display : block;
+			background-color : white;		
+			margin-top : -1.4vw;
+			margin-left : 0.8vw;
+			height : 0.5vw;
+		}
+
+		div.series_info_panorama {
+			position : absolute;
+			margin-top : -1vw;
+			margin-left : -1vw;
+			width : 25vw;
+			font-size : 1.1vw;
+			text-align : center;
+		}
+
+		div.series_info_squared {
+			position : absolute;
+			margin-top : -1vw;
+			margin-left : -1vw;
+			width : 17vw;
+			font-size : 1.1vw;
+			text-align : center;
+		}
+
+		a.series_line_1 {
+			display : none;
+		}
+
+		a.series_line_2 {
+			display : none;
+		}
+
+		a.series_line_3 {
+			display : none;
+		}
+
+		a.series_line_4 {
+			display : none;
+		}
+
+
+	div.video_thumbnail_season.list {
+		margin-left : 1.5vw;
+	}
+
+		div.series_thumbnail.list {
+			width : 95vw;
+			height : 21vw;
+			
+			background-color : rgb(35, 35, 35);
+			box-shadow : 5px 5px 5px #000;
+		}
+
+		img.series_thumbnail.list {
+			box-shadow : 0px 0px 0px #000;
+		}
+
+			div.series_panorama.list {
+				margin-top : 0.2vw;
+				margin-left : 0vw;
+				margin-right : 0vw;
+				margin-bottom : 0.2vw;
+			}
+
+			div.series_squared.list {
+				margin-top : 0.2vw;
+				margin-left : 0vw;
+				margin-right : 0vw;
+				margin-bottom : 0.2vw;
+			}
+
+		img.series_panorama.list {
+			margin-left : 0vw;
+			width : 36vw;
+			height : 20.2vw;
+		}
+
+		img.series_squared.list {
+			margin-left : 0vw;
+			width : 20.2vw;
+			height : 20.2vw;
+		}
+
+		img.series_play_panorama.list {
+			position : absolute;
+			top : 4.5vw;
+			left : 11vw;
+			width : 12vw;
+		}
+
+		img.series_play_squared.list {
+			position : absolute;
+			top : 5vw;
+			left : 5vw;
+			width : 10vw;
+		}
+
+		div.resume_bar_45.list {
+			display : none;
+		}
+
+		div.series_info_panorama.list {
+			position : absolute;
+			margin-top : -22vw;
+			margin-left : 38vw;
+			width : 50vw;
+			font-size : 3.6vw;
+			text-align : left;
+		}
+
+		div.series_info_squared.list {
+			position : absolute;
+			margin-top : -22vw;
+			margin-left : 22vw;
+			width : 70vw;
+			font-size : 3.6vw;
+			text-align : left;
+		}
+
+		a.series_line_1.list {
+			display : inline;
+			position : relative;
+			top : 0vw;
+			left : 1vw;
+			font-size : 3.6vw;
+			color : white;
+		}
+
+		a.series_line_2.list {
+			display : inline;
+			position : relative;
+			top : 1vw;
+			left : 1vw;
+		}
+
+		a.series_line_3.list {
+			display : none;			
+		}
+
+		a.series_line_4.list {
+			/*display : inline;*/
+			display : none;
+			position : absolute;
+			top : 10vw;
+			left : 1vw;
+		}
+
+
+/************************************************ PLAYER ***********************************************/
+
+img#background_shadow {
+	display : none;	
+	position : fixed;
+	z-index : 90;
+	opacity : 0.9;
+	top : 0vw;
+	left : 0vw;
+	width : 100%;
+	height : 100%;
+}
+
+
+/******* EPISOD *******/
+
+span#episod_title {
+	display : none;
+	position : absolute;
+	z-index : 90;
+	top : 2vw;
+	left : 2vw;
+	font-size : 6vw;
+	color : white;
+}
+
+	a#episod_name {
+		display : none;
+	}
+	
+	img#episod_time, img#episod_medal {
+		width : 8vw;
+	}
+
+
+/********************************************* VIDEO PLAYER ********************************************/
+
+img#video_close, img#audio_close {
+	display : none;	
+	position : fixed;
+	z-index : 90;
+	opacity : 0.7;
+	top : 2vw;
+	right : 2vw;
+	width : 10vw;
+	height : 10vw;
+}
+
+section#video_player {
+	display : none;
+	position : absolute;
+	z-index : 100;
+	top : 0vw;
+	left : 0vw;
+}
+
+		iframe#player, iframe#main_player, img#current_video {
+			position : absolute;
+			z-index : 100;
+			top : 0vw;
+			left : 0vw;
+			margin-top: 15vw;
+			width : 100vw; 
+			height : 56.25vw;
+			border : black;
+		}
+
+		iframe#main_player {
+			display : none;
+		}
+
+div#donation_area {
+	display : none;
+	position : fixed;
+	z-index : 100;
+	top : 75vw;
+	margin-left : 2vw;
+}
+
+		img.donation_button {
+			position : fixed;
+			top : 75vw;
+			left : 60vw;
+			width : 40vw;
+    	}
+
+		a.donation_text {
+			position : fixed;
+			top : 75vw;
+			width : 55vw;
+			color : white;
+		}
+
+div#donation_area_sheet {
+	display : none;
+	position : relative;
+	z-index : 3;
+	background-color : rgb(35, 35, 35);
+	padding-left : 2vw;
+	font-size : 3.6vw;
+}
+
+		img.donation_button_sheet {
+			width : 30vw;
+			margin-left : 64vw;
+			vertical-align : middle;
+    	}
+
+		a.donation_text_sheet {
+			width : 20vw;
+			color : white;
+		}
+
+
+/******************************************* AUDIO PLAYER ******************************************/
+
+section#audio_player {
+	display : none;
+	position : absolute;
+	z-index : 100;
+	top : 0vw;
+	left : 0vw;
+}
+
+		img.previous_audio, img.next_audio {
+			position : absolute;
+			z-index : 100;
+			top : 20vw;
+			width : 40vw; 
+			height : 40vw;
+		}
+
+		img.next_audio {
+			left : 8vw;
+		}
+
+		img.previous_audio {
+			left : 52vw;
+		}
+
+		img#shadow_previous_audio, img#shadow_next_audio {
+			position : absolute;
+			z-index : 100;
+			top : 20vw;
+			width : 3vw;
+			height : 40vw;
+		}
+
+		img#shadow_next_audio {
+			left : 22vw;
+		}
+
+		img#shadow_previous_audio {
+			left : 75vw;
+		}
+
+		img#current_audio {
+			position : absolute;
+			z-index : 100;
+			top : 0vw;
+			left : 25vw;
+			margin-top : 15vw;
+			width : 50vw; 
+			height : 50vw;
+		}
+
+		div#audio_control {
+			position : absolute;
+			z-index : 100;
+			background-color : black;
+			opacity : 0.9;
+			top : 68vw;
+			left : 0vw;
+			width : 100vw; 
+			height : 20vw;
+		}
+
+		audio#audio_popup {
+			position : absolute;
+			z-index : 100;
+			top : 60vw;
+			left : 0vw;
+			width : 100vw; 
+			height : 20vw;			
+		}
+
+				div#progress_bar_background {
+					position : relative;
+					z-index : 100;
+					padding-top : 1vw;
+					padding-bottom : 1vw;
+					top : -2vw;
+					width : 100vw; 
+					height : 5vw;
+				}
+
+						a#timecode {
+							display : none;
+							position : absolute;
+							z-index : 100;
+							background-color : black;
+							opacity : 0.9;
+							padding-top : 2vw;
+							padding-left : 4vw;
+							padding-right : 4vw;
+							padding-bottom : 0vw;
+							top : -10vw;
+							color : white;	
+							font-size : 4vw;
+						}
+
+						div#progress_bar {
+							position : relative;
+							z-index : 100;
+							background-color : white;
+							width : 0vw;
+							top : 1vw; 
+							height : 1.5vw;
+						}
+
+						div#time_display {
+							position : absolute;
+							text-align : center;
+							width : 100vw;
+							top : 3vw;
+							font-size : 3.5vw;
+						}
+
+
+				div#player_control {
+					text-align : center;
+				}
+
+						img.control_icon {
+							position : relative;
+							opacity : 0.6;
+							padding-left : 0.8vw;
+							padding-right : 0.8vw;
+							top : 1vw;
+							width : 10vw;
+						}
+
+						img#download {
+							padding-right : 5vw;
+						}
+
+						img#mute {
+							padding-left : 5vw;
+						}
+
+/******************************************* COMMENT ******************************************/
+
+textarea {
+	display : none;
+	position : fixed;
+	z-index : 50;
+	top : 14vw;
+	left : 36vw;
+	background-color : transparent;
+	border : none;
+	font-family : Avenir;
+	font-size : 1.5vw;
+}
+
+a.comment {
+	display : none;
+	position : fixed;
+	z-index : 50;
+	color : black;
+}
+
+a#title {
+	top : 11vw;
+	left : 35vw;
+} 
+
+a#previous {
+	top : 11vw;
+	left : 36vw;
+}
+
+a#next {
+	top : 11vw;
+	right : 36vw;
+}
+
+a#validate, a#useful {
+	top : 38vw;
+	right : 36vw;
+}
+
+a#remove, a#useless {
+	top : 38vw;
+	left : 36vw;
+}
+
+
+#button {
+	position : fixed;
+	z-index : 200;
+	top : 75vw;
+	margin-left : 2vw;
+	width : 50vw;
+}
+
+
+/*********************************************** COOKIES ***********************************************/
+
+div#cookie_popup {
+	display : none;
+	background-color : rgb(20, 20, 20);
+	position : fixed;
+	z-index : 200;
+	bottom : 0px;
+	padding-top : 6vw;
+	padding-left : 4vw;
+	padding-right : 4vw;
+	padding-bottom : 8vw;
+	text-align : center;
+}
+
+img#close_cookies {
+	position : fixed;
+	opacity : 0.7;
+	width : 10vw;
+	height : 10vw;
+	bottom : 20vw;
+	right : 2vw;	
+}
+
+
+/************************************************ SCROLL ***********************************************/
+
+img#page_back {
+	position: fixed;
+	z-index : 5;
+	bottom : 4vw;
+	left : 4vw;
+}
+
+img#page_up {
+	position: fixed;
+	z-index : 5;
+	bottom : 0vw;
+	left : 50%;
+	width : 20vw;
+ 	margin-left: -10vw;
+}
+
+
+/************************************************ FOOTER ***********************************************/
+
+#footer {
+	display : none;
+	background-color : rgb(10, 10, 10);
+	position : relative;
+	padding-top : 6vw;
+	height : 30vw;
+	text-align : center;
+}
+
+a#info_footer {
+	color : rgb(60, 60, 60);
+}
+
+ol#footer_list {
+	list-style-type : none;
+	padding-left : 0vw; 
+	margin-left : 0vw;
+}
+
+		ol#footer_list li { 
+			display : inline;
+			padding-left : 4vw; 
+			padding-right : 4vw; 
+		}
+
+		.item_footer {
+			color : grey; 
+			text-decoration : none;
+		}
+
+
+/************************************************* FIN ************************************************/
+
+}

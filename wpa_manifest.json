@@ -1,0 +1,47 @@
+{
+  "short_name": "Imago TV",
+  "name": "Imago TV - plateforme vidéo de la transition",
+  "theme_color": "#353535",
+  "background_color": "#353535",
+  "display": "fullscreen",
+  "Scope": "/",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "img/icons/wpa/wpa_36_36.png",
+      "type": "image/png",
+      "sizes": "36x36"
+    },
+    {
+      "src": "img/icons/wpa/wpa_48_48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "img/icons/wpa/wpa_72_72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "img/icons/wpa/wpa_96_96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "img/icons/wpa/wpa_192_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/icons/wpa/wpa_256_256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "img/icons/wpa/wpa_512_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "https://qa.imagotv.fr"
+}

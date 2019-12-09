@@ -1,0 +1,44 @@
+<html>
+<head>
+  <title>Your Website Title</title>
+</head>
+<body>
+
+  <!-- Load Facebook SDK for JavaScript -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '947275122283933',
+        xfbml      : true,
+        version    : 'v3.2'
+      });
+    
+      // Get Embedded Video Player API Instance
+      var my_video_player;
+      
+      FB.Event.subscribe('xfbml.ready', function(msg) {
+        if (msg.type === 'video') {
+          my_video_player = msg.instance;
+          intervalID = setInterval(display(my_video_player), 1000);
+        }
+      });
+    };
+        
+    function display(player) {
+      console.log(player.getCurrentPosition());
+  }
+    
+    
+  </script>
+  <div id="fb-root"></div>
+  <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+  <!-- Your embedded video player code -->
+  <div  
+    class="fb-video" 
+    data-href="https://www.facebook.com/facebook/videos/10153231379946729/" 
+    data-width="500" 
+    data-allowfullscreen="true"></div>
+
+</body>
+</html>

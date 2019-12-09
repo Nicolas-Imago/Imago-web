@@ -22,10 +22,10 @@
 		else if ($screen == "friend") {
 			if ($query == "ok") 
 				display_list($screen, "1", "search", "user", $query_id);
-			
+
+			display_list($screen, "4", "friend", "user", "");		
 			display_list($screen, "2", "pending_in", "user", "");
 			display_list($screen, "3", "pending_out", "user", "");
-			display_list($screen, "4", "friend", "user", "");
 		}
 
 		else {
@@ -47,37 +47,52 @@
 	function display_list($screen, $list_id, $thumbnail_type, $type_id, $query_id) {
 
 		global $page_number, $request_size;
-		global $user_id;
+		global $user_id, $status;
+
+		if ($query_id != "") 					$user = $query_id;
+		else 									$user = $user_id;
+
+		if ($user == $user_id) 					$level = 4;
+		// else if (are_friends($user, $user_id))	$level = 3;
+		else if ($status == "user") 			$level = 2;
+		else 									$level = 1;
+
 
 		if ($screen == "folder") {
-			if ($thumbnail_type == "video") 		$content_list = search_video_list_of($query_id);
-			if ($thumbnail_type == "audio") 		$content_list = search_audio_list_of($query_id);
-			if ($thumbnail_type == "content") 		$content_list = search_content_list_of($type_id, $query_id);
+			if ($thumbnail_type == "video") 	$content_list = search_video_list_of($query_id);
+			if ($thumbnail_type == "audio") 	$content_list = search_audio_list_of($query_id);
+			if ($thumbnail_type == "content") 	$content_list = search_content_list_of($type_id, $query_id);
 		}
 
 		if ($screen == "search") {
-			if ($thumbnail_type == "video") 		$content_list = search_video_list_of($query_id);
-			if ($thumbnail_type == "audio") 		$content_list = search_audio_list_of($query_id);
-			if ($thumbnail_type == "content") 		$content_list = search_content_list_of($type_id, $query_id);
+			if ($thumbnail_type == "video") 	$content_list = search_video_list_of($query_id);
+			if ($thumbnail_type == "audio") 	$content_list = search_audio_list_of($query_id);
+			if ($thumbnail_type == "content") 	$content_list = search_content_list_of($type_id, $query_id);
 		}
 
 		if ($screen == "favorite") {
-			if ($thumbnail_type == "video") 		$content_list = favorite_video_list_of($user_id);
-			if ($thumbnail_type == "audio") 		$content_list = favorite_audio_list_of($user_id);
-			if ($thumbnail_type == "content") 		$content_list = favorite_content_list_of($type_id, $user_id);
+			if ($thumbnail_type == "video") 	$content_list = favorite_video_list_of($user, $level);
+			if ($thumbnail_type == "audio") 	$content_list = favorite_audio_list_of($user, $level);
+			if ($thumbnail_type == "content") 	$content_list = favorite_content_list_of($type_id, $user, $level);
 		}
 
-		if ($screen == "watch_later") {
-			if ($thumbnail_type == "video") 		$content_list = watch_later_video_list_of($user_id);
-			if ($thumbnail_type == "audio") 		$content_list = watch_later_audio_list_of($user_id);
-			if ($thumbnail_type == "content") 		$content_list = watch_later_content_list_of($type_id, $user_id);
+		if ($screen == "later") {
+			if ($thumbnail_type == "video") 	$content_list = later_video_list_of($user, $level);
+			if ($thumbnail_type == "audio") 	$content_list = later_audio_list_of($user, $level);
+			if ($thumbnail_type == "content") 	$content_list = later_content_list_of($type_id, $user, $level);
+		}
+
+		if ($screen == "reco") {
+			if ($thumbnail_type == "video") 	$content_list = reco_video_list_of($user, $level);
+			if ($thumbnail_type == "audio") 	$content_list = reco_audio_list_of($user, $level);
+			if ($thumbnail_type == "content") 	$content_list = reco_content_list_of($type_id, $user, $level);
 		}
 
 		if ($screen == "friend") {
 			if ($thumbnail_type == "search") 		$content_list = connect_search_list_of($query_id);
 			if ($thumbnail_type == "pending_in") 	$content_list = connect_pending_list_of($user_id, "in");
 			if ($thumbnail_type == "pending_out") 	$content_list = connect_pending_list_of($user_id, "out");
-			if ($thumbnail_type == "friend") 		$content_list = connect_friend_list_of($user_id);
+			if ($thumbnail_type == "friend") 		$content_list = connect_friend_list_of($user);
 		}
 
 
@@ -98,22 +113,48 @@
 	if (isset($_GET["query_id"]))	$query_id 	= $_GET["query_id"];	else $query_id = "";
 
 
+    ////////////////////////////////// Redirection //////////////////////////////////
+
+    $request_url = $_SERVER["REQUEST_URI"];
+    $request_url = explode("/", $request_url);
+
+    if ($request_url[1] == "php") {
+
+    	$list = list_of($list_id);
+
+		header("Status: 301 Moved Permanently", false, 301);
+	    header('Location: /'. $list . '/' . urlencode($query_id));
+	    exit();
+    }
+
+    //////////////////////////////// Protect data ////////////////////////////////
+
+	$list_list = ["search", "favorite", "later", "reco", "friend", "folder"];
+
+	if (!in_array($list_id, $list_list)) {
+		include("404.php");
+		return;
+	}
+
+
     ////////////////////////////////// Get data //////////////////////////////////
 
 	$screen = $list_id;
 
-	if ($screen == "favorite" OR $screen == "watch_later" OR $screen == "friend") {
+	if ($screen == "favorite" OR $screen == "later" OR $screen == "reco" OR $screen == "friend") {
 	    if (empty($_SESSION["login"])) {
-			header('Location: login.php');
+			header('Location: /connexion');
 			exit();
 		}
 	}
 
+	if ($screen == "reco") $friend_user_id = $query_id;
+
 	if ($screen != "folder") $screen_title = screen_title($screen, "", "");
 
 	if ($screen == "folder") {
-		$banner_image_url = "../img/folder/banner/" . $query_id . ".jpg";
-		$small_banner_image_url = "../img/folder/small_banner/" . $query_id . ".jpg";
+		$banner_image_url = "/img/folder/banner/" . $query_id . ".jpg";
+		$small_banner_image_url = "/img/folder/small_banner/" . $query_id . ".jpg";
 	}
 
 	$page_number = array();
@@ -122,7 +163,7 @@
 	$message = "";
 	$request_size = "0";
 
-	if (isset($_GET["query_id"])) {
+	if (($screen == "search" OR $screen == "friend") AND isset($_GET["query_id"])) {
 		if (strlen($query_id) < 3) {
 			$message = "La recherche doit contenir <br> 
 						au moins 3 caractères";
@@ -130,7 +171,7 @@
 			$query = "ko";
 		}
 		else {
-			$message = "Pas de résultat pour cette recherche. <br> <br> 
+			$message = "Pas de résultat pour cette recherche. <br> <br>
 						Vérifiez l'<u>orthographe</u>, ou <br> 
 						essayez avec des <u>mots seuls</u> <br> 
 						plutôt que des expressions.";
@@ -143,43 +184,57 @@
 	}
 
 
+    ////////////////////////////////// OG //////////////////////////////////
+
+	$og_name = screen_title($screen, "", "");
+	
+
     ////////////////////////////////// Tag //////////////////////////////////
 
+	if ($screen == "folder") 
+		$folder_id = $_GET["query_id"];
+	else
+		$folder_id = "";
 
-	$screen_tag = read_tag("list", $screen, "", "", "");
+	$screen_tag = read_tag("list", $screen, "", $folder_id, "");
 
-	if (empty($screen_tag)) create_tag("list", $screen, "", "", "");
+	if (empty($screen_tag)) create_tag("list", $screen, "", $folder_id, "");
 	else {
 		$view = $screen_tag["view"] + 1;
 		$tag_id = $screen_tag["id"];
-		increment_tag($tag_id, "list", $screen, "", "", "", $view);
+		increment_tag($tag_id, "list", $screen, "", $folder_id, "", $view);
 	}	
 
 ?>
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang = "fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
    	
-    <link rel = "stylesheet" href = "../css/panorama/list.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/list.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/list_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/list_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
+    <?php include("lib/wpa.php") ?>
 
-    <meta property = "og:title" content = "Imago TV" />
+    <title> Imago TV - <?php ECHO $og_name ?> </title>
+
+    <meta property = "og:title" content = "Imago" />
+    <meta property = "og:type" content = "website" />
 	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
-	<meta property = "og:image" content = "../img/icons/imago.jpg" />
+	<meta property = "og:image" content = "http://asset.imagotv.fr/img/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+	<meta name = "description" content = "Imago propose une sélection de plus de 2000 vidéos parmi les meilleurs documentaires, web séries, courts-métrages ou podcasts engagés dans la transition." />
+
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -204,11 +259,11 @@
 
 	<div id = "screen">
 
-		<div id = "screen_title">
-			<?php if ($screen != "folder") {ECHO '<a>' . $screen_title . '</a>';} ?>
+		<div class = "screen_title">
+			<?php if ($screen != "folder") {ECHO '<h1 class = "screen_title" >' . $screen_title . '</h1>';} ?>
 		</div>
 
-		<a id = "warning"> Cette fonctionnalité ouvre fin septembre !! </a>
+		<!-- <a id = "warning"> Cette fonctionnalité ouvre très bientôt !! </a> -->
 
 		<?php include("block/button.php") ?>
 
@@ -220,10 +275,10 @@
 		</div>
 
 		<section id = "query" >
-    		<form id = "form" action = "list.php" method = "get">
+    		<form id = "form" action = "/php/list.php" method = "get">
     			<input type = "text" name = "list_id" value = "<?php ECHO $screen ?>" style = "display : none;">
 				<input id = "query" type = "text" name = "query_id" value = "<?php ECHO $query_id ?>">
-				<a id = "validate_button"> Validez </a>			
+				<a id = "validate_button"> Recherchez </a>			
 			</form> 
 		</section>
 
@@ -245,13 +300,9 @@
 
     <script type = "text/javascript">
 
-    	var user_login = "<?php ECHO $user_login; ?>";
-    	var user_id = "<?php ECHO $user_id; ?>";
-    	var status = "<?php ECHO $status; ?>";
-
     	var env = "<?php ECHO $env; ?>";
-    	var base_url = "<?php ECHO $base_url; ?>";
     	var page_url = "<?php ECHO $page_url; ?>";
+    	var status = "<?php ECHO $status ?>";
 
     	var screen = "<?php ECHO $screen; ?>";
 
@@ -271,17 +322,17 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
     
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header_v110.js"></script>
+	<script src = "/js/block/menu_v110.js"></script>
+	<script src = "/js/block/user_v110.js"></script>
+	<script src = "/js/block/footer_v110.js"></script>
 
-    <script src = "../js/block/button.js"></script>
-    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "/js/block/button_v110.js"></script>
+    <script src = "/js/block/thumbnail_v110.js"></script>
 
-	<script src = "../js/list.js"></script>
+	<script src = "/js/list_v110.js"></script>
 
 </body>
 </html>

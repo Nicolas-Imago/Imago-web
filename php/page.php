@@ -9,46 +9,39 @@
 
 <?php
 
-	// Functions
+	// Display screen
 
-	function add_href($html) {
+	if (isset($_GET["page_id"]))	$page_id = $_GET["page_id"]; 	else $page_id = "";
 
-    	global $content_id;
-
-    	ECHO ' href = "../php/page.php?page_id=' . $html . '" ';
-    }
-
-    // Display screen
-
-	if (isset($_GET["page_id"])) {$page_id = $_GET["page_id"];} else {$page_id = "";}
-
-	$page_url = "../html/" . $page_id . ".html";
+	$page_url = "html/" . $page_id . ".html";
 
 ?>
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang = "fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
 
-    <link rel = "stylesheet" href = "../css/panorama/page.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/page.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/page_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/page_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo de la transition </title>
+    <title> Imago TV - Info </title>
 
-    <meta property = "og:title" content = "ImagoTV" />
-	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
+    <meta property = "og:title" content = "Imago TV" />
+    <meta property = "og:description" content = "La plateforme vidéo gratuite de la transition" />
 	<meta property = "og:image" content = "/img/page/manifeste/og_img.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+    <meta name = "description" content = "Imago TV propose une sélection de plus de 2000 vidéos parmi les meilleurs documentaires, web séries, courts-métrages ou podcasts engagés dans la transition." />
+
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -71,14 +64,21 @@
 
 	<div id = "screen">
 
+		<div class = "screen_title" >
+			<h1 class = "screen_title" > A propos </h1> 
+		</div>
+
+		<?php include("block/button.php") ?>
+
 		<div class = "item_list">
 			<ol class = "item_list">
-		      	<li><a id = "item_1" class = "item" <?php add_href("qui_sommes_nous") ?> > L'équipe </a></li>
-		      	<li><a id = "item_2" class = "item" <?php add_href("manifeste") ?> > Le manifeste </a></li>
-		      	<li><a id = "item_3" class = "item" <?php add_href("media") ?> > Revue de presse </a></li>
-		      	<li><a id = "item_4" class = "item" <?php add_href("aidez_nous") ?> > Aidez-nous </a></li>
-		      	<li><a id = "item_5" class = "item" <?php add_href("faq") ?> > FAQ </a></li>
-		      	<li><a id = "item_6" class = "item" <?php add_href("version") ?> > Code </a></li>
+		      	<li><a id = "item_1" class = "item" href = "<?php ECHO "/info/equipe" ?>" > L'équipe </a></li>
+		      	<li><a id = "item_2" class = "item" href = "<?php ECHO "/info/manifeste" ?>" > Manifeste </a></li>
+		      	<li><a id = "item_3" class = "item" href = "<?php ECHO "/info/revue_de_presse" ?>" > Revue de presse </a></li>
+		      	<li><a id = "item_4" class = "item" href = "<?php ECHO "/info/aidez-nous" ?>" > Aidez-nous </a></li>
+		      	<li><a id = "item_5" class = "item" href = "<?php ECHO "/info/questions" ?>" > Questions </a></li>
+		      	<li><a id = "item_6" class = "item" href = "<?php ECHO "/info/code" ?>" > Code </a></li>
+		      	<!-- <li><a id = "item_7" class = "item" href = "<?php // ECHO "/info/apps" ?>" > Apps </a></li> -->
 		    </ol>
 		</div>
 
@@ -113,14 +113,14 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
 
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header_v110.js"></script>
+	<script src = "/js/block/menu_v110.js"></script>
+	<script src = "/js/block/user_v110.js"></script>
+	<script src = "/js/block/footer_v110.js"></script>
 
-	<script src = "../js/page.js"></script>
+	<script src = "/js/page_v110.js"></script>
 
 </body>
 </html>

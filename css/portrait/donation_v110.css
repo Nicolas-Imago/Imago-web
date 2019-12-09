@@ -1,0 +1,26 @@
+
+@media all and (max-width : 480px)  {
+
+a#donation_title {
+	display : block;
+	margin-top : 20vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 1vw;
+	text-align : center;
+	color : rgb(200,200,200);
+	font-size : 6vw;
+}
+
+a#donation_done {
+	display : block;
+	margin-top : 2vw;
+	margin-left : auto;
+	margin-right : auto;
+	margin-bottom : 6vw;
+	text-align : center;
+	font-size : 6vw;
+	color : grey;
+}
+
+}

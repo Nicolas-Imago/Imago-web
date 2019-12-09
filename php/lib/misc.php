@@ -85,6 +85,16 @@
         return $duration;
     }
 
+    function video_object_duration_of($duration_int) {
+
+        $heures = intval($duration_int / 60);
+        $minutes = intval(($duration_int % 60));
+
+        $duration = "PT" . $heures . "H" . $minutes . "M0S";       
+
+        return $duration;
+    }
+
 
     ////////////////////////////////// Author function //////////////////////////////////
 
@@ -133,6 +143,32 @@
     ////////////////////////////////// Misc functions //////////////////////////////////
 
 
+    function mapToList($mapList, $field) {
+
+        $f = function($e) use ($field)
+        {
+            return $e[$field];
+        };
+
+        return array_map($f, $mapList);
+    }
+
+    function list_to_tab($list) {
+
+        $list_size = sizeof($list);
+        $tab = [];
+
+        for ($index = 0; $index <= $list_size - 1; $index ++) {
+            $tab[$list[$index]["episod_id"]] = $list[$index]["resume_time"];
+        }
+
+        return $tab;
+    }
+
+
+    ////////////////////////////////// Misc functions //////////////////////////////////
+
+
    	function image_format_of($thumbnail_type, $type_id) {
 
         if ($type_id == "user")             $format = "rounded";
@@ -151,6 +187,8 @@
             if ($type_id == "conference")   $format = "panorama";
 
             if ($type_id == "book")         $format = "portrait";
+            if ($type_id == "show")         $format = "portrait";
+            if ($type_id == "dvd")         $format = "portrait";
         }
 
         if ($thumbnail_type == "comment")   $format = "post_it";
@@ -178,25 +216,87 @@
         if ($type_id == "kids")             $page_number = ceil($list_size / 4);
         if ($type_id == "conference")       $page_number = ceil($list_size / 4);
 
-        if ($type_id == "comment")          $page_number = ceil($list_size / 6);
         if ($type_id == "book")             $page_number = ceil($list_size / 5);
+        if ($type_id == "show")             $page_number = ceil($list_size / 5);
+        if ($type_id == "dvd")              $page_number = ceil($list_size / 5);
+
+        if ($type_id == "comment")          $page_number = ceil($list_size / 6);
 
         return $page_number;
 
     }
 
-    function type_of($index) {
+    function type_id_of($index) {
 
-        if ($index == "1")      $type = "tvshow";
-        if ($index == "2")      $type = "documentary";
-        if ($index == "3")      $type = "podcast";
-        if ($index == "4")      $type = "shortfilm";
-        if ($index == "5")      $type = "kids";
-        if ($index == "6")      $type = "humour";
-        if ($index == "7")      $type = "music";
-        if ($index == "8")      $type = "conference";
+        if ($index == "1")      $type_id = "tvshow";
+        if ($index == "2")      $type_id = "documentary";
+        if ($index == "3")      $type_id = "podcast";
+        if ($index == "4")      $type_id = "shortfilm";
+        if ($index == "5")      $type_id = "kids";
+        if ($index == "6")      $type_id = "humour";
+        if ($index == "7")      $type_id = "music";
+        if ($index == "8")      $type_id = "conference";
+
+        return $type_id;
+    }
+
+    function type_of($type_id) {
+
+        if      ($type_id == "tvshow")           $type = "emissions";
+        else if ($type_id == "documentary")      $type = "documentaires";
+        else if ($type_id == "podcast")          $type = "podcasts";
+        else if ($type_id == "shortfilm")        $type = "courts-metrages";
+        else if ($type_id == "kids")             $type = "jeunesse";
+        else if ($type_id == "humour")           $type = "humour";
+        else if ($type_id == "music")            $type = "musique";
+        else if ($type_id == "conference")       $type = "conference";
+
+        else $type = "";
 
         return $type;
+    }
+
+    function category_of($category_id) {
+
+        if      ($category_id == 0)      $category = "";
+
+        else if ($category_id == 1)      $category = "conscience";
+        else if ($category_id == 2)      $category = "alternatives";
+        else if ($category_id == 3)      $category = "medias";
+        else if ($category_id == 4)      $category = "sante";        
+        else if ($category_id == 5)      $category = "ecologie";
+        else if ($category_id == 6)      $category = "economie";
+        else if ($category_id == 7)      $category = "societe";
+        else if ($category_id == 8)      $category = "histoire";
+
+        else $category = "";
+
+        return $category;
+    }
+
+    function section_of($section_id) {
+
+        if      ($section_id == "teaser")       $section = "bande-annonce";
+        else if ($section_id == "movie")        $section = "film";
+        else if ($section_id == "bonus")        $section = "bonus";
+        else if ($section_id == "excerpt")      $section = "extraits";
+
+        else $section = "";
+
+        return $section;
+    }
+
+    function list_of($list_id) {
+
+        if      ($list_id == "folder")          $list = "dossier";
+        else if ($list_id == "search")          $list = "recherche";
+        else if ($list_id == "favorite")        $list = "favoris";
+        else if ($list_id == "watch_later")     $list = "memos";
+        else if ($list_id == "friend")          $list = "amis";
+
+        else $list = "";
+
+        return $list;
     }
 
     ////////////////////////////////// Name functions //////////////////////////////////
@@ -263,6 +363,8 @@
             else if ($type_id == "podcast")         $title = "Podcast(s) du même auteur (" . $item_number . ")";
 
             else if ($type_id == "book")            $title = "Livre(s) du même auteur (" . $item_number . ")";
+            else if ($type_id == "show")            $title = "Spectacles(s) du même auteur (" . $item_number . ")";
+            else if ($type_id == "dvd")             $title = "Acheter le DVD";
 
             else                                    $title = "Avis et recommandations (" . $item_number . ")";
         }
@@ -277,9 +379,13 @@
 
         else if ($screen == "favorite")     $screen_title = "Mes favoris";
 
-        else if ($screen == "watch_later")     $screen_title = "A regarder plus tard"; 
+        else if ($screen == "later")        $screen_title = "A voir plus tard";
 
-        else if ($screen == "friend")     $screen_title = "Mes amis"; 
+        else if ($screen == "reco")         $screen_title = "Mes recommandations";  
+
+        else if ($screen == "friend")       $screen_title = "Mes amis";
+
+        else if ($screen == "folder")       $screen_title = "Dossier";  
 
         else if ($screen == "type") {
 
@@ -301,7 +407,7 @@
 
         else if ($screen == "category_type") {
 
-            $category = category_of($category_id);
+            $category = category_title_of($category_id);
 
             if ($type_id == "tvshow")       $screen_title = "Toutes les émissions " . $category;
             if ($type_id == "documentary")  $screen_title = "Tous les documentaires " . $category;
@@ -330,7 +436,7 @@
     }
 
 
-    function category_of($category_id) {
+    function category_title_of($category_id) {
 
         if ($category_id == 0)      $category = "";
 
@@ -367,22 +473,16 @@
     ////////////////////////////////// Display functions //////////////////////////////////
 
 
-    function display_og_image($type_id, $content_id, $thumbnail, $episod_id, $video_id) {
+    function display_og_image($type_id, $content_id, $episod_id) {
 
         global $content;
 
-        if ($episod_id == "") {
-            if ($type_id == "documentary" OR $type_id == "shortfilm")
-                ECHO 'https://www.imagotv.fr/img/' . $type_id . '/cover_big/' . $content_id . '.jpg';
-            else 
-                ECHO 'https://www.imagotv.fr/img/' . $type_id . '/background/' . $content_id . '.jpg';
-        }
-        else {
-            if ($thumbnail == "local")
-                ECHO 'https://www.imagotv.fr/img/video/' . $type_id . '/' . $content_id . '/hd/' . $episod_id . '.jpg';
-            else
-                ECHO 'https://img.youtube.com/vi/' . $video_id . '/maxresdefault.jpg';
-        }
+        if ($type_id == "documentary" OR $type_id == "shortfilm")
+            ECHO 'https://asset.imagotv.fr/img/' . $type_id . '/sharing/' . $content_id . '.jpg';
+        else if ($episod_id == "")
+            ECHO 'https://asset.imagotv.fr/img/' . $type_id . '/sharing/' . $content_id . '.jpg';
+        else
+            ECHO 'https://asset.imagotv.fr/img/' . $type_id . '/episod/' . $content_id . '/hd/' . $episod_id . '.jpg';
     }
 
 
@@ -405,7 +505,7 @@
         //     ECHO ' <img ';
         //         ECHO ' id = "author_image_' . $index . '" ';
         //         ECHO ' class = "author_image" ';
-        //         ECHO ' src = "../img/author/thumbnail/' . $author_id . '.png" ';
+        //         ECHO ' src = "/img/author/thumbnail/' . $author_id . '.png" ';
         //     ECHO ' > ';
         // }
     }
@@ -416,7 +516,7 @@
         global $content;
 
         if ($index <= $content["note_" . $note])
-            ECHO ' src = "../img/icons/notation/star_light_grey.png" ';
+            ECHO ' src = "/img/icons/notation/star_light_grey.png" ';
         else
-            ECHO ' src = "../img/icons/notation/star_grey.png" ';
+            ECHO ' src = "/img/icons/notation/star_grey.png" ';
     }

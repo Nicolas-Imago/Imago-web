@@ -1,0 +1,75 @@
+
+@media all and (min-width : 481px)  {
+
+	img.big_image {
+		position : absolute;  
+		width : 100vw;
+	}
+
+	img.small_image {
+		display : none;
+	}
+
+/************************************************ QUERY ************************************************/
+
+section#query {
+	position : relative;
+	z-index : 2;
+	display : block;
+	width : 20vw;
+	left : 50vw;
+	margin-left : -10vw;
+}
+
+input {
+	background-color : transparent;
+	border-top : none;
+	border-left : none;
+	border-right : none;
+	border-bottom-color : grey; 	
+	height : 1.5vw;
+	margin-left : auto;
+	margin-right : auto;
+	width : 20vw;
+	color : grey;
+	font-size : 1.2vw;
+}
+
+a#validate_button {
+	display : block;
+	text-align : center;
+	margin-top : 3vw;
+	margin-bottom : 2vw;
+	font-size : 1.2vw;
+}
+
+a#message {
+	display : block;
+	margin-left : auto;
+	margin-right : auto;
+	height : 2vw;
+	width : 20vw;
+	color : red;
+	text-align : center;
+	font-size : 1.2vw;
+}
+
+
+/************************************************ RESULT ************************************************/
+
+section#list {
+	position : relative;
+	background-color : rgb(35, 35, 35);
+}
+
+section.folder {
+	padding-top : 2vw;
+	margin-top : 31vw;
+}
+
+section#result {
+	position : relative;
+	z-index : 5;
+}
+
+}

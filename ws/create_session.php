@@ -1,6 +1,11 @@
 
 <?php include("../php/lib/init.php") ?>
+
 <?php include("../php/lib/model.php") ?>
+<?php include("../php/lib/misc.php") ?>
+
+<?php include("../php/lib/session.php") ?>
+
 
 <?php
     

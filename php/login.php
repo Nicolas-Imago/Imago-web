@@ -9,96 +9,25 @@
 
 <?php 
 
-    // Display functions 
+    ////////////////////////////////// Redirection //////////////////////////////////
 
-    // function hide() {
+    $request_url = $_SERVER["REQUEST_URI"];
+    $request_url = explode("/", $request_url);
 
-    // 	if (isset($_SESSION["login"])) {
-    //         ECHO ' style = "visibility:hidden;" ';
-    //     }
-    // }
+    if ($request_url[1] == "php") {
 
-    // function display_validate() {
-
-    // 	if (!isset($_SESSION["login"])) {
-    //         ECHO ' style = "display:block;" ';
-    //     }
-    // }
-
-    // function display_subscribe() {
-
-    //     if (isset($_SESSION["login"])) {
-    //         ECHO ' style = "visibility:hidden;" ';
-    //     }
-    // }
-
-    // function display_enter() {
-
-    // 	if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
-    //         ECHO ' style = "display:block;" ';
-    //     }
-    // }
-    
-    // function display_logout() {
-
-    // 	if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
-    //         ECHO ' style = "display:block;" ';
-    //     }
-    // }
-
-  //   function dislay_message() {
-
-  //   	if (isset($_SESSION["login"])) {
-		// 	ECHO ' style = "visibility:visible; color:green" ';
-		// }
-		// else if (isset($_POST["login"])) { 
-		// 	ECHO ' style = "visibility:visible; color:red" ';
-		// }
-  //   }
-
-    // Check login and Display
-
-    // $login_status = "";
-
-    if (!empty($_SESSION["login"])) {
-        header('Location: member.php');
+        header("Status: 301 Moved Permanently", false, 301);
+        header('Location: /connexion');
         exit();
     }
 
-    // $login = "";
-    // $password_default = "";
 
-    // $validate_message = "Valider";
-    // $enter_message = "Retournez sur ImagoTV";
+    ////////////////////////////////// Get data //////////////////////////////////
 
-    // $message = "defaut_message";
-
-
-    // if (isset($_SESSION["login"]) AND isset($_POST["login"])) {
-	   //  $message = "Bonjour " . $_SESSION["login"] . " !";
-    // }
-
-    // else if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
-    // 	$message = "Vous avez été correctement déconnecté !";
-    // }
-
- //    if (isset($_POST["login"]) AND isset($_POST["password"])) {
-
- //    	$login = $_POST["login"];
- //    	$password = $_POST["password"];
-
- //    	$member = read_member($login);
- //    	$test_password = password_verify($password, $member["password"]);
-
-	//     if ($test_password) {
-	//         $_SESSION["login"] = $login;
- //            header('Location: homepage.php');
- //            exit();
-	//     } 
-	//     else {
- //            $login_status = "error";
-	//     }
-	// }
+    if (!empty($_SESSION["login"])) {
+        header('Location: /profil');
+        exit();
+    }
 
 ?>
 
@@ -109,21 +38,21 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
 
-    <link rel = "stylesheet" href = "../css/panorama/login.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/login.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/login_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/login_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo de la transition </title>
+    <title> Imago TV - Connexion </title>
 
     <meta property = "og:title" content = "Imago TV" />
     <meta property = "og:description" content = "La plateforme vidéo gratuite de la transition" />
     <meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+    <script src = "/js/lib/jquery.js"></script>
 
     <!-- TRACKING -->
 
@@ -163,21 +92,12 @@
 			<a id = "message" > Login ou mot de passe erroné </a>
 
     		<a id = "validate" class = "action" > VALIDER </a>
-            <a href = "subscribe.php" id = "subscribe" class = "action" > (je ne suis pas encore inscrit) </a>
-            <a id = "forget" class = "action" > Mot de passe oublié </a>
+            <a href = "/inscription" id = "subscribe" class = "action" > (je ne suis pas encore inscrit) </a>
+            <a id = "forget" class = "action" href = "mailto:contact@imagotv.fr" > Mot de passe oublié </a>
 
 		</section>
 
 	</div>
-
-
-<?php
-
-	    // if (isset($_SESSION["login"]) AND !isset($_POST["login"])) {
-        //      $_SESSION = array();
-        //      session_destroy();
-    	// }
-?>
 
 
 <!-- FOOTER -->
@@ -196,21 +116,19 @@
         var env = "<?php ECHO $env; ?>";
         var base_url = "<?php ECHO $base_url; ?>";
 
-        // var login_status = "<?php ECHO $login_status; ?>";
-
     </script> 
 
 
 <!-- JS FILES -->
 
-    <script src = "../js/lib/misc.js"></script>
+    <script src = "/js/lib/misc_v110.js"></script>
     
-    <script src = "../js/block/header.js"></script>
-    <script src = "../js/block/menu.js"></script>
-    <script src = "../js/block/user.js"></script>
-    <script src = "../js/block/footer.js"></script>
+    <script src = "/js/block/header_v110.js"></script>
+    <script src = "/js/block/menu_v110.js"></script>
+    <script src = "/js/block/user_v110.js"></script>
+    <script src = "/js/block/footer_v110.js"></script>
 
-	<script src = "../js/login.js"></script>
+	<script src = "/js/login_v110.js"></script>
 
 </body>
 </html>

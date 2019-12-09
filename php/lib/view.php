@@ -9,6 +9,8 @@
 
     function display_thumbnail_container($list_id, $thumbnail_type, $type_id, $category_id, $title, $content_list) {
 
+        global $user_id;
+
         $format = image_format_of($thumbnail_type, $type_id);
         $list_size = sizeof($content_list);
         $page_number = page_number_of($type_id, $content_list);
@@ -17,9 +19,12 @@
 
             // Display title 
 
-            if ($type_id == "")       $title_href = "/php/category.php?category_id=" . $category_id;
-            if ($category_id == "")   $title_href = "/php/category.php?type_id=" . $type_id;
-            else   $title_href = "/php/category.php?type_id=" . $type_id . "&category_id=" . $category_id;
+            $type = type_of($type_id);
+            $category = category_of($category_id);
+
+            if ($type_id == "")       $title_href = "/" . $category;
+            if ($category_id == "")   $title_href = "/" . $type;
+            else   $title_href = "/" . $type . "/" . $category;
 
             ECHO ' <a href = "' . $title_href . '" id = "' . $list_id . '" class = "title" > ' . $title . '</a> ';
 
@@ -48,7 +53,20 @@
                     for ($index = $thumbnail_number; $index >= 1; $index--) {
 
                         $thumbnail = $content_list[$thumbnail_number - $index];
-                        display_thumbnail($list_id, $index, $thumbnail_type, $type_id, "", $thumbnail);
+
+                        if (($thumbnail_type == "video" OR $thumbnail_type == "audio") AND $user_id != "") {
+                            $video_resume_list = get_episod_resume_list($thumbnail["content_id"], $user_id);
+                            $video_resume_tab = list_to_tab($video_resume_list); 
+
+                            if(isset($video_resume_tab[$thumbnail["episod_id"]]))
+                                $resume = $video_resume_tab[$thumbnail["episod_id"]];
+                            else
+                                $resume = 0;
+                        }   
+                        else
+                            $resume = 0;                  
+
+                        display_thumbnail($list_id, $index, $thumbnail_type, $type_id, "season", $thumbnail, $resume);
                     } 
 
                 ECHO ' </div> ';
@@ -60,15 +78,28 @@
 
             $left_img_id = "left_arrow_container_" . $list_id;
             $left_img_class = "left_arrow_container";
-            $left_img_src = "../img/icons/arrow/page_left_grey.png";
+            $left_img_src = "/img/icons/arrow/page_left_grey.png";
 
             $right_div_class = "arrow_container right_arrow_container_" . $format;
 
             $right_img_id = "right_arrow_container_" . $list_id;
             $right_img_class = "right_arrow_container";
-            $right_img_src = "../img/icons/arrow/page_right_grey.png";
+            $right_img_src = "/img/icons/arrow/page_right_grey.png";
 
-            include("block/arrow.php");
+
+            // HTML code
+
+    ?>
+
+    <div class = "<?php ECHO $left_div_class ?>" >
+        <img id="<?php ECHO $left_img_id ?>" class="<?php ECHO $left_img_class ?>" src="<?php ECHO $left_img_src ?>" >
+    </div>
+
+    <div class = "<?php ECHO $right_div_class ?>" >
+        <img id="<?php ECHO $right_img_id ?>" class="<?php ECHO $right_img_class ?>" src="<?php ECHO $right_img_src ?>">
+    </div>
+
+    <?php
 
         }
         return $list_size;
@@ -80,27 +111,6 @@
     ///////////////////////////////////// Thumbnail list display ////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    ////////////  list  ////////////
-
-    function display_thumbnail_list($list_id, $thumbnail_type, $type_id, $content_list) {
-
-        $thumbnail_number = sizeof($content_list);
-
-        for ($index = 0; $index < $thumbnail_number; $index++) {
-
-            $thumbnail = $content_list[$index];
-            display_thumbnail($list_id, $index, $thumbnail_type, $type_id, $thumbnail);
-        } 
-
-        // $format = image_format_of($thumbnail_type, $type_id);
-
-        // ECHO ' <div id = "' . $list_id .'-more" class = "thumbnail_info ' . $format . ' more" > ';
-        //     ECHO ' <img class = "thumbnail ' . $format . '" src = "../img/more_' . $format . '.jpg" > </img>';
-        // ECHO ' </div>';
-    }
-
 
     //////////// Series ////////////
 
@@ -121,9 +131,9 @@
 
     //////////// Movie ////////////
 
-    function display_series_video($content_id, $content, $video_id_list, $type_id) {
+    function display_series_video($content_id, $content, $video_id_list, $type_id, $section_id) {
 
-        global $season_size;
+        global $season_size, $current_season, $user_id;
 
         if ($type_id == "podcast") $thumbnail_type = "audio";
         if ($type_id != "podcast") $thumbnail_type = "video";
@@ -137,17 +147,31 @@
 
         for ($season_index = $season_number; $season_index >= 1; $season_index--) {
 
+            // $season_index = $current_season;
+
             ECHO ' <div class = "scrolling_container" > ';
                 ECHO ' <div id = "video_thumbnail_season_' . $season_index . '" class = "video_thumbnail_season" > ';
 
                 for ($video_index = $season_size; $video_index >= 1; $video_index--) {
 
-                    if (($season_index != $season_number) OR ($video_index <= $video_number_last_season)) {
+                    $index = $season_size * ($season_index - 1) + $video_index;
 
-                        $index = $season_size * ($season_index - 1) + $video_index;
+                    if (($season_index != $season_number) OR ($video_index <= $video_number_last_season)) {
                         $thumbnail = $video_id_list[$index - 1];
 
-                        display_thumbnail(0, $index, $thumbnail_type, $type_id, "", $thumbnail);
+                        if ($user_id != "") {
+                            $video_resume_list = get_episod_resume_list($content_id, $user_id);
+                            $video_resume_tab = list_to_tab($video_resume_list); 
+
+                            if(isset($video_resume_tab[$index]))
+                                $resume = $video_resume_tab[$index];
+                            else
+                                $resume = 0;
+                        }   
+                        else
+                            $resume = 0;  
+
+                        display_thumbnail(0, $index, $thumbnail_type, $type_id, $section_id, $thumbnail, $resume);
                     }
                 }
 
@@ -176,7 +200,7 @@
                         for ($index = 1; $index <= $video_number; $index++) {
 
                             $thumbnail = $video_id_list[$section_id][$index - 1];
-                            display_thumbnail(0, $index, "video", $type_id, $section_id, $thumbnail);
+                            display_thumbnail(0, $index, "video", $type_id, $section_id, $thumbnail, "");
                         }
 
                 ECHO '</div>';
@@ -191,13 +215,13 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    function display_thumbnail($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail) {
+    function display_thumbnail($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail, $resume) {
 
         if (in_array($thumbnail_type, array("content")))
             display_thumbnail_content($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail);
 
         if (in_array($thumbnail_type, array("video", "audio")))
-            display_thumbnail_episod($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail);
+            display_thumbnail_episod($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail, $resume);
 
         if (in_array($thumbnail_type, array("comment")))
             display_thumbnail_comment($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail);
@@ -225,8 +249,13 @@
 
         // Prepare image URL
 
-        $image_url = '../img/content/' . $type_id . '/cover/' . $content_id . '.jpg'; 
-        if(!file_exists($image_url)) $image_url = '../img/content/' . $type_id . '/default.jpg';
+        if ($type_id == "dvd")
+            $image_url = 'https://www.asset.imagotv.fr/img/' . $type_id . '/cover/' . $content_id . '.png';
+        else
+            $image_url = 'https://www.asset.imagotv.fr/img/' . $type_id . '/cover/' . $content_id . '.jpg';
+
+        // if(!file_exists($image_url)) 
+        //     $image_url = '/img/content/' . $type_id . '/default.jpg';
 
         // Prepare thumbnail text
 
@@ -250,23 +279,17 @@
         // Prepare HTML params
 
         $th_div_id = $list_id .'-'. $index .'-'. $thumbnail_type .'-'. $content_id .'-'. $section_id .'-'. $episod_id;
-        // $th_div_class = "thumbnail_info " . $format; 
 
-        if ($type_id == "documentary" OR $type_id == "shortfilm") {
-            $href = 'movie.php?content_id=' . $content_id;
-            $target = "";
-        }
-        else if ($type_id == "book") {
+        if ($type_id == "book" OR $type_id == "show" OR $type_id == "dvd") {
             $href = $thumbnail["link"];
             $target = "_blank";
         }
         else {
-            $href = 'series.php?content_id=' . $content_id;
+            $href = '/' . type_of($type_id) . '/' . str_replace ("_", "-" , $content_id);
             $target = "";
         }
 
         $image_class = "thumbnail " . $format;
-        // $th_img_src = $image_url;
 
         $text_div_id = "info_" . $list_id . '_' . $content_id . '_' . $episod_id;
         $text_div_class = "info_" . $format;
@@ -294,7 +317,7 @@
 
     //////////// Episod ////////////
 
-    function display_thumbnail_episod($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail) {
+    function display_thumbnail_episod($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail, $resume) {
 
         $format = image_format_of($thumbnail_type, $type_id);
 
@@ -302,24 +325,21 @@
         $episod_id = $thumbnail["episod_id"];
         $hosting = $thumbnail["hosting"];
 
+        $duration = $thumbnail["duration"];
+
+        if ($duration != 0) {
+            $pourcentage = $resume / $duration;
+            if ($type_id == "podcast") $width_13 = 13 * $pourcentage . "vw"; else $width_13 = 0;
+            if ($type_id == "tvshow")  $width_21 = 21 * $pourcentage . "vw"; else $width_21 = 0;
+            $width_45 = 45 * $pourcentage . "vw";
+        }    
+
         // Prepare image URL
                 
-        if ($hosting == "invidio") {$video_id = $thumbnail["youtube_id"];}
-        else {$video_id = $thumbnail[$hosting . '_id'];}
-
-        if ($thumbnail["thumbnail"] == "local") {
-
-            if ($section_id == "")
-                $image_url = "../img/video/" . $type_id . "/" . $content_id . "/" . $episod_id . ".jpg";
-    
-            if ($section_id != "")
-                $image_url = "../img/video/" . $type_id . "/" . $content_id . "/" . $section_id . "_" . $episod_id . ".jpg";
-
-            if(!file_exists($image_url)) $image_url = "../img/video/" . $type_id . "/" . $content_id . "/default.jpg";
-        }
-
-        if ($thumbnail["thumbnail"] == "youtube")
-            $image_url = "https://img.youtube.com/vi/" . $video_id . "/mqdefault.jpg";
+        if ($section_id == "season")
+            $image_url = "https://www.asset.imagotv.fr/img/".$type_id."/episod/".$content_id."/".$episod_id.".jpg";
+        else
+            $image_url = "https://www.asset.imagotv.fr/img/".$type_id."/episod/".$content_id."/".$section_id."_".$episod_id . ".jpg";
 
 
         // Prepare thumbnail text
@@ -338,22 +358,28 @@
         $line_1 = '#' .$thumbnail["title"];
         $line_2 = $timing;
         $line_3 = $thumbnail["description"];
-        $line_4 = 'Lu ' . $view . ' fois sur Imago';
+        $line_4 = $view . ' vues';
 
 
         // Prepare HTML params
 
         $th_div_id = $list_id.'-'.$index.'-'.$thumbnail_type.'-'.$content_id.'-'.$section_id.'-'.$episod_id;
-        $th_div_class = "series_thumbnail series_" . $format; 
+        $th_div_class = "series_thumbnail series_" . $format;
 
-        if ($type_id == "documentary" OR $type_id == "shortfilm")
-            $href = "movie.php?content_id=" . $content_id . "&section_id=" . $section_id . "&episod_id=" . $episod_id;
-        else 
-            $href = "series.php?content_id=" . $content_id . "&episod_id=" . $episod_id;
+        $section = section_of($section_id);
+
+        $content_id_new = str_replace ("_", "-", $content_id);
+
+        if ($section_id == "season")
+            $href = '/'. type_of($type_id) .'/'. $content_id_new .'/'. $episod_id;
+        else            
+            $href = '/'. type_of($type_id) .'/'. $content_id_new .'/'. $section .'/'. $episod_id; 
+
 
         $image_class = "series_thumbnail series_" . $format;
 
-        // $play_id = "play_" . $section_id . '_' . $index;
+        $resume_class = "resume_" . $episod_id;
+
         $play_class = "series_play_" . $format;
 
         $text_div_id = "series_info_" . $list_id . '_' . $content_id. '_' . $episod_id;
@@ -365,19 +391,21 @@
 
     <div id = "<?php ECHO $th_div_id ?>" class = "<?php ECHO $th_div_class ?>" > 
 
-        <a href = "<?php ECHO $href ?>" >
-            <img class = "<?php ECHO $image_class ?>" src = " <?php ECHO $image_url ?>" > </img>
-        </a>
+        <a id = "link" href = "<?php ECHO $href ?>" >
+            <img class = "<?php ECHO $image_class ?>" src = " <?php ECHO $image_url ?>" > </img> </a>
         
-        <a href = "<?php ECHO $href ?>" >    
-            <img class = "<?php ECHO $play_class ?>" src = "../img/icons/play_new.png" > </img>
-        </a>
+        <a id = "link" href = "<?php ECHO $href ?>" >   
+            <img class = "<?php ECHO $play_class ?>" src = "/img/icons/play/icon_1.png" > </img> </a>
+
+        <div class = "resume_bar_13" id = "<?php ECHO $resume_class ?>" style="width:<?php ECHO $width_13 ?>" > </div>
+        <div class = "resume_bar_21" id = "<?php ECHO $resume_class ?>" style="width:<?php ECHO $width_21 ?>" > </div>
+        <div class = "resume_bar_45" id = "<?php ECHO $resume_class ?>" style="width:<?php ECHO $width_45 ?>" > </div>
 
         <div id = "<?php ECHO $text_div_id ?>" class = "<?php ECHO $text_div_class ?>" >
             <div> <a class = "series_line_1"> <?php ECHO $line_1 ?> </a> </div>
             <div> <a class = "series_line_2"> <?php ECHO $line_2 ?> </a> </div>
             <div> <a class = "series_line_3"> <?php ECHO $line_3 ?> </a> </div>
-            <div> <a class = "series_line_4"> <?php ECHO $line_4 ?> </a> </div>
+            <!-- <div> <a class = "series_line_4"> <?php ECHO $line_4 ?> </a> </div> -->
         </div>
 
     </div>
@@ -409,7 +437,7 @@
         $th_div_class = 'thumbnail_info ' . $format; 
 
         $image_class = 'thumbnail ' . $format;
-        $image_src = '../img/icons/comment/comment_' . $thumbnail["color"] . '.png';
+        $image_src = '/img/icons/comment/comment_' . $thumbnail["color"] . '.png';
 
         $text_div_id = "info_" . $list_id;
         $text_div_class = "info_" . $format;
@@ -445,8 +473,8 @@
 
         // Prepare image URL
 
-        $image_url = '../img/content/' . $type_id . '/cover/' . $content_id . '.jpg'; 
-        if(!file_exists($image_url)) $image_url = '../img/content/' . $type_id . '/default.jpg';
+        $image_url = '/img/content/' . $type_id . '/cover/' . $content_id . '.jpg'; 
+        if(!file_exists($image_url)) $image_url = '/img/content/' . $type_id . '/default.jpg';
 
         // Prepare thumbnail text
 
@@ -501,7 +529,7 @@
             <div> <a class = "donation_line_1" > <?php ECHO $line_1 ?> </a> </div>
             <div> <a class = "donation_line_2" > <?php ECHO $line_2 ?> </a> </div>
             <div> <a class = "donation_line_3" > <?php ECHO $line_3 ?> </a> </div>
-            <img id = "<?php ECHO $ck_img_id ?>" class = "check" src = '../img/icons/check_off.png'; > </img>
+            <img id = "<?php ECHO $ck_img_id ?>" class = "check" src = '/img/icons/check_off.png'; > </img>
         </div>
 
     </div>
@@ -515,48 +543,65 @@
 
     function display_thumbnail_user($list_id, $index, $thumbnail_type, $type_id, $section_id, $thumbnail) {
 
+        global $user_id;
+
         $format = image_format_of($thumbnail_type, $type_id);
 
         $content_id = "user";
 
-        if ($thumbnail_type == "search")        $section_id = $thumbnail["id"];
-        if ($thumbnail_type == "pending_in")    $section_id = $thumbnail["user_id_1"];
-        if ($thumbnail_type == "pending_out")   $section_id = $thumbnail["user_id_2"];
-        if ($thumbnail_type == "friend")        $section_id = $thumbnail["user_id_1"];
+        if ($thumbnail_type == "search") {
+            $user_id_1 = $user_id;  
+            $user_id_2 = $thumbnail["id"];
+            $user_id_friend = $user_id_2;
+        }
 
+        else {        
+            $user_id_1 = $thumbnail["user_id_1"];
+            $user_id_2 = $thumbnail["user_id_2"];
 
-        $episod_id = $index;
+            if ($user_id_1 == $user_id) $user_id_friend = $user_id_2;
+            else $user_id_friend = $user_id_1;
 
-        // Prepare image URL
-
-        $image_url = "../img/creator/author/default_user.png";
+        }
 
         // Prepare thumbnail text
 
-        if (strlen($thumbnail["login"]) > 20)
-            $line_1 = substr($thumbnail["login"], 0, 20) . '...';
+        $pseudo = explode("@", $thumbnail["login"])[0];
+
+        if (strlen($pseudo) > 20)
+            $line_1 = substr($pseudo, 0, 20) . '...';
         else
-            $line_1 = $thumbnail["login"];
+            $line_1 = $pseudo;
 
         // Prepare HTML params
 
-        $th_div_id = $list_id.'-'.$index.'-'.$thumbnail_type.'-'.$content_id.'-'.$section_id.'-'.$episod_id;
-        $th_div_class = "thumbnail_info " . $format; 
+        $div_id = $list_id .'-'. $index .'-'. $thumbnail_type .'-'. $content_id .'-'. $user_id_1 .'-'. $user_id_2;
 
-        $th_img_class = "thumbnail " . $format;
-        $th_img_src = $image_url;
+        $img_class = "thumbnail " . $format;
+        $img_src = "/img/user/user_" . ($user_id_friend%6 +1) . ".png";
+        // $img_src = "/img/user/user_" . random_int (1,6) . ".png";
 
-        $text_div_id = "info_" . $list_id . '_' . $content_id. '_' . $episod_id;
+        if ($thumbnail_type == "search")        $txt_src = "/img/user/user_add.png";
+        if ($thumbnail_type == "pending_in")    $txt_src = "/img/user/user_accept.png";
+        if ($thumbnail_type == "pending_out")   $txt_src = "/img/user/user_remove.png";
+        if ($thumbnail_type == "friend")        $txt_src = "/img/user/user_remove.png";
+
+        $user_layer_id = "user_layer_" . $list_id . '_' . $index; 
+        $user_action_id = "user_action_" . $list_id . '_' . $index; 
+
+        $text_div_id = "info_" . $list_id . '_' . $content_id. '_' . $index;
         $text_div_class = "info_" . $format . " " . $format;
 
         // HTML code
 
     ?>
 
-    <div id = "<?php ECHO $th_div_id ?>" class = "<?php ECHO $th_div_class ?>" > 
+    <div id = "<?php ECHO $div_id ?>" class = "user_thumbnail" > 
 
-        <img class = "<?php ECHO $th_img_class ?>" src = "<?php ECHO $th_img_src ?>" > </img>
-            
+        <img class = "<?php ECHO $img_class ?>" src = "<?php ECHO $img_src ?>" > </img>
+        <img id = "<?php ECHO $user_layer_id ?>" class = "user_layer" src = "/img/user/layer.png" > </img>
+        <img id = "<?php ECHO $user_action_id ?>" class = "user_action" src = "<?php ECHO $txt_src ?>" > </img>  
+
         <div id = "<?php ECHO $text_div_id ?>" class = "<?php ECHO $text_div_class ?>" >
             <div> <a class = "line_1"> <?php ECHO $line_1 ?> </a> </div> 
         </div>
@@ -568,3 +613,7 @@
     }
 
 ?>
+
+
+
+

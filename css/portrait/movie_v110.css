@@ -1,0 +1,76 @@
+
+@media all and (max-width : 480px)  {
+
+div#screen {
+	display : none;
+}
+
+img.cover_image {
+	position : absolute;
+	top : 15vw;
+	right : 0px;
+	width : 100%;
+}
+
+img.background_image {
+	display : none;
+}
+
+
+/************************************************ INFO ************************************************/
+
+section#information {
+	margin-top : 148vw;
+}
+
+		img.logo_image {
+			display : none;
+		}
+
+		#info_title {
+			padding-left : 0vw;
+		}
+
+		div.date {
+			padding-top : 4vw;
+		}
+
+		div.number {
+			display : none;
+		}
+
+/************************************************ VIDEO **********************************************/
+
+section#video {
+	position : relative;
+	background-color : rgb(35, 35, 35);
+}
+
+		a.thumbnail_title {
+			font-size : 5vw;
+			padding-left : 2vw;	
+		}
+
+		div.scrolling_container {
+			padding-left : 1vw;
+			padding-bottom : 2vw;
+		}
+
+/************************************************ RELATED ************************************************/
+
+section#related_thumbnail {
+	position : relative;
+	margin-top : 6vw;
+}
+
+div.more_content {
+	position : relative;
+	z-index : 10;
+	width : 94vw;
+	height : 1px;
+	top : 0vw;
+	left : 2vw;
+	background-color : rgb(80, 80, 80);
+}
+
+}

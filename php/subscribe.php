@@ -9,45 +9,22 @@
 
 <?php
 
-    // Functions 
+    ////////////////////////////////// Redirection //////////////////////////////////
 
-  //   function display_message($status) {
+    $request_url = $_SERVER["REQUEST_URI"];
+    $request_url = explode("/", $request_url);
 
-  //       if ($status == "error") {
-  //           ECHO ' style = "visibility:visible; color:red" ';
-  //       }
-		// else { 
-  //           ECHO ' style = "visibility:visible; color:green" ';
-		// }
-  //   }
+    if ($request_url[1] == "php") {
 
-    // function display_enter($status) {
+        header("Status: 301 Moved Permanently", false, 301);
+        header('Location: /inscription');
+        exit();
+    }
 
-    //     if ($status == "created") {
-    //         ECHO ' style = "display:bloc" ';
-    //     }
-    //     else { 
-    //         ECHO ' style = "display:none" ';
-    //     }
-    // }
-
-    // function display_form($status) {
-
-    //     if ($status == "created") {
-    //         ECHO ' style = "display:none" ';
-    //     }
-    // }
-
-    // function display_value($field) {
-
-    // 	if (!empty($_POST[$field])) {ECHO ' value = "' . $_POST[$field] . '"';}
-    // }
-
-
-    // Display
+    ////////////////////////////////// Get data //////////////////////////////////
 
     if (!empty($_SESSION["login"])) {
-        header('Location: member.php');
+        header('Location: /profil');
         exit();
     }
 
@@ -65,17 +42,7 @@
     if (!empty($_POST)) {
 
         $current_date = get_time();
-
-    	// $first_name = $_POST["first_name"];
-     //    $last_name = $_POST["last_name"];
-     //    $email = $_POST["email"];
-     //    $login = $_POST["login"];
-
-    	// $password_1 = $_POST["password_1"];
-     //    $password_2 = $_POST["password_2"];
-
         $test_member = read_member($_POST["login"]);
-
 
         if (empty($login)) {
         	$subscription_message = "Attention ! <br> Vous devez saisir un pseudo";
@@ -119,21 +86,21 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
    	
-    <link rel = "stylesheet" href = "../css/panorama/subscribe.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/subscribe.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/subscribe_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/subscribe_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo de la transition </title>
+    <title> Imago TV - Inscription </title>
 
     <meta property = "og:title" content = "Imago TV" />
     <meta property = "og:description" content = "La plateforme vidéo de la transition" />
 	<meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -156,12 +123,12 @@
 
 	<div id = "screen">
 
-		<!-- <img id = "subscribe_background_image" src = "../img/login/imago.jpg"></img> -->
+		<!-- <img id = "subscribe_background_image" src = "/img/login/imago.jpg"></img> -->
 		<a id = "subscribe_title"> Veuillez remplir vos informations : </a>
 
 		<section id = "subscribe_information">
 
-    		<form id = "form" action = "subscribe.php" method = "post" >
+    		<form id = "form" action = "/inscription" method = "post" >
 
 				<!-- USER INFORMATION -->
 
@@ -206,7 +173,7 @@
 
 			<a id = "subscription_message" > <?php ECHO $subscription_message ?> </a>
 
-            <a href = "homepage.php" id = "enter" > Retournez sur Imago TV </a>
+            <a href = "/" id = "enter" > Retournez sur Imago TV </a>
 
 
 		</section>
@@ -237,14 +204,14 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
 
-    <script src = "../js/block/header.js"></script>
-    <script src = "../js/block/menu.js"></script>
-    <script src = "../js/block/user.js"></script>
-    <script src = "../js/block/footer.js"></script>
+    <script src = "/js/block/header_v110.js"></script>
+    <script src = "/js/block/menu_v110.js"></script>
+    <script src = "/js/block/user_v110.js"></script>
+    <script src = "/js/block/footer_v110.js"></script>
 
-	<script src = "../js/subscribe.js"></script>
+	<script src = "/js/subscribe_v110.js"></script>
 
 </body>
 </html>

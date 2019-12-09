@@ -38,21 +38,21 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
    	
-    <link rel = "stylesheet" href = "../css/panorama/donation.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/donation.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/donation_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/donation_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo de la transition </title>
+    <title> Imago TV - Dons </title>
 
     <meta property = "og:title" content = "Imago TV" />
 	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
 	<meta property = "og:image" content = "/img/icons/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -75,11 +75,11 @@
 
 	<div id = "screen">
 
-		<!-- <img id = "member_background_image" src = "../img/login/imago.jpg"></img> -->
+		<!-- <img id = "member_background_image" src = "/img/login/imago.jpg"></img> -->
 		<a id = "donation_title"> Mes promesses de dons </a>
 		<a id = "donation_done"> Mes dons effectués </a>
 
-		<a id = "warning"> Cette fonctionnalité ouvre fin septembre !! </a>
+		<a id = "warning"> Cette fonctionnalité ouvre en fin d'année !! </a>
 
 		<!-- <a id = "donation_select"> Tout sélectionner </a> -->
 
@@ -127,16 +127,16 @@
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
     
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header_v110.js"></script>
+	<script src = "/js/block/menu_v110.js"></script>
+	<script src = "/js/block/user_v110.js"></script>
+	<script src = "/js/block/footer_v110.js"></script>
 
-    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "/js/block/thumbnail_v110.js"></script>
 
-	<script src = "../js/donation.js"></script>
+	<script src = "/js/donation_v110.js"></script>
 
 </body>
 </html>

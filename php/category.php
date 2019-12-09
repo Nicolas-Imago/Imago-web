@@ -1,5 +1,5 @@
 
-<?php require_once("lib/init.php") ?>
+<?php require_once("lib/init.php"); ?>
 
 <?php require_once("lib/model.php") ?>
 <?php require_once("lib/view.php") ?>
@@ -11,7 +11,6 @@
 
 
     ////////////////////////////////// Display functions //////////////////////////////////
-
 
 	function display_all_list($screen, $type_id, $category_id) {
 
@@ -38,23 +37,47 @@
 
 		global $page_number, $total_item_number;
 
-		$category = category_of($category_id);
+		$category = category_title_of($category_id);
 		$content_list = category_content_list_of($type_id, $category);
 
 		$item_number = sizeof($content_list);
 		$total_item_number = $total_item_number + $item_number;
 		$title = content_list_title_of($screen, $type_id, $category_id, $item_number);
-		
+
 		$page_number[$list_id] = page_number_of($type_id, $content_list);
 
 		display_thumbnail_container($list_id, "content", $type_id, $category_id, $title, $content_list);
 	}
 
 
-    ////////////////////////////////// Get url param //////////////////////////////////
+    ///////////////////////////////// Get url param /////////////////////////////////
 
 	if (isset($_GET["type_id"])) 		$type_id 		= $_GET["type_id"];			else $type_id = "";
 	if (isset($_GET["category_id"]))	$category_id 	= $_GET["category_id"];		else $category_id = "";
+
+	if ($type_id == "" AND $category_id != "") 	$screen = "category";
+    if ($type_id != "" AND $category_id == "") 	$screen = "type";
+	if ($type_id != "" AND $category_id != "") 	$screen = "category_type";
+
+
+    ////////////////////////////////// Redirection //////////////////////////////////
+
+    $request_url = $_SERVER["REQUEST_URI"];
+    $request_url = explode("/", $request_url);
+
+    if ($request_url[1] == "php") {
+
+    	$type = type_of($type_id);
+    	$category = category_of($category_id);
+
+		header("Status: 301 Moved Permanently", false, 301);
+
+		if ($screen == "category")			header('Location: /'. $category);
+	    if ($screen == "type")				header('Location: /'. $type);
+		if ($screen == "category_type")		header('Location: /'. $type . '/' . $category);
+
+	    exit();
+    }
 
 
     ////////////////////////////////// Get data //////////////////////////////////
@@ -71,11 +94,6 @@
 		include("404.php");
 		return;
 	}
-
-
-	if ($type_id == "" AND $category_id != "") 	$screen = "category";
-    if ($type_id != "" AND $category_id == "") 	$screen = "type";
-	if ($type_id != "" AND $category_id != "") 	$screen = "category_type";
 	
 	$screen_title = screen_title($screen, $type_id, $category_id);
 
@@ -88,12 +106,20 @@
 		if ($category_id > 1) 	$previous_category_id = $category_id - 1; 	else $previous_category_id = 8;
 		if ($category_id < 8) 	$next_category_id = $category_id + 1; 		else $next_category_id = 1;
 
-		$arrow_left_page_href = "category.php?type_id=" . $type_id . "&category_id=" . $previous_category_id;
-		$arrow_right_page_href = "category.php?type_id=" . $type_id . "&category_id=" . $next_category_id;
+		$type = type_of($type_id);
+
+		$arrow_left_page_href = "/" . $type . "/" . category_of($previous_category_id);
+		$arrow_right_page_href = "/" . $type . "/" . category_of($next_category_id);
 	}
 
 
 	// $total_item_number = 0;
+
+
+    ////////////////////////////////// OG //////////////////////////////////
+
+	$og_name = $screen_title;
+	
 	
     ////////////////////////////////// Tag //////////////////////////////////
 
@@ -111,28 +137,32 @@
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang = "fr">
 
 <head>
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel = "stylesheet" href = "../css/panorama/imago.css"/>
-   	<link rel = "stylesheet" href = "../css/portrait/imago.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
    	
-    <link rel = "stylesheet" href = "../css/panorama/category.css"/>
-    <link rel = "stylesheet" href = "../css/portrait/category.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/category_v110.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/category_v110.css"/>
 
-    <link rel = "icon" type = "image/png" href = "../img/icons/imago_con.png"/>
+    <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
-    <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
+    <?php include("lib/wpa.php") ?>
 
-    <meta property = "og:title" content = "Imago TV" />
+    <title> Imago TV - <?php ECHO $og_name ?> </title>
+
+    <meta property = "og:title" content = "Imago" />
     <meta property = "og:type" content = "website" />
 	<meta property = "og:description" content = "La plateforme vidéo de la transition" />
-	<meta property = "og:image" content = "../img/icons/imago.jpg" />
+	<meta property = "og:image" content = "http://asset.imagotv.fr/img/imago.jpg" />
 
-    <script src = "../js/lib/jquery.js"></script>
+	<meta name = "description" content = "Imago propose une sélection de plus de 2000 vidéos parmi les meilleurs documentaires, web séries, courts-métrages ou podcasts engagés dans la transition." />
+
+    <script src = "/js/lib/jquery.js"></script>
 
 	<!-- TRACKING -->
 
@@ -157,8 +187,8 @@
 
 	<div id = "screen">
 
-		<div id = "screen_title">
-			<a id = "title" > <?php ECHO $screen_title; ?> </a> 
+		<div class = "screen_title">
+			<h1 class = "screen_title" > <?php ECHO $screen_title; ?> </h1> 
 		</div>
 
 		<?php include("block/button.php") ?>
@@ -168,11 +198,11 @@
 		</section>
 
 		<a href = "<?php ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "../img/icons/arrow/page_left_grey.png" >
+			<img id = "arrow_left_page"  class = "arrow_page" src = "/img/icons/arrow/page_left_grey.png" >
 		</a>
 
 		<a href = "<?php ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "../img/icons/arrow/page_right_grey.png" >
+			<img id = "arrow_right_page" class = "arrow_page" src = "/img/icons/arrow/page_right_grey.png" >
 		</a>
 
 	</div>
@@ -187,20 +217,14 @@
 
     <script type = "text/javascript">
 
-    	var user_login = "<?php ECHO $user_login; ?>";
-    	var user_id = "<?php ECHO $user_id; ?>";
-    	var status = "<?php ECHO $status; ?>";
-
     	var env = "<?php ECHO $env; ?>";
-    	var base_url = "<?php ECHO $base_url; ?>";
     	var page_url = "<?php ECHO $page_url; ?>";
+    	var status = "<?php ECHO $status ?>";
 
     	var type_id = "<?php ECHO $type_id; ?>";
     	var category_id = "<?php ECHO $category_id; ?>";
 
     	var page_number = [];
-
-    	var total_item_number = "<?php ECHO $total_item_number; ?>";
 
     	page_number["1"] = "<?php ECHO $page_number["1"]; ?>";
     	page_number["2"] = "<?php ECHO $page_number["2"]; ?>";
@@ -211,22 +235,24 @@
     	page_number["7"] = "<?php ECHO $page_number["7"]; ?>";
     	page_number["8"] = "<?php ECHO $page_number["8"]; ?>";
 
+    	var total_item_number = "<?php ECHO $total_item_number; ?>";
+
   	</script> 
 
 
 <!-- JS FILES -->
 
-	<script src = "../js/lib/misc.js"></script>
+	<script src = "/js/lib/misc_v110.js"></script>
     	
-	<script src = "../js/block/header.js"></script>
-	<script src = "../js/block/menu.js"></script>
-	<script src = "../js/block/user.js"></script>
-	<script src = "../js/block/footer.js"></script>
+	<script src = "/js/block/header_v110.js"></script>
+	<script src = "/js/block/menu_v110.js"></script>
+	<script src = "/js/block/user_v110.js"></script>
+	<script src = "/js/block/footer_v110.js"></script>
 
-    <script src = "../js/block/button.js"></script>
-    <script src = "../js/block/thumbnail.js"></script>
+    <script src = "/js/block/button_v110.js"></script>
+    <script src = "/js/block/thumbnail_v110.js"></script>
 
-	<script src = "../js/category.js"></script>
+	<script src = "/js/category_v110.js"></script>
 
 </body>
 </html>
