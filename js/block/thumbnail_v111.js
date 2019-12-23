@@ -48,7 +48,7 @@ function scroll_thumbnail(list_id, page_id) {
     pager_index[list_id - 1] = page_id;
     $("div#pager_" + list_id + "_" + pager_index[list_id - 1]).css("background", "rgb(120, 120, 120)");
 
-    page_position = - (page_id - 1) * 0.904 * $(window).width();
+    page_position = - (page_id - 1) * 0.917 * $(window).width();
 
     $("div#scrolling_container_" + list_id).animate({left : page_position}, 500);
 
@@ -143,7 +143,6 @@ function listen_content_thumbnail(comment_list) {
         }
 
         if (thumbnail_type == "pending_in") {
-            console.log("ici")
             // $("img#user_layer_" + list_id + "_" + index).show();
             $("img#user_layer_" + list_id + "_" + index).show();
             $("img#user_action_" + list_id + '_' + index).show();
@@ -187,7 +186,16 @@ function listen_content_thumbnail(comment_list) {
 
     $("div.series_thumbnail").click(function() {
         $('html,body').animate({scrollTop: 0})
-        launch_player("switch", type_id, content_id, param_1, param_2)
+
+        section_id = param_1;
+        episod_id = param_2;
+        
+        // console.log(type_id)
+        // console.log(content_id)
+        // console.log(param_1)
+        // console.log(param_2)
+
+        launch_player("switch", type_id, content_id, section_id, episod_id)
     });
 
 
@@ -202,9 +210,9 @@ function listen_content_thumbnail(comment_list) {
                 },
                 function(data, status) {
                     // alert("Data: " + data + "\n Status: " + status);
-                    status = callback_status(data);
+                    callback = callback_status(data);
 
-                    if (status == "ok")
+                    if (callback == "ok")
                         go_to("");
             });
         }

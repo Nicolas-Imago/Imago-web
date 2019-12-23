@@ -266,7 +266,7 @@
 
     ///////////// Favorite /////////////
 
-    function favorite_video_list_of($user_id, $level) {
+    function favorite_video_list_of($user_id) {
 
         global $data_base;
 
@@ -275,20 +275,19 @@
             FROM imago_info_video i
             INNER JOIN imago_my_favorite f
             ON i.content_id = f.content_id
+            AND i.section_id = f.section_id
             AND i.episod_id = f.episod_id
             AND i.type = 'tvshow'
             AND f.user_id = ?
-            AND f.visibility <= ? 
             ORDER BY f.add_date DESC
         ");
 
-        $request->execute(array($user_id, $level));
+        $request->execute(array($user_id));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
-    
 
-    function favorite_audio_list_of($user_id, $level) {
+    function favorite_audio_list_of($user_id) {
 
         global $data_base;
 
@@ -297,20 +296,20 @@
             FROM imago_info_video i 
             INNER JOIN imago_my_favorite f
             ON i.content_id = f.content_id
+            AND i.section_id = f.section_id
             AND i.episod_id = f.episod_id
             AND i.type = 'podcast'
             AND f.user_id = ?
-            AND f.visibility <= ? 
             ORDER BY f.add_date DESC
         ");
 
-        $request->execute(array($user_id, $level));
+        $request->execute(array($user_id));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
 
 
-    function favorite_content_list_of($type_id, $user_id, $level) {
+    function favorite_content_list_of($type_id, $user_id) {
 
         global $data_base;
 
@@ -321,12 +320,11 @@
             ON i.content_id = f.content_id 
             AND i.type = ?
             AND f.user_id = ?
-            AND f.episod_id = ''
-            AND f.visibility <= ? 
+            AND f.episod_id = '0'
             ORDER BY f.add_date DESC 
         ");
 
-        $request->execute(array($type_id, $user_id, $level));
+        $request->execute(array($type_id, $user_id));
 
         return $request->fetchAll(PDO::FETCH_ASSOC);
     } 
@@ -343,6 +341,7 @@
             FROM imago_info_video i
             INNER JOIN imago_my_later l
             ON i.content_id = l.content_id
+            AND i.section_id = l.section_id
             AND i.episod_id = l.episod_id
             AND i.type = 'tvshow'
             AND l.user_id = ?
@@ -364,6 +363,7 @@
             FROM imago_info_video i 
             INNER JOIN imago_my_later l
             ON i.content_id = l.content_id
+            AND i.section_id = l.section_id
             AND i.episod_id = l.episod_id
             AND i.type = 'podcast'
             AND l.user_id = ?
@@ -387,7 +387,7 @@
             ON i.content_id = l.content_id 
             AND i.type = ?
             AND l.user_id = ? 
-            AND l.episod_id = ''
+            AND l.episod_id = '0'
             ORDER BY l.add_date DESC
         ");
 
@@ -408,6 +408,7 @@
             FROM imago_info_video i
             INNER JOIN imago_my_reco r
             ON i.content_id = r.content_id
+            AND i.section_id = r.section_id
             AND i.episod_id = r.episod_id
             AND i.type = 'tvshow'
             AND r.user_id = ?
@@ -429,6 +430,7 @@
             FROM imago_info_video i 
             INNER JOIN imago_my_reco r
             ON i.content_id = r.content_id
+            AND i.section_id = r.section_id
             AND i.episod_id = r.episod_id
             AND i.type = 'podcast'
             AND r.user_id = ?
@@ -452,7 +454,7 @@
             ON i.content_id = r.content_id 
             AND i.type = ?
             AND r.user_id = ? 
-            AND r.episod_id = ''
+            AND r.episod_id = '0'
             ORDER BY r.add_date DESC
         ");
 
@@ -902,7 +904,7 @@
     ////////////////////////////////// Get favorite information //////////////////////////////////
 
 
-    function read_favorite_content($user_id, $content_id, $episod_id) {
+    function read_favorite_content($user_id, $content_id, $section_id, $episod_id) {
 
         global $data_base;
 
@@ -911,15 +913,16 @@
             FROM imago_my_favorite 
             WHERE user_id = ?
             AND content_id = ?
+            AND section_id = ?
             AND episod_id = ?
         "); 
             
-        $request->execute(array($user_id, $content_id, $episod_id));
+        $request->execute(array($user_id, $content_id, $section_id, $episod_id));
 
         return $request->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-    function read_later_content($user_id, $content_id, $episod_id) {
+    function read_later_content($user_id, $content_id, $section_id, $episod_id) {
 
         global $data_base;
 
@@ -928,15 +931,16 @@
             FROM imago_my_later 
             WHERE user_id = ?
             AND content_id = ?
+            AND section_id = ?
             AND episod_id = ?
         "); 
             
-        $request->execute(array($user_id, $content_id, $episod_id)); 
+        $request->execute(array($user_id, $content_id, $section_id, $episod_id)); 
 
         return $request->fetchAll(PDO::FETCH_ASSOC); 
     } 
 
-    function read_reco_content($user_id, $content_id, $episod_id) {
+    function read_reco_content($user_id, $content_id, $section_id, $episod_id) {
 
         global $data_base;
 
@@ -945,10 +949,11 @@
             FROM imago_my_reco 
             WHERE user_id = ?
             AND content_id = ?
+            AND section_id = ?
             AND episod_id = ?
         "); 
             
-        $request->execute(array($user_id, $content_id, $episod_id));   
+        $request->execute(array($user_id, $content_id, $section_id, $episod_id));   
 
         return $request->fetchAll(PDO::FETCH_ASSOC); 
     }

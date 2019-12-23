@@ -1,10 +1,6 @@
 
-/******************************************* INIT SCREEN ********************************************/
-
 var format = get_cookie("display_mode");
 if (format != "grid" && format != "list") format = "list";
-
-var pager_index = [1, 1, 1, 1, 1, 1];
 
 var note_value = new Array();
 note_value[1] = note_1;
@@ -25,30 +21,43 @@ function init_screen() {
 
     $("a#link").removeAttr("href");
 
+    // Seasons
+
     $("a#season_" + current_season).css("color", "white");
     $("div.video_thumbnail_season").hide();
     $("div#video_thumbnail_season_" + current_season).show();
 
+    if (window.innerWidth < trigger_width)
+        $("a#season_" + current_season).css("color", "white");
+
     // Buttons
+
+    $("img.donation").jrumble({x:0, y:0, rotation:10});
 
     if (crowdfunding_url != "") {  
         $("img#crowdfunding").show();
         $("a#crowdfunding").attr("href", crowdfunding_url);
     }
 
-    if (content_id == "tuto_anti_creatif") {
+    if (content_id == "tuto_anti_creatif")
         $("img#crowdfunding").attr("src", "/img/icons/button/utip.png");
-    }
 
-    if (episod_id == "") {           
-        $("img#favorite").show();
-        $("img#content_reco").show();
-    }
-    
-    if (is_favorite == "1") {
-        $("img#favorite").css("opacity", "0.2");
+    if (content_id == "kalune_aimer")     
+        $("img#crowdfunding").attr("src", "/img/icons/button/buy.png");
+
+
+    $("img#content_favorite, img#content_reco, img#content_later").show();
+
+    if (is_content_favorite == "1") {
+        $("img#content_favorite").css("opacity", "0.2");
         if (window.innerWidth < trigger_width)      $("img#heart_mobile").show();
         if (window.innerWidth > trigger_width)      $("img#heart_pc").show();
+    }
+
+    if (is_content_later == "1") {
+        $("img#content_later").css("opacity", "0.2");
+        if (window.innerWidth < trigger_width)      $("img#time_mobile").show();
+        if (window.innerWidth > trigger_width)      $("img#time_pc").show();    
     }
 
     if (is_content_reco == "1") {
@@ -57,59 +66,29 @@ function init_screen() {
         if (window.innerWidth > trigger_width)      $("img#medal_pc").show();    
     }
 
-    // Specific cases
+    // Thumbnails
 
-    // if (episod_id != "") $("div#button_header, img.sharing").addClass("player");
+    if (window.innerWidth > trigger_width)
+        $("div.info_panorama, div.info_portrait, div.info_squared").hide();
 
     if (type_id == "tvshow")    $("div.resume_bar_13").hide();
     if (type_id == "podcast")   $("div.resume_bar_21").hide();
-    if (type_id == "podcast") {
-        if (window.innerWidth < trigger_width)      $("span#episod_title").css("left", "25vw");
-        if (window.innerWidth > trigger_width)      $("span#episod_title").css("left", "37vw");  
-    }
 
-    if (type_id == "music")     $("img#crowdfunding").attr("src", "../img/icons/button/buy.png");
-
-    if (window.innerWidth < trigger_width)
-        $("a#season_" + current_season).css("color", "white");
-
-    for (index = 0; index <= 7; index++) {
-        $("div#pager_" + index + "_1").css("background", "rgb(120, 120, 120)");
-        $("img#left_arrow_container_" + index).hide();
-
-        if (page_number[index] <= 1)
-            $("img#right_arrow_container_" + index).hide();
-    }
-
-    $("img.arrow_page").hide();
-    $("img.donation").jrumble({x:0, y:0, rotation:10});
-
-    if (window.innerWidth > trigger_width) {
-        $("div.info_panorama, div.info_portrait, div.info_squared").hide();
-    }
-
-    set_mosaic_mode();
 
     change_display_mode(format);
+    set_mosaic_mode();
 
     // listen mouse over, scroll and resize
 
-    // if (env != "prod" && status == "admin") listen_name();
-
     listen_author();
     listen_category();
-
+    // listen_producer();
     listen_my_contents();
     listen_buttons();
-    // listen_note();
-    // listen_note_setting();
 
     listen_seasons_buttons();
     listen_display_mode(format);
 
-    listen_pager();
-    listen_left_arrow();
-    listen_right_arrow();
     listen_container();
     listen_content_thumbnail(comment_list);  
 
@@ -118,9 +97,6 @@ function init_screen() {
 
     if (episod_id != "")
         launch_player("first", type_id, content_id, section_id, episod_id);
-
-    // if (type_id != "podcast" && video_id != "") launch_video_player(hosting, episod_id, video_id, timecode);
-    // if (type_id == "podcast" && audio_id != "") launch_audio_player(audio_hosting, episod_id, audio_id, timecode);
 }
 
 /*********************************************** LISTEN *********************************************/
@@ -186,13 +162,11 @@ function listen_display_mode(format) {
     $("img#grid").click(function() {
         format = "grid";
         change_display_mode(format);
-        // listen_content_thumbnail(comment_list, format);
     });
 
     $("img#list").click(function() {
         format = "list";
         change_display_mode(format);
-        // listen_content_thumbnail(comment_list, format);
     });
 
 }
@@ -249,25 +223,16 @@ function screen_update() {
 
     close_menu_and_user();
 
-    if (window.innerWidth > trigger_width) {
-        move_element("img.background_image", 0.04, 0.5);
-        move_element("div.background_shadow", 0.04, 0.5);
-        move_element("img#background_shadow", 0.04, 0.5);
-
+    if (window.innerWidth > trigger_width)
         screen_scroll();
-    }
-    else {
+    else
         move_element("img.background_image", 0.15, 0.5);
-        $("img#close_player").css("left", "");
-    }
 }
 
 
 /********************************************** SCROLL *********************************************/
 
 function screen_scroll() {
-
-        // Opacity management
 
         trigger_1 = 0;                              speed_1 = 0.25 * window.innerWidth;
         trigger_2 = 0;                              speed_2 = 0.03 * window.innerWidth;
@@ -286,14 +251,5 @@ function screen_scroll() {
         $("div.number, div.duration, div.category, div.info").css("opacity", image_opacity_3);
         $("div.description").css("opacity", image_opacity_4);
         $("a.author, h1.name, img.logo_image, section#button_list").css("opacity", image_opacity_5);  
-
-        if (window.scrollY >= trigger_3) {$("div#note_1, div#note_2, div#note_3").hide()}
-        else if (window.scrollY < trigger_3) {$("div#note_1, div#note_2, div#note_3").show()}
-
-        if (window.scrollY >= trigger_4) {$("div.number, div.duration, div.category, div.info").hide()}
-        else if (window.scrollY < trigger_4) {$("div.number, div.duration, div.category, div.info").show()}
-
-        if (window.scrollY >= trigger_5) {$("div.description").hide()}
-        else if (window.scrollY < trigger_5) {$("div.description").show()}
 }
 

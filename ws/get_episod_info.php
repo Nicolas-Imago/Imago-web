@@ -31,32 +31,40 @@
 
     $audio_id = $episod["audio_id"];
 
+    $title = $episod["title"];
+
     $fact_checking = $episod["fact_check"];
 
     $resume_time = read_resume_time($user_id, $content_id, $episod_id);
     if (sizeof($resume_time) != 0) $timecode = $resume_time["0"]["resume_time"];
     else $timecode = "0";
 
-    $later = read_later_content($user_id, $content_id, $episod_id);
+    $favorite = read_favorite_content($user_id, $content_id, $section_id, $episod_id);
+    if (sizeof($favorite) != 0) $is_episod_favorite = "1";
+    else $is_episod_favorite = "0";
+
+    $later = read_later_content($user_id, $content_id, $section_id, $episod_id);
     if (sizeof($later) != 0) $is_episod_later = "1";
     else $is_episod_later = "0";
 
-    $reco = read_reco_content($user_id, $content_id, $episod_id);
+    $reco = read_reco_content($user_id, $content_id, $section_id, $episod_id);
     if (sizeof($reco) != 0) $is_episod_reco = "1";
     else $is_episod_reco = "0";
 
     $status = [
-        "hosting"           => $hosting,
-        "audio_hosting"     => $audio_hosting,
-        "content_id"        => $content_id,
-        "name"              => $name,
-        "episod_id"         => $episod_id,
-        "video_id"          => $video_id,
-        "audio_id"          => $audio_id,
-        "fact_checking"     => $fact_checking,
-        "timecode"          => $timecode,
-        "is_episod_later"   => $is_episod_later,
-        "is_episod_reco"    => $is_episod_reco
+        "hosting"               => $hosting,
+        "audio_hosting"         => $audio_hosting,
+        "content_id"            => $content_id,
+        "episod_id"             => $episod_id,
+        "video_id"              => $video_id,
+        "audio_id"              => $audio_id,
+        "name"                  => $name,
+        "title"                 => $title,
+        "fact_checking"         => $fact_checking,
+        "timecode"              => $timecode,
+        "is_episod_favorite"    => $is_episod_favorite,
+        "is_episod_later"       => $is_episod_later,
+        "is_episod_reco"        => $is_episod_reco
     ];
 
     $status_json = json_encode($status);

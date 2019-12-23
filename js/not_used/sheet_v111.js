@@ -64,7 +64,7 @@ function init_screen() {
 
     // listen mouse over, scroll and resize
 
-    if (env != "prod" && status == "admin") listen_name();
+    // if (env != "prod" && user_status == "admin") listen_name();
 
     listen_author();
     listen_category();

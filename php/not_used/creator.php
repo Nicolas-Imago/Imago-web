@@ -201,7 +201,7 @@
 
     	var user_login = "<?php ECHO $user_login; ?>";
     	var user_id = "<?php ECHO $user_id; ?>";
-    	var status = "<?php ECHO $status; ?>";
+    	var user_status = "<?php ECHO $status; ?>";
 
     	var env = "<?php ECHO $env; ?>";
     	var base_url = "<?php ECHO $base_url; ?>";

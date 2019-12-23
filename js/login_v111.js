@@ -52,9 +52,9 @@ function listen_validate_login() {
             },
             function(data, status){
                 // alert("Data: " + data + "\n Status: " + status);
-                status = callback_status(data);
+                callback = callback_status(data);
 
-                if (status == "ok") {
+                if (callback == "ok") {
                     if (url == "") 
                         window.location.href = "/accueil";
                     else 

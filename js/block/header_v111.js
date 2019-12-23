@@ -81,8 +81,8 @@ function close_user() {
 
     $("#user").animate({left : "0px"}, 500);
 
-    if (status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white.png")};
-    if (status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white_red.png")};
+    if (user_status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white.png")};
+    if (user_status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white_red.png")};
 
     if (window.innerWidth < trigger_width) $("div#black_layer").fadeOut(500);
     $("body").css("overflow-y", "auto");
@@ -102,8 +102,8 @@ function close_menu_and_user() {
         user_mode = 0;
         $("#user").animate({left : "0px"}, 500);
 
-        if (status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey.png")};
-        if (status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey_red.png")};
+        if (user_status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey.png")};
+        if (user_status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey_red.png")};
 
         $("div#black_layer").fadeOut(500);
         $("body").css("overflow-y", "auto");
@@ -192,16 +192,16 @@ function listen_user_button() {
         $(this).css("cursor","pointer");
         if (user_mode == 1) {$("img#user_button").attr("src", "/img/icons/user/user_icon_close_white.png")};
         if (user_mode == 0) {    
-            if (status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white.png")};
-            if (status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white_red.png")};
+            if (user_status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white.png")};
+            if (user_status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_white_red.png")};
         } 
         $("a#user_text").css("color", "white");
     },function() {
         $(this).css("cursor","auto"); 
         if (user_mode == 1) {$("img#user_button").attr("src", "/img/icons/user/user_icon_close_grey.png")};
         if (user_mode == 0) {    
-            if (status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey.png")};
-            if (status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey_red.png")};
+            if (user_status != "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey.png")};
+            if (user_status == "logout") {$("img#user_button").attr("src", "/img/icons/user/user_icon_open_grey_red.png")};
         }            
         $("a#user_text").css("color", "grey");
     });
@@ -215,12 +215,12 @@ function listen_user_button() {
 
 //     $("img#user_button").click(function() {
 
-//         if (status == "logout") {
+//         if (user_status == "logout") {
 //             go_to("/php/login.php");
 //             set_cookie("url_cookie", page_url, 1);
 //         }
 
-//         if (status != "logout") {
+//         if (user_status != "logout") {
 //             if (user_mode == 1) {user_mode = 0; close_user();}
 //             else {user_mode = 1; open_user();}
 //         }

@@ -113,9 +113,6 @@
 	}
 
 
-	// $total_item_number = 0;
-
-
     ////////////////////////////////// OG //////////////////////////////////
 
 	$og_name = $screen_title;
@@ -143,11 +140,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
    	
-    <link rel = "stylesheet" href = "/css/panorama/category_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/category_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/category_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/category_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
@@ -219,7 +216,7 @@
 
     	var env = "<?php ECHO $env; ?>";
     	var page_url = "<?php ECHO $page_url; ?>";
-    	var status = "<?php ECHO $status ?>";
+    	var user_status = "<?php ECHO $status ?>";
 
     	var type_id = "<?php ECHO $type_id; ?>";
     	var category_id = "<?php ECHO $category_id; ?>";
@@ -242,17 +239,17 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
     	
-	<script src = "/js/block/header_v110.js"></script>
-	<script src = "/js/block/menu_v110.js"></script>
-	<script src = "/js/block/user_v110.js"></script>
-	<script src = "/js/block/footer_v110.js"></script>
+	<script src = "/js/block/header_v111.js"></script>
+	<script src = "/js/block/menu_v111.js"></script>
+	<script src = "/js/block/user_v111.js"></script>
+	<script src = "/js/block/footer_v111.js"></script>
 
-    <script src = "/js/block/button_v110.js"></script>
-    <script src = "/js/block/thumbnail_v110.js"></script>
+    <script src = "/js/block/button_v111.js"></script>
+    <script src = "/js/block/thumbnail_v111.js"></script>
 
-	<script src = "/js/category_v110.js"></script>
+	<script src = "/js/category_v111.js"></script>
 
 </body>
 </html>

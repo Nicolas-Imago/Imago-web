@@ -83,7 +83,7 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel = "stylesheet" href = "/css/panorama/embed_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/embed_v111.css"/>
 
     <script src = "/js/lib/jquery.js"></script>
 
@@ -120,7 +120,7 @@
 
     	var user_login = "<?php ECHO $user_login; ?>";
     	var user_id = "<?php ECHO $user_id; ?>";
-    	var status = "<?php ECHO $status; ?>";
+    	var user_status = "<?php ECHO $status; ?>";
 
     	var env = "<?php ECHO $env; ?>";
     	var base_url = "<?php ECHO $base_url; ?>";
@@ -137,11 +137,11 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
-    <script src = "/js/block/thumbnail_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
+    <script src = "/js/block/thumbnail_v111.js"></script>
 
-	<!-- <script src = "/js/block/player_v110.js"></script> -->
-	<script src = "/js/embed_v110.js"></script>
+	<!-- <script src = "/js/block/player_v111.js"></script> -->
+	<script src = "/js/embed_v111.js"></script>
 
 </body>
 </html>

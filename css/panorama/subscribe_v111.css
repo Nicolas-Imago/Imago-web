@@ -1,9 +1,10 @@
 
 @media all and (min-width : 481px)  {
 
+
 /************************************ IMAGE ************************************/
 
-/*img#member_background_image {
+/*img#subscribe_background_image {
 	position : fixed;
 	z-index : 1;
  	margin-top : 40vh;
@@ -13,6 +14,7 @@
 	margin-left : -30%;
 	opacity : 0.1;
 }*/
+
 
 /************************************ TITLE ************************************/
 
@@ -51,7 +53,7 @@ a.subscribe_item_title {
 	float : left;
 	width : 15vw;
 	font-size : 1.2vw;
-	color : rgb(200,200,200);
+	color : rgb(200, 200, 200);
 }
 
 div#subscribe_mod_date_input, div#subscribe_login_input {
@@ -93,13 +95,20 @@ a#subscribe_update_title {
 	display : block;
 	float : left;
 	width : 36vw;
+	font-size : 1.2vw;
 }
 
 a#subscribe {
 	display : block;
 	text-align : center;
+	margin-left : auto;
+	margin-right : auto;
 	margin-top : 4vw;
 	margin-bottom : 4vw;
+	width : 10vw;
+	border-radius : 0.8vw;
+	padding : 0.5vw;
+	background-color : rgb(20, 20, 20);
 	font-size : 1.2vw;
 }
 
@@ -110,17 +119,10 @@ a#subscription_message {
 	margin-right : auto;
 	margin-bottom : 6vw;
 	height : 2vw;
-	width   : 30vw;
+	width : 30vw;
 	color : red;
 	text-align : center;
 	font-size : 1.2vw;
-}
-
-a {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-o-user-select: none;
-	user-select: none;
 }
 
 a#enter {
@@ -129,10 +131,18 @@ a#enter {
 	margin-left : auto;
 	margin-right : auto;
 	height : 2vw;
-	width   : 18vw;
+	width : 18vw;
 	color : grey;
 	text-align : center;
+	text-decoration : none;
 	font-size : 1.2vw;
+}
+
+a {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
 }
 
 a#enter:hover {

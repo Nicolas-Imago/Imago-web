@@ -54,7 +54,8 @@ section#information {
 section#video {
 	position : relative;
 	z-index: 10;
-	margin-top : 36vw;
+	top : 3vw;
+	margin-bottom : 2vw;
 	margin-left : 24vw;
 }
 

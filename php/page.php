@@ -25,11 +25,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
 
-    <link rel = "stylesheet" href = "/css/panorama/page_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/page_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/page_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/page_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
@@ -100,7 +100,7 @@
 
     	var user_login = "<?php ECHO $user_login; ?>";
     	var user_id = "<?php ECHO $user_id; ?>";
-    	var status = "<?php ECHO $status; ?>";
+    	var user_status = "<?php ECHO $status; ?>";
 
     	var env = "<?php ECHO $env; ?>";
     	var base_url = "<?php ECHO $base_url; ?>";
@@ -113,14 +113,14 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
 
-	<script src = "/js/block/header_v110.js"></script>
-	<script src = "/js/block/menu_v110.js"></script>
-	<script src = "/js/block/user_v110.js"></script>
-	<script src = "/js/block/footer_v110.js"></script>
+	<script src = "/js/block/header_v111.js"></script>
+	<script src = "/js/block/menu_v111.js"></script>
+	<script src = "/js/block/user_v111.js"></script>
+	<script src = "/js/block/footer_v111.js"></script>
 
-	<script src = "/js/page_v110.js"></script>
+	<script src = "/js/page_v111.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 
 var trigger_width = 480;
-var version = "1.1.0";
+var version = "1.1.1";
 
 /*********************************************** COOKIES ***********************************************/
 
@@ -81,6 +81,14 @@ function set_sharing_url() {
 
 }
 
+function limite(zone, max) {
+
+    if (zone.value.length >= max)
+        zone.value = zone.value.substring(0, max);
+    else
+        $("a#callback").show();
+        $("a#callback").text(zone.value.length + "/350");
+}
 
 function move_element(target, height_factor, speed) {
 
@@ -106,25 +114,17 @@ function set_mosaic_mode() {
 function callback_status(data) {
 
     data = "{" + data.split('{')[1];
-    data = data.substring(0, data.length - 2);
+    data = data.split('}')[0] + "}";
 
-    status = JSON.parse(data).status;
+    callback = JSON.parse(data).status;
 
-    if (status == "not_connected") go_to("/php/login.php"); 
+    if (callback == "not_connected") 
+        window.location.href = "/connexion"; 
 
-    return status       
+    return callback       
 }
 
-
-// function image_exist(url) {
-
-//     var img = new Image();
-//     img.src = url;
-
-//     return img.height != 0;
-// }
-
-/********************************************** FUNCTIONS **********************************************/
+/********************************************** CATEGORY **********************************************/
 
 function category_name_of(category_id) {
 

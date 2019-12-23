@@ -309,8 +309,8 @@
         if ($thumbnail_type == "pending_out")   $title = "Demandes envoyées";
         if ($thumbnail_type == "friend")        $title = "Mes amis";
 
-        if ($thumbnail_type == "video")         $title = "Vidéos";
-        if ($thumbnail_type == "audio")         $title = "Podcasts";
+        if ($thumbnail_type == "video")         $title = "Pistes vidéos";
+        if ($thumbnail_type == "audio")         $title = "Pistes audios";
 
         if ($thumbnail_type == "content") {
             if ($type_id == "tvshow")           $title = "Emissions";

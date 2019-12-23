@@ -12,42 +12,40 @@ var youtube_ready;
 
 /************************************************ PLAYER ***********************************************/
 
-function launch_player(mode, type_id, content_id, current_section_id, current_episod_id) {
+function launch_player(mode, type_id, content_id, section_id, episod_id) {
 
         $.post("/ws/get_episod_info.php",
             {
                 type_id : type_id,
                 content_id : content_id,
-                section_id : current_section_id,
-                episod_id : current_episod_id
+                section_id : section_id,
+                episod_id : episod_id
             },
             function(data, status) {
                 // alert("Data: " + data + "\n Status: " + status);
                 data = "{" + data.split('{')[1];
-                data = data.substring(0, data.length - 2);
+                data = data.split('}')[0] + "}";
 
                 hosting = JSON.parse(data).hosting;
                 audio_hosting = JSON.parse(data).audio_hosting;
-                name = JSON.parse(data).name;
                 episod_id = JSON.parse(data).episod_id;
                 video_id = JSON.parse(data).video_id;
                 audio_id = JSON.parse(data).audio_id;
+                name = JSON.parse(data).name;
+                title = JSON.parse(data).title;
                 fact_checking = JSON.parse(data).fact_checking;
                 timecode = JSON.parse(data).timecode;
+                is_episod_favorite = JSON.parse(data).is_episod_favorite;
                 is_episod_later = JSON.parse(data).is_episod_later;
                 is_episod_reco = JSON.parse(data).is_episod_reco;
 
-                if (type_id == "podcast")
-                    launch_audio_player(audio_hosting, episod_id, audio_id, timecode);
-                else
-                    launch_video_player(hosting, episod_id, video_id, timecode);
                    
                 if (mode == "switch") {
                     pathname = window.location.pathname;
                     page_name = "Imago TV - " + name + " #" + episod_id; 
 
                     if (type_id == "documentary" || type_id == "shortfilm") {
-                        section_name = section_of(current_section_id)
+                        section_name = section_of(section_id)
                         window.history.replaceState("stateObj", page_name, pathname + "/" + section_name + "/" + episod_id);
                     }
                     else
@@ -56,33 +54,47 @@ function launch_player(mode, type_id, content_id, current_section_id, current_ep
                     reset_matomo(page_name);
                 }
 
-                $("img#favorite").hide();
-                $("img#content_later").hide();
-                $("img#content_reco").hide();
+                $("img#content_favorite, img#content_later, img#content_reco").hide();
+                
 
-                if (type_id != "documentary" && type_id != "shortfilm") {
-                    $("span#episod_title").show();
-                    $("a#episod_name").text("Episode n°" + episod_id);
-                    $("img#episod_later").show();
-                    $("img#episod_reco").show();
-                }
+                $("span#episod_title").show();
 
-                if (is_episod_later == "1") {
-                    $("img#episod_later").css("opacity", "0.2");
-                    $("img#episod_time").show();
+                if (type_id == "documentary" || type_id == "shortfilm") {
+                    if (name.length > 40) name = name.substr(1, 40) + "..."  
+                    $("a#episod_name").text(name + " - " + section_of(section_id));
                 }
                 else {
-                    $("img#episod_later").css("opacity", "1");
-                    $("img#episod_time").hide();
-                }
+                    if (title.length > 50) title = title.substr(0, 50) + "..." 
+                    $("a#episod_name").text("#" + title);
 
-                if (is_episod_reco == "1") {
-                    $("img#episod_reco").css("opacity", "0.2");
-                    $("img#episod_medal").show();
-                }
-                else {
-                    $("img#episod_reco").css("opacity", "1");
-                    $("img#episod_medal").hide();
+                    $("img#episod_favorite, img#episod_later, img#episod_reco").show();
+                    
+                    if (is_episod_favorite == "1") {
+                        $("img#episod_favorite").css("opacity", "0.2");
+                        $("img#episod_heart").show();
+                    }
+                    else {
+                        $("img#episod_favorite").css("opacity", "1");
+                        $("img#episod_heart").hide();
+                    }
+
+                    if (is_episod_later == "1") {
+                        $("img#episod_later").css("opacity", "0.2");
+                        $("img#episod_time").show();
+                    }
+                    else {
+                        $("img#episod_later").css("opacity", "1");
+                        $("img#episod_time").hide();
+                    }
+
+                    if (is_episod_reco == "1") {
+                        $("img#episod_reco").css("opacity", "0.2");
+                        $("img#episod_medal").show();
+                    }
+                    else {
+                        $("img#episod_reco").css("opacity", "1");
+                        $("img#episod_medal").hide();
+                    }
                 }
 
                 if (fact_checking != "") {
@@ -91,12 +103,38 @@ function launch_player(mode, type_id, content_id, current_section_id, current_ep
                 }
 
 
+                if (type_id == "podcast")
+                    launch_audio_player(audio_hosting, episod_id, audio_id, timecode);
+                else
+                    launch_video_player(hosting, episod_id, video_id, timecode);
+
+
                 if (content_id == "irrintzina_le_cri_de_la_generation_climat" && episod_id != "") {
                     $("div#donation_area").show();
                     setTimeout(function(){ $("div#donation_area").fadeOut(2000)}, 10000);
                 } 
 
                 set_sharing_url();
+
+                if (type_id != "podcast")
+                    $("a#embed_display").show();
+
+
+                if ((type_id == "documentary" || type_id == "shortfilm") && (section_id != "movie")) {
+                    $("section.comment").hide();
+                }
+                else
+                    $("section.comment").show();
+
+
+                if (section_id != "")
+                    embed = "https://www.imagotv.fr/php/embed.php?content_id=" + content_id + "&section_id=" + section_id + "&episod_id=" + episod_id;
+                else
+                    embed = "https://www.imagotv.fr/php/embed.php?content_id=" + content_id + "&episod_id=" + episod_id;                    
+
+                iframe = '<iframe width="640" height="360" src="' + embed + '" frameborder="0" allowfullscreen></iframe>';
+
+                $("input#embed_value").val(iframe);
             }
         );
 
@@ -104,22 +142,224 @@ function launch_player(mode, type_id, content_id, current_section_id, current_ep
             {
                 type_id : type_id,
                 content_id : content_id,
-                section_id : current_section_id,
-                episod_id : current_episod_id
+                section_id : section_id,
+                episod_id : episod_id
             },
             function(data, status) {
                 // alert("Data: " + data + "\n Status: " + status);
             }
         );
+
+        if (user_status != "user") {
+            $("a#login").show();
+            comment = "Connectez-vous pour pouvoir laisser votre avis !";
+            $("textarea#comment_value").val(comment);
+        }
+        else {
+
+            $.post("/ws/read_comment.php",
+                {
+                    content_id : content_id,
+                    section_id : section_id,
+                    episod_id : episod_id
+                },
+                function(data, status) {
+                    // alert("Data: " + data + "\n Status: " + status);
+
+                    if (data.includes("[]")) {
+                        comment = "Vous avez aimé ? Laissez votre avis ici !";
+                    }
+                    else {
+                        data = "{" + data.split('{')[1];
+                        data = data.split('}')[0] + "}";
+                        comment = JSON.parse(data).comment;
+                        $("a#modify, a#remove").show();
+                    }
+
+                    $("textarea#comment_value").val(comment);
+                }
+            );
+        }
+
+        $.post("/ws/read_comment_list.php",
+            {
+                content_id : content_id,
+                section_id : section_id,
+                episod_id : episod_id
+            },
+            function(data, status) {
+                // alert("Data: " + data + "\n Status: " + status);
+                data = "[" + data.split('[')[1];
+                data = data.split(']')[0] + "]";
+                data = JSON.parse(data);
+
+                comment_number = data.length;
+
+                if (comment_number == "0") {
+                    if (user_status == "user") $("div#comment_list").append('<a class = "comment_text"> Aucun autre avis encore publié </a>')
+                    if (user_status != "user") $("div#comment_list").append('<a class = "comment_text"> Aucun avis encore publié </a>')
+                }
+                else {
+                
+                    for (index = 0; index < comment_number; index++) {
+                        $("div#comment_list").append('<a class = "comment_author">' + data[index]["login"] + ' : </a> <br>')
+                        $("div#comment_list").append('<a class = "comment_text">' + data[index]["comment"] + '</a> <br> <br>')
+                    }
+                }
+            }
+        );
+
+        listen_embed_display();
+        listen_embed_copy();
     }
+
+function listen_embed_display() {
+
+    // Listen mouse over
+
+    $("a#embed_display").hover(function() {
+        $(this).css("cursor","pointer");
+        $(this).css("color", "white");
+    },function() {
+        $(this).css("cursor","auto");
+        $(this).css("color", "grey");
+    });
+
+    // Listen click on
+
+    $("a#embed_display").click(function() {
+        $("input#embed_value, a#embed_copy").fadeIn(1000);
+        setTimeout(function(){ $("input#embed_value, a#embed_copy").fadeOut(1000)}, 5000);
+    });
+}
+
+
+function listen_embed_copy() {
+
+    // Listen mouse over
+
+    $("a#embed_copy").hover(function() {
+        $(this).css("cursor","pointer");
+        $(this).css("color", "white");
+    },function() {
+        $(this).css("cursor","auto");
+        $(this).css("color", "grey");
+    });
+
+    // Listen click on
+
+    $("a#embed_copy").click(function() {
+        var text_to_copy = document.getElementById('embed_value');
+        text_to_copy.select();
+        document.execCommand('copy');
+    });
+
+}
+
+// Un premier film d'une grande sensibilité. A la fois très personnel et en même temps d'une grande sensibilité. Nicolas
+
+function remove_warning() {
+
+    if ($("textarea#comment_value").val() == "Vous avez aimé ? Laissez votre avis ici !") {
+        $("textarea#comment_value").val(""); 
+        $("a#save").show();
+    }
+}
+
+function listen_comment_buttons() {
+
+    // Listen mouse over
+
+    $("a.comment_button").hover(function() {
+        $(this).css("cursor","pointer");
+        $(this).css("color", "white");
+    },function() {
+        $(this).css("cursor","auto");
+        $(this).css("color", "grey");
+    });
+
+    // Listen click on
+
+    $("a#login").click(function() {
+        set_cookie("url_cookie", window.location, 1);
+        window.location.href = "/connexion"; 
+    });
+
+    $("a#save, a#modify").click(function() {
+
+        comment = $("textarea#comment_value").val();
+        
+        $.post("/ws/add_comment.php",
+            {
+                content_id : content_id,
+                section_id : section_id,
+                episod_id : episod_id,
+                comment : comment
+            },
+            function(data, status) {
+                // alert("Data: " + data + "\n Status: " + status);
+                callback = callback_status(data);
+
+                if (callback == "created") {
+                    $("a#save").hide();
+                    $("a#modify, a#remove").show();
+                    $("a#callback").show();
+                    $("a#callback").text("avis publié");
+                    setTimeout(function(){ $("a#callback").fadeOut(1000)}, 2000);
+                }
+                if (callback == "modified") {
+                    $("a#callback").show();
+                    $("a#callback").text("avis modifié");
+                    setTimeout(function(){ $("a#callback").fadeOut(1000)}, 2000);
+                }
+            }
+        );
+
+    });
+
+    $("a#remove").click(function() {
+        
+        $.post("/ws/remove_comment.php",
+            {
+                content_id : content_id,
+                section_id : section_id,
+                episod_id : episod_id
+            },
+            function(data, status) {
+                // alert("Data: " + data + "\n Status: " + status);
+                callback = callback_status(data);
+
+                if (callback == "removed") {
+                    comment = "Vous avez aimé ? Laissez votre avis ici !";
+                    $("textarea#comment_value").val(comment);
+                    $("a#modify, a#remove").hide();
+                    $("a#callback").show();
+                    $("a#callback").text("avis supprimé");
+                    setTimeout(function(){ $("a#callback").fadeOut(1000)}, 2000);
+                }
+            }
+        );
+
+    });
+}
+
+// php/embed.php?content_id=irrintzina_le_cri_de_la_generation_climat&section_id=movie&episod_id=1
 
 
 /************************************************ VIDEO ***********************************************/
 
 function launch_video_player(hosting, episod_id, video_id, timecode) {
 
-        $("body").css("overflow", "hidden");
-        $("img#background_shadow, img#video_close").fadeIn(500);
+        if (window.innerWidth > trigger_width) {
+            $("div#screen").css("position", "fixed");
+            $("div#footer").hide();
+            $("section#button_list").css("margin-left", "76vw");
+            $("div#pop_up").css("overflow-y", "auto");
+        }
+        else 
+            $("body").css("overflow", "hidden");
+
+        $("div#pop_up_shadow, div#pop_up").fadeIn(500);
 
         // if (type_id == "tvshow") {
         //     current_image_url   = "https://www.asset.imagotv.fr/img/tvshow/episod/" + content_id + "/hd/" + episod_id + ".jpg";       
@@ -292,8 +532,19 @@ listen_player_control();
 
 function launch_audio_player(hosting, episod_id, audio_id, timecode) {
 
-        $("body").css("overflow", "hidden");
-        $("img#background_shadow, img#audio_close").show();
+        if (window.innerWidth > trigger_width) {
+            $("div#screen").css("position", "fixed");
+            $("div#footer").hide();
+            $("section#button_list").css("margin-left", "76vw");
+            $("div#pop_up").css("overflow-y", "auto");
+        }
+        else 
+            $("body").css("overflow", "hidden");
+
+        $("div#pop_up_shadow, div#pop_up").fadeIn(500);
+
+        // $("body").css("overflow", "hidden");
+        // $("img#background_shadow, div#pop_up, img#audio_close").show();
 
         switch (hosting) {
 
@@ -501,15 +752,15 @@ function listen_player_control() {
 
 function init_close_player() {
 
-    $("img#audio_close, img#video_close").hover(function() {
+    $("img#player_close").hover(function() {
         $(this).css("cursor","pointer");
         $(this).css("opacity","1");
     },function() {
         $(this).css("cursor","auto");
-        $(this).css("opacity","0.7");
+        $(this).css("opacity","0.4");
     });
 
-    $("img#audio_close, img#video_close").click(function() {
+    $("img#player_close").click(function() {
 
         $pathname = window.location.pathname;
         $pathname = $pathname.split("/");
@@ -518,17 +769,18 @@ function init_close_player() {
         // var stateObj = { pathname: "" };
         window.history.replaceState("stateObj", name + " sur Imago TV", $new_pathname);
  
-        $("body").css("overflow", "");
-        $("img#background_shadow, img#audio_close, img#video_close").hide();
-
-        $("img#favorite").show();
-        $("img#content_reco").show();
-        $("img#episod_later").hide();
-        $("img#episod_reco").hide();
-
-        if (type_id == "documentary" || type_id == "shortfilm") {
-            $("img#content_later").show();
+        if (window.innerWidth > trigger_width) {
+            $("div#screen").css("position", "static");
+            $("div#footer").show();
+            $("section#button_list").css("margin-left", "96vw")
         }
+        else
+            $("body").css("overflow", "");
+
+        $("div#pop_up_shadow, div#pop_up").hide();
+
+        $("img#content_favorite, img#content_later, img#content_reco").show();
+        $("img#episod_favorite, img#episod_later, img#episod_reco").hide();
 
         $("span#episod_title").hide();
 
@@ -575,6 +827,8 @@ function init_close_player() {
         }
 
         set_sharing_url();
+
+        $("div#comment_list").empty();
 
         $("div#eqds_button").hide();
     });

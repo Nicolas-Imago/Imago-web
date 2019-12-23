@@ -91,15 +91,15 @@ function listen_my_contents() {
 
     // Listen click on
 
-    $("img#heart_mobile, img#heart_pc").click(function() {
+    $("img#episod_heart, img#heart_mobile, img#heart_pc").click(function() {
         go_to("/favoris")
     });
 
-    $("img#episod_time, img#episod_time").click(function() {
+    $("img#episod_time, img#time_mobile, img#time_pc").click(function() {
         go_to("/memos")
     });
 
-    $("img#medal_mobile, img#medal_pc, img#episod_medal").click(function() {
+    $("img#episod_medal, img#medal_mobile, img#medal_pc").click(function() {
         go_to("/recommandations")
     });
 }

@@ -71,21 +71,21 @@
 		}
 
 		if ($screen == "favorite") {
-			if ($thumbnail_type == "video") 	$content_list = favorite_video_list_of($user, $level);
-			if ($thumbnail_type == "audio") 	$content_list = favorite_audio_list_of($user, $level);
-			if ($thumbnail_type == "content") 	$content_list = favorite_content_list_of($type_id, $user, $level);
+			if ($thumbnail_type == "video") 	$content_list = favorite_video_list_of($user);
+			if ($thumbnail_type == "audio") 	$content_list = favorite_audio_list_of($user);
+			if ($thumbnail_type == "content") 	$content_list = favorite_content_list_of($type_id, $user);
 		}
 
 		if ($screen == "later") {
-			if ($thumbnail_type == "video") 	$content_list = later_video_list_of($user, $level);
-			if ($thumbnail_type == "audio") 	$content_list = later_audio_list_of($user, $level);
-			if ($thumbnail_type == "content") 	$content_list = later_content_list_of($type_id, $user, $level);
+			if ($thumbnail_type == "video") 	$content_list = later_video_list_of($user);
+			if ($thumbnail_type == "audio") 	$content_list = later_audio_list_of($user);
+			if ($thumbnail_type == "content") 	$content_list = later_content_list_of($type_id, $user);
 		}
 
 		if ($screen == "reco") {
-			if ($thumbnail_type == "video") 	$content_list = reco_video_list_of($user, $level);
-			if ($thumbnail_type == "audio") 	$content_list = reco_audio_list_of($user, $level);
-			if ($thumbnail_type == "content") 	$content_list = reco_content_list_of($type_id, $user, $level);
+			if ($thumbnail_type == "video") 	$content_list = reco_video_list_of($user);
+			if ($thumbnail_type == "audio") 	$content_list = reco_audio_list_of($user);
+			if ($thumbnail_type == "content") 	$content_list = reco_content_list_of($type_id, $user);
 		}
 
 		if ($screen == "friend") {
@@ -215,11 +215,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
    	
-    <link rel = "stylesheet" href = "/css/panorama/list_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/list_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/list_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/list_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
@@ -302,7 +302,7 @@
 
     	var env = "<?php ECHO $env; ?>";
     	var page_url = "<?php ECHO $page_url; ?>";
-    	var status = "<?php ECHO $status ?>";
+    	var user_status = "<?php ECHO $status ?>";
 
     	var screen = "<?php ECHO $screen; ?>";
 
@@ -322,17 +322,17 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
     
-	<script src = "/js/block/header_v110.js"></script>
-	<script src = "/js/block/menu_v110.js"></script>
-	<script src = "/js/block/user_v110.js"></script>
-	<script src = "/js/block/footer_v110.js"></script>
+	<script src = "/js/block/header_v111.js"></script>
+	<script src = "/js/block/menu_v111.js"></script>
+	<script src = "/js/block/user_v111.js"></script>
+	<script src = "/js/block/footer_v111.js"></script>
 
-    <script src = "/js/block/button_v110.js"></script>
-    <script src = "/js/block/thumbnail_v110.js"></script>
+    <script src = "/js/block/button_v111.js"></script>
+    <script src = "/js/block/thumbnail_v111.js"></script>
 
-	<script src = "/js/list_v110.js"></script>
+	<script src = "/js/list_v111.js"></script>
 
 </body>
 </html>

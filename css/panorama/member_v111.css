@@ -118,8 +118,14 @@ a#member_new_pwd_title {
 a#member_update_button {
 	display : block;
 	text-align : center;
+	margin-left : auto;
+	margin-right : auto;
 	margin-top : 4vw;
 	margin-bottom : 4vw;
+	width : 10vw;
+	border-radius : 0.8vw;
+	padding : 0.5vw;
+	background-color : rgb(20, 20, 20);
 	font-size : 1.2vw;
 }
 

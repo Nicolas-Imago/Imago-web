@@ -86,11 +86,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
    	
-    <link rel = "stylesheet" href = "/css/panorama/subscribe_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/subscribe_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/subscribe_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/subscribe_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
@@ -134,22 +134,22 @@
 
 				<div id = "subscribe_first_name_input" class = "subscribe_item">
 				   	<a class = "subscribe_item_title"> Prénom (facultatif) : </a>
-				   	<input type = "text" name = "first_name" value = "<?php  ECHO $first_name ?>" >
+				   	<input type = "text" name = "first_name" value = "<?php  ECHO $first_name ?>" > </input>
 				</div>
 
 				<div class = "subscribe_item">
 					<a class = "subscribe_item_title"> Nom (facultatif) : </a>
-				   	<input type = "text" name = "last_name" value = "<?php  ECHO $last_name ?>" >
+				   	<input type = "text" name = "last_name" value = "<?php  ECHO $last_name ?>" > </input>
 				</div>
 
 				<div class = "subscribe_item">
 					<a class = "subscribe_item_title"> Email (newsletter) : </a>
-				   	<input type = "text" name = "email" value = "<?php  ECHO $email ?>" >
+				   	<input type = "text" name = "email" value = "<?php  ECHO $email ?>" > </input>
 				</div>
 
 				<div id = "subscribe_login_input" class = "subscribe_item">
 				   	<a class = "subscribe_item_title"> Pseudo * (obligatoire) : </a>
-				   	<input type = "text" name = "login" value = "<?php  ECHO $login ?>" >
+				   	<input type = "text" name = "login" value = "<?php  ECHO $login ?>" > </input>
 				</div>		
 
 
@@ -159,22 +159,20 @@
 
 				<div id = "subscribe_pwd_input" class = "subscribe_item">
 				   	<a class = "subscribe_item_title"> Mot de passe * : </a>
-				   	<input type = "password" name = "password_1" value = "">
+				   	<input type = "password" name = "password_1" value = ""> </input>
 				</div>
 
 				<div class = "subscribe_item">
 				   	<a class = "subscribe_item_title"> Recopie mot de passe * : </a>
-				   	<input type = "password" name = "password_2" value = "">
+				   	<input type = "password" name = "password_2" value = ""> </input>
 				</div>
-
-				<a id = "subscribe"> Valider </a>			
-
+			
+                <a id = "subscribe"> valider </a>
+            
 			</form> 
 
 			<a id = "subscription_message" > <?php ECHO $subscription_message ?> </a>
-
             <a href = "/" id = "enter" > Retournez sur Imago TV </a>
-
 
 		</section>
 
@@ -192,7 +190,7 @@
 
         var user_login = "<?php ECHO $user_login; ?>";
         var user_id = "<?php ECHO $user_id; ?>";
-        var status = "<?php ECHO $status; ?>";
+        var user_status = "<?php ECHO $status; ?>";
 
         var env = "<?php ECHO $env; ?>";
         var base_url = "<?php ECHO $base_url; ?>";
@@ -204,14 +202,14 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
 
-    <script src = "/js/block/header_v110.js"></script>
-    <script src = "/js/block/menu_v110.js"></script>
-    <script src = "/js/block/user_v110.js"></script>
-    <script src = "/js/block/footer_v110.js"></script>
+    <script src = "/js/block/header_v111.js"></script>
+    <script src = "/js/block/menu_v111.js"></script>
+    <script src = "/js/block/user_v111.js"></script>
+    <script src = "/js/block/footer_v111.js"></script>
 
-	<script src = "/js/subscribe_v110.js"></script>
+	<script src = "/js/subscribe_v111.js"></script>
 
 </body>
 </html>

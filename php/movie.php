@@ -48,8 +48,8 @@
 
     ///////////////////////////////// Get url param /////////////////////////////////
 
-	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
 	if (isset($_GET["type_id"])) 		$type_id 	= $_GET["type_id"];			else $type_id = "";
+	if (isset($_GET["content_id"])) 	$content_id = $_GET["content_id"];		else $content_id = "";
 	if (isset($_GET["section_id"])) 	$section_id = $_GET["section_id"]; 		else $section_id = "";
 	if (isset($_GET["episod_id"])) 		$episod_id 	= (int)$_GET["episod_id"]; 	else $episod_id = "";
 	if (isset($_GET["timecode"])) 		$timecode 	= $_GET["timecode"]; 		else $timecode = "";
@@ -60,6 +60,11 @@
 
 	$content = get_content_info($content_id);
 	if ($type_id == "") $type_id = $content["type"];
+
+	if ($content == null) {
+		include("404.php");
+		return;
+	}
 
 	// if ($timecode == "") {
 	// 	$resume_time = read_resume_time($user_id, $content_id, $episod_id);
@@ -140,67 +145,37 @@
 
 	$producer_id = $content["producer"];
 
-	if ($section_id != "" && $episod_id != "") {
+	if ($episod_id != "") {
+
 
 		$episod = $video_id_list[$section_id][$episod_id - 1];
 	    $thumbnail = $episod["thumbnail"];
 	    $fact_check_url = $episod["fact_check"];
-
-		// $hosting = $episod["hosting"];
-		// $video_id = $episod[$hosting . '_id'];
     }
     else {
+    	
     	$thumbnail = "";
     	$fact_check_url = "";
-
-    	// $hosting = "";
-    	// $video_id = "";	
     }
 
-	if (isset($video_id_list["movie"]["0"])) $fact_check_url = $video_id_list["movie"]["0"]["fact_check"];
-	else $fact_check_url = "";
-
-    if ($status == "user" AND !empty(read_favorite_content($user_id, $content_id, ""))) $is_favorite = "1";
+    if ($status == "user" AND !empty(read_favorite_content($user_id, $content_id, "", ""))) $is_favorite = "1";
     else $is_favorite = "0";
 
-    if ($status == "user" AND !empty(read_later_content($user_id, $content_id, ""))) $is_content_later = "1";
+    if ($status == "user" AND !empty(read_later_content($user_id, $content_id, "", ""))) $is_content_later = "1";
     else $is_content_later = "0";
 
-    if ($status == "user" AND !empty(read_reco_content($user_id, $content_id, ""))) $is_content_reco = "1";
+    if ($status == "user" AND !empty(read_reco_content($user_id, $content_id, "", ""))) $is_content_reco = "1";
     else $is_content_reco = "0";
 
-    // if ($status == "user" AND !empty(read_later_content($user_id, $content_id, $episod_id))) $is_later = "1";
-    // else $is_later = "0";
-
-    // if ($status == "user" AND !empty(read_reco_content($user_id, $content_id, $episod_id))) $is_episod_reco = "1";
-    // else $is_episod_reco = "0";
-
-    // if ($status == "user" AND !empty(get_user_comment_list($user_id, $content_id))) $has_comment = "1";
-    // else $has_comment = "0";
 	
 	$background_url = "https://www.asset.imagotv.fr/img/" . $type_id . "/background/" . $content_id . ".jpg";
 	$logo_url = "";
 	$cover_url = "https://www.asset.imagotv.fr/img/" . $type_id . "/cover_big/" . $content_id . ".jpg";
 
-	$canonical_url = "https://www.imagotv.fr/" . type_of($type_id) . "/" . str_replace ("_", "-" , $content_id);
+	$canonical_url = "/" . type_of($type_id) . "/" . str_replace ("_", "-" , $content_id);
 
 	$video_object_url = "https://www.asset.imagotv.fr/img/" . $type_id . "/episod/" . $content_id . "/movie_1.jpg";
 	$video_object_duration = video_object_duration_of($content["duration"]);
-
-	// $content_list = content_list_of($type_id, $category);
-	// $content_list_size = sizeof($content_list);
-
-	// for ($index = 0; $index < $content_list_size; $index++)
-	// 	if ($content_list[$index] == $content_id) $content_index = $index;
-
-	// $previous_content_id = $content_list[$content_list_size - 1];
-	// $next_content_id = $content_list[0];
-
-	// if ($content_index > 0) $previous_content_id = $content_list[$content_index - 1];
-	// if ($content_index < ($content_list_size - 1)) $next_content_id = $content_list[$content_index + 1];
-
-	// $arrow_left_page_href = "movie.php?type_id=" . $type_id . "&content_id=" . $previous_content_id;
-	// $arrow_right_page_href = "movie.php?type_id=" . $type_id . "&content_id=" . $next_content_id;
 
 
     ////////////////////////////////// OG //////////////////////////////////
@@ -232,11 +207,11 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
     
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
 
-    <link rel = "stylesheet" href = "/css/panorama/movie_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/movie_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/movie_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/movie_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
@@ -254,7 +229,7 @@
 	  		"name": "<?php ECHO $og_title ?>",
 	  		"description": "<?php ECHO $content["description"] ?>",
 	  		"thumbnailUrl": "<?php ECHO $video_object_url ?>",
-	  		"uploadDate": "2018-12-18T18:00:00+08:00",
+	  		"uploadDate": "2019-12-08T18:00:00+08:00",
 	  		"duration": "<?php ECHO $video_object_duration ?>"
 		}
 		
@@ -294,23 +269,8 @@
 
 		<img class = "background_image" src = <?php ECHO $background_url ?> ></img>
 		<img class = "cover_image" src = <?php ECHO $cover_url ?> ></img>
-
-<!-- 		<a class = "partner_text"> En partenariat avec : </a>
-		<img class = "partner_image" src = <?php ECHO $partner_url ?> ></img> -->
 		
-		<?php include("block/button.php") ?>
 		<?php include("block/information.php") ?>
-
-
-		<div id = "donation_area_sheet">
-
-			<a class = "donation_text_sheet"> Ce film vous est offert par fokus21, un don est possible sur </a> 
-
-			<a target = "_blank" href = "https://www.helloasso.com/associations/fokus-21/formulaires/3">
-				<img class = "donation_button_sheet" src = "/img/icons/button/helloasso_inline.png" > </img>
-			</a>
-
-		</div>
 
 		<section id = "video">
 
@@ -333,27 +293,19 @@
 			<?php display_list("movie", "4", "content", "shortfilm", $content_id, $author_id_list) ?> 
 
 			<?php display_list("movie", "6", "content", "book", "", $author_id_list) ?>
-			<?php display_list("series", "7", "content", "show", "", $author_id_list) ?>
-			<?php // display_list("series", "8", "content", "dvd", "", $author_id_list) ?>	
-
- 			<?php // display_list("series", "5", "comment", "comment", $content_id, "") ?>			
+			<?php display_list("movie", "7", "content", "show", "", $author_id_list) ?>
+			<?php // display_list("movie", "8", "content", "dvd", "", $author_id_list) ?>	
 
 		</section>
 
-<!-- 		<a href = "<?php // ECHO $arrow_left_page_href ?>" >
-			<img id = "arrow_left_page"  class = "arrow_page" src = "/img/icons/arrow/page_left_grey.png" >
-		</a>
-
-		<a href = "<?php // ECHO $arrow_right_page_href ?>" >		
-			<img id = "arrow_right_page" class = "arrow_page" src = "/img/icons/arrow/page_right_grey.png" >
-		</a> -->
-
 	</div> 
+
+	<?php include("block/button.php") ?>
 
 
 <!-- POP UP -->
 
-	<?php include("block/pop_up.php") ?>
+	<?php include("block/player.php") ?>
 
 
 <!-- FOOTER -->
@@ -367,7 +319,7 @@
 
     	var env = "<?php ECHO $env ?>";
     	var page_url = "<?php ECHO $page_url ?>";
-    	var status = "<?php ECHO $status ?>";
+    	var user_status = "<?php ECHO $status ?>";
 
     	// var fbclid = "<?php // ECHO $fbclid ?>";
 
@@ -376,8 +328,6 @@
 
     	var content_id = "<?php ECHO $content_id ?>";
     	var section_id = "<?php ECHO $section_id ?>";
-    	// var video_id = "<?php // ECHO $video_id ?>";
-    	// var audio_id = "<?php // ECHO $audio_id ?>";
     	var episod_id = "<?php ECHO $episod_id ?>";
     	var timecode = "<?php ECHO $timecode ?>";
 
@@ -386,33 +336,14 @@
 
 
 
-    	// var content_index = "<?php // ECHO $content_index ?>";
-    	// var content_list_size = "<?php // ECHO $content_list_size ?>";
-
-    	// var hosting = "<?php // ECHO $hosting ?>";
-    	// var audio_hosting = "<?php // ECHO $audio_hosting ?>";
-
-		var fact_check_url = "<?php ECHO $fact_check_url ?>";
+		// var fact_check_url = "<?php // ECHO $fact_check_url ?>";
 		var crowdfunding_url = "<?php ECHO $crowdfunding_url ?>";
 
-    	var is_favorite = "<?php ECHO $is_favorite ?>";
+    	var is_content_favorite = "<?php ECHO $is_favorite ?>";
     	var is_content_later = "<?php ECHO $is_content_later ?>";
     	var is_content_reco = "<?php ECHO $is_content_reco ?>";
-    	// var is_later = "<?php // ECHO $is_later ?>";
-    	// var is_episod_reco = "<?php // ECHO $is_episod_reco ?>";
 
-    	// var has_comment = "<?php // ECHO $has_comment ?>";
     	var comment_list = <?php ECHO json_encode($comment_list) ?>;
-
-    	var page_number = [];
-
-    	page_number[0] = "1";
-    	page_number[1] = "<?php ECHO $page_number["1"] ?>";
-    	page_number[2] = "<?php ECHO $page_number["2"] ?>";
-    	page_number[3] = "<?php ECHO $page_number["3"] ?>";
-    	page_number[4] = "<?php ECHO $page_number["4"] ?>";
-    	page_number[5] = "<?php ECHO $page_number["5"] ?>";
-    	page_number[6] = "<?php ECHO $page_number["6"] ?>";
 
     	var note_1 = "<?php ECHO $content["note_1"] ?>";
     	var note_2 = "<?php ECHO $content["note_2"] ?>";
@@ -423,19 +354,19 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
     
-	<script src = "/js/block/header_v110.js"></script>
-	<script src = "/js/block/menu_v110.js"></script>
-	<script src = "/js/block/user_v110.js"></script>
-	<script src = "/js/block/footer_v110.js"></script>
+	<script src = "/js/block/header_v111.js"></script>
+	<script src = "/js/block/menu_v111.js"></script>
+	<script src = "/js/block/user_v111.js"></script>
+	<script src = "/js/block/footer_v111.js"></script>
 
-    <script src = "/js/block/button_v110.js"></script>
-    <script src = "/js/block/thumbnail_v110.js"></script>
-    <script src = "/js/block/information_v110.js"></script>
+    <script src = "/js/block/button_v111.js"></script>
+    <script src = "/js/block/thumbnail_v111.js"></script>
+    <script src = "/js/block/information_v111.js"></script>
 
-    <script src = "/js/block/player_v110.js"></script>
-	<script src = "/js/movie_v110.js"></script>
+    <script src = "/js/block/player_v111.js"></script>
+	<script src = "/js/movie_v111.js"></script>
 
 </body>
 </html>

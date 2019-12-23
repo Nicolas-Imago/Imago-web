@@ -18,28 +18,35 @@
         $add_date = get_time();
 
         $content_id = $_POST["content_id"];
+        $section_id = $_POST["section_id"];
+        $episod_id = $_POST["episod_id"];
+
         $comment = $_POST["comment"];
 
         $request = $data_base->prepare("
             SELECT *
             FROM imago_related_comment
             WHERE content_id = ?
+            AND section_id = ?
+            AND episod_id = ?
             AND user_id = ?
         ");
 
-        $request->execute(array($content_id, $user_id));
-
+        $request->execute(array($content_id, $section_id, $episod_id, $user_id));
+        
         if (sizeof($request->fetchAll()) == 0) {
 
             $request = $data_base->prepare("
                 INSERT INTO imago_related_comment
-                    (`user_id`, `content_id`, `comment`, `add_date`) 
+                    (`user_id`, `content_id`, `section_id`, `episod_id`, `comment`, `add_date`) 
                 VALUES 
-                    (:user_id, :content_id, :comment, :add_date)");
+                    (:user_id, :content_id, :section_id, :episod_id, :comment, :add_date)");
 
             $request->execute(array(
                 'user_id' => $user_id, 
                 'content_id' => $content_id,
+                'section_id' => $section_id,
+                'episod_id' => $episod_id,
                 'comment' => $comment,
                 'add_date' => $add_date,
             ));
@@ -58,6 +65,10 @@
                 WHERE 
                     content_id = :content_id
                 AND
+                    section_id = :section_id
+                AND
+                    episod_id = :episod_id
+                AND
                     user_id = :user_id
             ");
 
@@ -65,6 +76,8 @@
                 'comment' => $comment,
                 'add_date' => $add_date,
                 'content_id' => $content_id,
+                'section_id' => $section_id,
+                'episod_id' => $episod_id,
                 'user_id' => $user_id
             ));
         

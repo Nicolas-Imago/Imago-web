@@ -7,7 +7,7 @@ init_user()
 
 function init_user() {
 
-    if (status == "logout")
+    if (user_status == "logout")
         $("span#item_user_8").hide();
     else
         $("span#item_user_9").hide();

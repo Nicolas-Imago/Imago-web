@@ -1,30 +1,33 @@
 
-@media all and (min-width : 481px)  {
+@media all and (max-width : 480px)  {
+
 
 /************************************ IMAGE ************************************/
 
-/*img#member_background_image {
+img#login_background_image {
 	position : fixed;
 	z-index : 1;
  	margin-top : 40vh;
  	transform : translateY(-50%);
-	width : 60vw;
+	width : 90vw;
 	left : 50%;
-	margin-left : -30%;
+	margin-left : -45%;
 	opacity : 0.1;
-}*/
+}
+
 
 /************************************ TITLE ************************************/
 
 a#login_title {
 	display : block;
-	margin-top : 20vh;	
+	margin-top : 30vw;
 	margin-left : auto;
 	margin-right : auto;
-	margin-bottom : 4vw;
+	margin-bottom : 8vw;
+	width : 60vw;
 	text-align : center;
 	color : rgb(200,200,200);
-	font-size : 2vw;
+	font-size : 5vw;
 }
 
 
@@ -34,23 +37,24 @@ section#login_connection {
 	position : absolute;
 	z-index : 2;
 	display : block;
-	width : 30vw;
+	width : 90vw;
 	left : 50%;
-	margin-left : -15%;
+	margin-left : -45%;
 }
 
 div.login_item {
-	margin-bottom : 0.5vw;
-	width : 40vw;
+	margin-bottom : 2vw;
+	width : 80vw;
 	margin-left : auto;
 	margin-right : auto;
+	text-align : center;
 }
 
 		a.login_item_title {
 			display : block;
 			float : left;
-			width : 10vw;
-			font-size : 1.2vw;
+			width : 25vw;
+			font-size : 3.6vw;
 			color : rgb(200,200,200);
 		}
 
@@ -59,16 +63,17 @@ div.login_item {
 			border-top : none;
 			border-left : none;
 			border-right : none;
-			border-bottom-color : grey; 	
-			height : 1.5vw;
-			width : 15vw;
+			border-radius: 0px;
+			border-bottom-color : grey;
+			height : 3.6vw;	
+			width : 45vw;
+			font-size : 3.6vw;
 			color : grey;
-			font-size : 1.2vw;
 		}
 
 a#message {
 	display : block;
-	margin-top : 1.5vw;
+	margin-top : 10vw;
 	text-align : center;
 	color : red;
 }
@@ -76,29 +81,25 @@ a#message {
 
 a.action {
 	display : block;
-	margin-top : 2vw;
+	margin-top : 6vw;
 	margin-left : auto;
 	margin-right : auto;
-	height : 2vw;
-	width   : 20vw;
+	width : 50vw;
 	color : grey;
 	text-align : center;
 	text-decoration : none;
-	font-size : 1.2vw;
+	font-size : 3.6vw;
 }
 
 a#validate {
-	border-radius : 2vw;
-	padding : 0.5vw;
-	padding-top: 1.5vw;
-	width : 10vw;
+	width : 15vw;
+	border-radius : 3vw;
+	padding : 2vw;
 	background-color : rgb(20, 20, 20);
-	color : grey;
 }
 
 a#subscribe {
 	display : block;
-	margin-top : 0.5vw;	
 }
 
 a {
@@ -108,8 +109,10 @@ a {
 	user-select: none;
 }
 
-/*#footer {
-	margin-top : 40vw;
-}*/
+
+#footer {
+	margin-top : 80vw;
+}
+
 
 }

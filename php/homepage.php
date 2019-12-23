@@ -115,17 +115,19 @@
     <meta charset = "utf-8"/>
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <link rel = "stylesheet" href = "/css/panorama/imago_v110.css"/>
-   	<link rel = "stylesheet" href = "/css/portrait/imago_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/imago_v111.css"/>
+   	<link rel = "stylesheet" href = "/css/portrait/imago_v111.css"/>
 
-    <link rel = "stylesheet" href = "/css/panorama/homepage_v110.css"/>
-    <link rel = "stylesheet" href = "/css/portrait/homepage_v110.css"/>
+    <link rel = "stylesheet" href = "/css/panorama/homepage_v111.css"/>
+    <link rel = "stylesheet" href = "/css/portrait/homepage_v111.css"/>
 
     <link rel = "icon" type = "image/png" href = "/img/icons/imago_con.png"/>
 
     <?php include("lib/wpa.php") ?>
 
     <title> Imago TV - La plateforme vidéo gratuite de la transition </title>
+
+	<link rel = "canonical" href = "https://www.imagotv.fr" />
 
     <meta property = "og:title" content = "Imago" />
     <meta property = "og:type" content = "website" />
@@ -162,8 +164,8 @@
 		<div class = "screen_title" >
 			<h1 class = "screen_title" > La plateforme vidéo gratuite de la transition </h1> 
 			<a class = "screen_title" > Une sélection de plus de 2500 vidéos </a> <br>
-			<a class = "screen_title" > docu, web séries, courts-métrages et podcasts</a> <br>
-			<a class = "screen_title" >  engagés dans la transition. </a>
+			<a class = "screen_title" > Docu, web séries, courts-métrages et podcasts</a> <br>
+			<a class = "screen_title" >  Le meilleur de la création engagée </a>
 		</div>
 
 		<?php include("block/button.php") ?>
@@ -205,17 +207,17 @@
 
 			// display_corner("cine", 2);
 
-			display_thumbnail_container("1", "video", "tvshow", "", "Les dernières vidéos", $video_list);
+			display_thumbnail_container("1", "video", "tvshow", "", "Nos dernières vidéos", $video_list);
 
 			display_folder($folder_list, 2);
 
-			display_thumbnail_container("2", "audio", "podcast", "", "Les derniers podcasts", $audio_list);
+			display_thumbnail_container("2", "audio", "podcast", "", "Nos derniers podcasts", $audio_list);
 
-			display_folder($folder_list, 4);
+			display_folder($folder_list, 3);
 
 			display_corner("info", 4);
 
-			display_folder($folder_list, 3);
+			display_folder($folder_list, 4);
 
 			// display_corner("theatre", 2);
 
@@ -223,27 +225,27 @@
 
 			display_thumbnail_container("3", "content", "tvshow", "", "Emissions", $tvshow_list);
 
-			display_folder($folder_list, 4);
+			display_folder($folder_list, 6);
 
 			display_thumbnail_container("4", "content", "documentary", "", "Documentaires", $documentary_list);
 
-			// display_folder($folder_list, 5);
+			// display_folder($folder_list, 7);
 
 			// display_corner("media", 4);
 
-			// display_folder($folder_list, 6);
+			// display_folder($folder_list, 8);
 
 			// display_corner("asso", 4);
 
-			// display_folder($folder_list, 7);
+			// display_folder($folder_list, 9);
 
 			// display_corner("producer", 4);
 
-			display_folder($folder_list, 8);
+			display_folder($folder_list, 10);
 
 			display_thumbnail_container("5", "content", "shortfilm", "", "Courts-métrages", $shortfilm_list);
 
-			display_folder($folder_list, 9);
+			display_folder($folder_list, 11);
 
 
 			ECHO '<section id = "category" class = "list">';
@@ -260,7 +262,7 @@
 			ECHO	'</div>';
 			ECHO '</section>';
 
-			display_folder($folder_list, 10);
+			display_folder($folder_list, 12);
 		?>
 
 	</div>
@@ -277,7 +279,7 @@
 
     	var env = "<?php ECHO $env; ?>";
     	var page_url = "<?php ECHO $page_url; ?>";
-    	var status = "<?php ECHO $status ?>";
+    	var user_status = "<?php ECHO $status ?>";
 
     	var page_number = [];
 
@@ -292,17 +294,17 @@
 
 <!-- JS FILES -->
 
-	<script src = "/js/lib/misc_v110.js"></script>
+	<script src = "/js/lib/misc_v111.js"></script>
     	
-	<script src = "/js/block/header_v110.js"></script>
-	<script src = "/js/block/menu_v110.js"></script>
-	<script src = "/js/block/user_v110.js"></script>
-	<script src = "/js/block/footer_v110.js"></script>
+	<script src = "/js/block/header_v111.js"></script>
+	<script src = "/js/block/menu_v111.js"></script>
+	<script src = "/js/block/user_v111.js"></script>
+	<script src = "/js/block/footer_v111.js"></script>
 
-    <script src = "/js/block/button_v110.js"></script>
-    <script src = "/js/block/thumbnail_v110.js"></script>
+    <script src = "/js/block/button_v111.js"></script>
+    <script src = "/js/block/thumbnail_v111.js"></script>
 
-	<script src = "/js/homepage_v110.js"></script>
+	<script src = "/js/homepage_v111.js"></script>
 
 </body>
 </html>

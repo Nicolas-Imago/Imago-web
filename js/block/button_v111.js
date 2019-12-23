@@ -4,7 +4,7 @@
 set_sharing_url();
 
 $("a#tipeee").attr("href", crowdfunding_url);
-$("a#captain_fact").attr("href", fact_check_url);
+// $("a#captain_fact").attr("href", fact_check_url);
 
 
 function listen_buttons() {
@@ -24,24 +24,25 @@ function listen_buttons() {
         var action = $(this).attr("id");
         set_cookie("url_cookie", window.location, 1);
 
-        if (action == "favorite") {
+        if (action == "content_favorite") {
 
-            if (is_favorite == "0") { 
+            if (is_content_favorite == "0") { 
 
                 $.post("/ws/add_favorite.php",
                     {
                         content_id : content_id,
-                        episod_id : 0
+                        section_id : "",
+                        episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
-                            $("img#favorite").css("opacity", "0.2");
+                        if (callback == "ok") {
+                            $("img#content_favorite").css("opacity", "0.2");
                             if (window.innerWidth < trigger_width) $("img#heart_mobile").show();
                             if (window.innerWidth > trigger_width) $("img#heart_pc").show();
-                            is_favorite = "1";
+                            is_content_favorite = "1";
                         }
                     }
                 )
@@ -52,17 +53,18 @@ function listen_buttons() {
                 $.post("/ws/remove_favorite.php",
                     {
                         content_id : content_id,
-                        episod_id : 0
+                        section_id : "",
+                        episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
-                            $("img#favorite").css("opacity", "1");
+                        if (callback == "ok") {
+                            $("img#content_favorite").css("opacity", "1");
                             if (window.innerWidth < trigger_width) $("img#heart_mobile").hide();
                             if (window.innerWidth > trigger_width) $("img#heart_pc").hide();
-                            is_favorite = "0";
+                            is_content_favorite = "0";
                         }                    
                     }
                 )
@@ -76,13 +78,14 @@ function listen_buttons() {
                 $.post("/ws/add_later.php",
                     {
                         content_id : content_id,
+                        section_id : "",
                         episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#content_later").css("opacity", "0.2");
                             if (window.innerWidth < trigger_width) $("img#time_mobile").show();
                             if (window.innerWidth > trigger_width) $("img#time_pc").show();
@@ -97,13 +100,14 @@ function listen_buttons() {
                 $.post("/ws/remove_later.php",
                     {
                         content_id : content_id,
+                        section_id : "",
                         episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#content_later").css("opacity", "1");
                             if (window.innerWidth < trigger_width) $("img#time_mobile").hide();
                             if (window.innerWidth > trigger_width) $("img#time_pc").hide();
@@ -121,13 +125,14 @@ function listen_buttons() {
                 $.post("/ws/add_reco.php",
                     {
                         content_id : content_id,
-                        episod_id : 0
+                        section_id : "",
+                        episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#content_reco").css("opacity", "0.2");
                             if (window.innerWidth < trigger_width) $("img#medal_mobile").show();
                             if (window.innerWidth > trigger_width) $("img#medal_pc").show();
@@ -142,18 +147,64 @@ function listen_buttons() {
                 $.post("/ws/remove_reco.php",
                     {
                         content_id : content_id,
-                        episod_id : 0
+                        section_id : section_id,
+                        episod_id : ""
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#content_reco").css("opacity", "1");
                             if (window.innerWidth < trigger_width) $("img#medal_mobile").hide();
                             if (window.innerWidth > trigger_width) $("img#medal_pc").hide();
                             is_content_reco = "0"; 
                         }                     
+                    }
+                )
+            }
+        }
+
+        if (action == "episod_favorite") {
+
+            if (is_episod_favorite == "0") { 
+
+                $.post("/ws/add_favorite.php",
+                    {
+                        content_id : content_id,
+                        section_id : section_id,
+                        episod_id : episod_id
+                    },
+                    function(data, status){
+                        // alert("Data: " + data + "\n Status: " + status);
+                        callback = callback_status(data);
+
+                        if (callback == "ok") {
+                            $("img#episod_favorite").css("opacity", "0.2");
+                            $("img#episod_heart").show();
+                            is_episod_favorite = "1";
+                        }
+                    }
+                )
+            }
+
+            else {
+
+                $.post("/ws/remove_favorite.php",
+                    {
+                        content_id : content_id,
+                        section_id : section_id,
+                        episod_id : episod_id
+                    },
+                    function(data, status){
+                        // alert("Data: " + data + "\n Status: " + status);
+                        callback = callback_status(data);
+
+                        if (callback == "ok") {
+                            $("img#episod_favorite").css("opacity", "1");
+                            $("img#episod_heart").hide();
+                            is_episod_favorite = "0";
+                        }                    
                     }
                 )
             }
@@ -166,13 +217,14 @@ function listen_buttons() {
                 $.post("/ws/add_later.php",
                     {
                         content_id : content_id,
+                        section_id : section_id,
                         episod_id : episod_id
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#episod_later").css("opacity", "0.2");
                             $("img#episod_time").show();
                             is_episod_later = "1"; 
@@ -186,13 +238,14 @@ function listen_buttons() {
                 $.post("/ws/remove_later.php",
                     {
                         content_id : content_id,
+                        section_id : section_id,
                         episod_id : episod_id
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#episod_later").css("opacity", "1");
                             $("img#episod_time").hide();
                             is_episod_later = "0"; 
@@ -209,13 +262,14 @@ function listen_buttons() {
                 $.post("/ws/add_reco.php",
                     {
                         content_id : content_id,
+                        section_id : section_id,
                         episod_id : episod_id
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#episod_reco").css("opacity", "0.2");
                             $("img#episod_medal").show();
                             is_episod_reco = "1"; 
@@ -229,13 +283,14 @@ function listen_buttons() {
                 $.post("/ws/remove_reco.php",
                     {
                         content_id : content_id,
+                        section_id : section_id,
                         episod_id : episod_id
                     },
                     function(data, status){
                         // alert("Data: " + data + "\n Status: " + status);
-                        status = callback_status(data);
+                        callback = callback_status(data);
 
-                        if (status == "ok") {
+                        if (callback == "ok") {
                             $("img#episod_reco").css("opacity", "1");
                             $("img#episod_medal").hide();
                             is_episod_reco = "0"; 
@@ -244,24 +299,6 @@ function listen_buttons() {
                 )
             }
         }
-
-        // if (action == "comment") {
-
-        //     $.post("/ws/read_comment.php",
-        //         {
-        //             content_id : content_id,
-        //         },
-        //         function(data, status){
-        //             // alert("Data: " + data + "\n Status: " + status);
-                    
-        //             data = '[' + data.split('"[')[1];
-        //             data = data.substring(0, data.length - 2);
-
-        //             comment_list = JSON.parse(data);
-        //             display_comment("mine", 1);
-        //         }
-        //     )          
-        // }
     });
 }
 
@@ -339,16 +376,16 @@ function listen_comment_validate() {
                 },
                 function(data, status){
                     // alert("Data: " + data + "\n Status: " + status);
-                    status = callback_status(data);
+                    callback = callback_status(data);
 
-                    if (status == "created" || status == "modified") {
+                    if (callback == "created" || callback == "modified") {
                         $("body").css("overflow", "");
                         $("img#background_shadow, img#close_player").hide();
                         $("img#comment_popup, textarea, a#popup_validate").hide();
                     }
 
                     else {
-                        alert(status);
+                        alert(callback);
                     }
                 }
             )
